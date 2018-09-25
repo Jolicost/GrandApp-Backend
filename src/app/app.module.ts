@@ -11,13 +11,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     SideBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,

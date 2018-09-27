@@ -12,6 +12,8 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { UsersComponent } from './components/users/users.component';
+import { EntitiesComponent } from './components/entities/entities.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ActivitiesComponent } from './components/activities/activities.componen
     TopBarComponent,
     SideBarComponent,
     DashboardComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    UsersComponent,
+    EntitiesComponent
   ],
   imports: [
     BrowserModule,

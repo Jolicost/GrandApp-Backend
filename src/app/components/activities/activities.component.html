@@ -1,6 +1,69 @@
-<ul>
-  <li>asdasdasd</li>
-  <li>asdasdasdasdasd</li>
-  <li>asdasdaasdassd</li>
-  <li>asdasdasd</li>
-</ul>
+<div class="games-content">
+  <h1>Activities list</h1>
+  <div class="ui divider"></div>
+  <div class="top-controls" style="text-align: right; padding: 20px">
+    Table size: 
+    <select class="ui dropdown" (change)="setPageSize($event)">
+      <option value="4">4</option>
+      <option value="6">6</option>
+      <option value="8">8</option>
+      <option selected="selected">10</option>
+    </select>
+    <button class="ui labeled icon button" (click)= "openModal({mode: 'addGame', obj: null})" style="margin-left: 50px;">
+        <i class="add icon"></i>
+        Add
+    </button>
+  </div>
+  
+  <div class="table-content">
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Decription</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Location</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= 'let activity of activities'>
+          <td>{{ activity.name }}</td>
+          <td>{{ activity.description }}</td>
+          <td>{{ activity.startDate }}</td>
+          <td>{{ activity.endDate }}</td>
+          <td>{{ activity.location }}</td>
+          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'deleteGame', obj: game})">
+            <i class="trash icon"></i>
+          </button></td>
+          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editGame', obj: game})">
+            <i class="edit icon"></i>
+          </button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="7">
+            <!--app-dialog></app-dialog-->
+            <div class="ui right floated pagination menu">
+              <a class="icon item">
+                <i class="left chevron icon"></i>
+              </a>
+              <a class="item" *ngFor="let loop of loopTimes" (click)="getGamesPara(loop + 1)">{{loop + 1}}</a>
+              <a class="icon item">
+                <i class="right chevron icon"></i>
+              </a>
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+    <!--app-snack-bar></app-snack-bar-->
+    <div class="ui center aligned basic segment">
+      <button class="ui centered aligned button" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</div>
+

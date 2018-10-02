@@ -1,0 +1,70 @@
+<div class="content-panel">
+    <div class="infoDialog" *ngIf="data.mode === 'infoDialog'" style="text-align: center">
+        <div class="content-panel">
+            <div class="ui icon header">
+              <i class="exclamation icon"></i>
+              Error Message:
+            </div>
+            <div class="content">
+              {{ data.obj }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
+    <div class="ui form">
+        <h1 *ngIf="data.mode === 'addActivity'" >Add activity:</h1>
+        <form [formGroup]="classificationForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
+            <div class="ui field">
+                <label style="text-align: left">
+                Name:
+                <input type="text" formControlName="name">
+                </label>
+                <div class= "error-message" *ngIf= "classificationForm.get('name').invalid && classificationForm.get('name').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui field">
+                <label style="text-align: left">
+                Desciption:
+                <input type="text" formControlName="description">
+                </label>
+                <div class= "error-message" *ngIf= "classificationForm.get('description').invalid && classificationForm.get('description').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <div>
+</div>
+
+
+<div class="ui divider"></div>
+
+<!-->Add & Edit Actions<-->
+<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
+  <div class="ui green basic ok button" (click)="onSaveClick(data.mode)">
+    <i class="checkmark icon"></i>
+    Save
+  </div>
+  <div class="ui red basic cancel button"  (click)="onCancelClick()">
+    <i class="remove icon"></i>
+    Cancel
+  </div>
+</div>
+
+<!-->Delete Actions<-->
+<div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
+  <div class="ui green basic ok button"  (click)="onDeleteClick(data.mode)">
+    <i class="checkmark icon"></i>
+    Yes
+  </div>
+  <div class="ui red basic cancel button"  (click)="onCancelClick()">
+    <i class="remove icon"></i>
+    No
+  </div>
+</div>

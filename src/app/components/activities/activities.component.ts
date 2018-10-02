@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
   selector: 'app-activities',
@@ -31,7 +32,9 @@ export class ActivitiesComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private dialogService: DialogService
+  ) { }
 
   ngOnInit() {
   }
@@ -46,5 +49,9 @@ export class ActivitiesComponent implements OnInit {
 
   deleteActivity() {
 
+  }
+
+  openModal(mode) {
+    this.dialogService.openDialog(mode);
   }
 }

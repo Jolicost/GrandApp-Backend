@@ -28,6 +28,9 @@ import { DialogComponent, DialogContentComponent } from './components/dialog/dia
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
+// Angular google map
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +59,10 @@ import { FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
-<h1>Users list</h1>
-<ul>
-  <li>asdasdasd</li>
-  <li>asdasdasdasdasd</li>
-  <li>asdasdaasdassd</li>
-  <li>asdasdasd</li>
-</ul>
+<!-- Center of the map -->
+<agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" (mapClick)="mapclicked($event)">
+  <!-- Markers -->
+  <agm-marker *ngFor = "let m of markers" [latitude]= m.lat [longitude]= m.lng>
+      <agm-info-window >{{ m.description }}</agm-info-window>
+  </agm-marker>
+</agm-map>

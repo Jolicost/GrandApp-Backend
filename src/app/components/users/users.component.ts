@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReverseGeocodingService } from '../../services/reverseGeocoding/reverse-geocoding.service';
+import { ActivitiesService } from '../../services/activities/activities.service';
+import { UserLocationService } from '../../services/userLocation/user-location.service';
 
 @Component({
   selector: 'app-users',
@@ -9,46 +11,46 @@ import { ReverseGeocodingService } from '../../services/reverseGeocoding/reverse
 export class UsersComponent implements OnInit {
   iniLat = 51.678418;
   iniLng = 7.809007;
+  usersOfActivity = [];
+  activity;
 
-  markers = [
-    {
-      name: 'name1',
-      description: 'descrip1',
-      lat: 51.578428,
-      lng: 7.809917,
-      address: ''
-    },
-    {
-      name: 'name2',
-      description: 'descrip2',
-      lat: 51.478448,
-      lng: 7.809027,
-      address: ''
-    },
-    {
-      name: 'name3',
-      description: 'descrip3',
-      lat: 51.628438,
-      lng: 7.609027,
-      address: ''
-    }
-  ];
+  currentActivity = {
+    name: 'act1',
+    startDate: 'date1',
+    endDate: 'date2'
+  };
 
-  address = [];
+  locationsOfUser = [];
+
   constructor(
-    private reverseGeoService: ReverseGeocodingService
+    private reverseGeoService: ReverseGeocodingService,
+    private activityService: ActivitiesService,
+    private userLocationService: UserLocationService
   ) { }
 
   ngOnInit() {
-    this.markers.forEach(element => {
-      this.reverseGeoService.convertToStreet(element.lat, element.lng)
-        .subscribe(res => {
-          element.address = res.results[0].formatted_address;
-        });
+    this.activity = this.activityService.getActivities()[0];
+    console.log('activity', this.activity);
+
+    this.usersOfActivity = this.activity.participants;
+    console.log('usersOfActivity: ', this.usersOfActivity);
+
+    this.usersOfActivity.forEach(element => {
+      const position = this.userLocationService.getUserLocation(element.id);
+      this.reverseGeoService.convertToStreet(position.lat, position.lng).subscribe(res => {
+        position['address'] = res.results[0].formatted_address;
+      });
+      this.locationsOfUser.push(position);
     });
 
+    console.log('locationsOfUser: ', this.locationsOfUser);
   }
   mapclicked($event) {
-    console.log($event);
+    // console.log($event);
   }
+
+  filterByActivity(event) {
+    const activityName = event.target.value;
+  }
+
 }

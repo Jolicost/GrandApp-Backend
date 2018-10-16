@@ -1,15 +1,23 @@
 <h1>User location:</h1>
 
-<!-- Center of the map -->
-<agm-map [latitude]="iniLat" [longitude]="iniLng" [scrollwheel]="true" (mapClick)="mapclicked($event)">
-  <!-- Markers -->
-  <agm-marker *ngFor = "let m of markers" [latitude]= m.lat [longitude]= m.lng>
-      <agm-info-window >
-        <p><strong>Person name:</strong> {{ m.name }}</p>
-        <p><strong>Activity name:</strong> {{ m.description }}</p>
-        <p><strong>Latitude:</strong> {{ m.lat }}</p>
-        <p><strong>Longitude:</strong> {{ m.lng }}</p>
-        <p><strong>Address:</strong> {{ m.address }}</p>
-      </agm-info-window>
-  </agm-marker>
-</agm-map>
+<div class="agm-map">
+  <!-- Center of the map -->
+  <agm-map [latitude]="iniLat" [longitude]="iniLng" [scrollwheel]="true" (mapClick)="mapclicked($event)">
+    <!-- Markers -->
+    <agm-marker *ngFor = "let p of locationsOfUser;" [latitude]= p.lat [longitude]= p.lng>
+        <agm-info-window >
+          <p><strong>Latitude:</strong> {{ p.lat }}</p>
+          <p><strong>Longitude:</strong> {{ p.lng }}</p>
+          <p><strong>Address:</strong> {{ p.address }}</p>
+        </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</div>
+
+<div class="controlPanel">
+  <h1>Filter users by activities:</h1>
+  <p>Choose one activity</p>
+  <select class="ui dropdown" (change)="filterByActivity($event)">
+    <option *ngFor = "let act of activities" value="act.name"> {{ act.name }} </option>
+  </select>
+</div>

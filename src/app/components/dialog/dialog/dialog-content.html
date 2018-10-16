@@ -12,16 +12,24 @@
     </div>
 </div>
 
-<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
+<!--Dialog title-->
+<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity'">
+    <h1 *ngIf="data.mode === 'addActivity'" >Add activity:</h1>
+    <h1 *ngIf="data.mode === 'editActivity'" >Edit activity:</h1>
+    <h1 *ngIf="data.mode === 'deleteActivity'" >Delete activity:</h1>
+</div>
+
+<div class="ui divider"></div>
+
+<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode">
     <div class="ui form">
-        <h1 *ngIf="data.mode === 'addActivity'" >Add activity:</h1>
-        <form [formGroup]="classificationForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
+        <form [formGroup]="activityForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
             <div class="ui field">
                 <label style="text-align: left">
                 Name:
                 <input type="text" formControlName="name">
                 </label>
-                <div class= "error-message" *ngIf= "classificationForm.get('name').invalid && classificationForm.get('name').touched" style="text-align: center">
+                <div class= "error-message" *ngIf= "activityForm.get('name').invalid && activityForm.get('name').touched" style="text-align: center">
                     <div class="input-err-message" style="text-align: center">
                         <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
                     </div>
@@ -32,20 +40,74 @@
                 Desciption:
                 <input type="text" formControlName="description">
                 </label>
-                <div class= "error-message" *ngIf= "classificationForm.get('description').invalid && classificationForm.get('description').touched" style="text-align: center">
+                <div class= "error-message" *ngIf= "activityForm.get('description').invalid && activityForm.get('description').touched" style="text-align: center">
                     <div class="input-err-message" style="text-align: center">
                         <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                     </div>
                 </div>
             </div>
+           <div class="ui field">
+                <label style="text-align: left">
+                Start Date:
+                <input type="text" formControlName="startDate">
+                </label>
+                <div class= "error-message" *ngIf= "activityForm.get('startDate').invalid && activityForm.get('startDate').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui field">
+                <label style="text-align: left">
+                End Date:
+                <input type="text" formControlName="endDate">
+                </label>
+                <div class= "error-message" *ngIf= "activityForm.get('endDate').invalid && activityForm.get('endDate').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui field">
+                <label style="text-align: left">
+                Latitude:
+                <input type="text" formControlName="lat">
+                </label>
+                <div class= "error-message" *ngIf= "activityForm.get('lat').invalid && activityForm.get('lat').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui field">
+                <label style="text-align: left">
+                Longitude:
+                <input type="text" formControlName="lng">
+                </label>
+                <div class= "error-message" *ngIf= "activityForm.get('lng').invalid && activityForm.get('lng').touched" style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui field">
+                <label style="text-align: left">
+                Image:
+                </label>
+                <input type="file" (change)="onFileSelected($event)"> 
+                <button class="ui blue basic button" (click)="onUpload"> Upload </button>
+            </div>
         </form>
     <div>
 </div>
 
+<div *ngIf="data.mode === 'deleteActivity'">
+    <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.name }}</span></p>
+</div>
 
 <div class="ui divider"></div>
 
-<!-->Add & Edit Actions<-->
+<!--Add & Edit Actions-->
 <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
   <div class="ui green basic ok button" (click)="onSaveClick(data.mode)">
     <i class="checkmark icon"></i>
@@ -57,7 +119,7 @@
   </div>
 </div>
 
-<!-->Delete Actions<-->
+<!--Delete Actions-->
 <div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
   <div class="ui green basic ok button"  (click)="onDeleteClick(data.mode)">
     <i class="checkmark icon"></i>

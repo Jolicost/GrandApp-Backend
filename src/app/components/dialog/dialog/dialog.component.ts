@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
-
 import { DialogService } from '../../../services/dialog/dialog.service';
+import { HttpClient } from '@angular/common/http';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -24,7 +24,7 @@ export class DialogComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -32,6 +32,12 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.dialogService.dialog$.subscribe(mode => {
         // mode 传过来的时候是个obj {mode: 他的action类别, obj: optional的，可以选择传过来任何一个obj如果需要的话}
         if (mode.mode === 'addActivity') {
+          this.openDialog(mode);
+        }
+        if (mode.mode === 'editActivity') {
+          this.openDialog(mode);
+        }
+        if (mode.mode === 'deleteActivity') {
           this.openDialog(mode);
         }
       })
@@ -60,19 +66,37 @@ export class DialogComponent implements OnInit, OnDestroy {
 })
 export class DialogContentComponent implements OnInit {
 
-    classificationForm = new FormGroup({
+    selectedFile = null;
+    activityToDelete;
+
+    activityForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
         Validators.minLength(3)
       ]),
-      description: new FormControl('', Validators.required)
+      description: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required),
+      lat: new FormControl('', Validators.required),
+      lng: new FormControl('', Validators.required),
     });
 
     constructor(
       public dialogRef: MatDialogRef<DialogContentComponent>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
-      private dialogService: DialogService
+      private dialogService: DialogService,
+      private http: HttpClient
     ) {
+      this.activityToDelete = this.data.obj;
+      console.log(this.activityToDelete);
+    }
+
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+    }
+
+    onUpload() {
 
     }
 

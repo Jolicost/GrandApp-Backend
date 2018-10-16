@@ -23,7 +23,10 @@
           <th>Decription</th>
           <th>Start date</th>
           <th>End date</th>
-          <th>Location</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Participants</th>
+          <th>Image</th>
           <th></th>
           <th></th>
         </tr>
@@ -34,18 +37,26 @@
           <td>{{ activity.description }}</td>
           <td>{{ activity.startDate }}</td>
           <td>{{ activity.endDate }}</td>
-          <td>{{ activity.location }}</td>
-          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'deleteActivity', obj: game})">
+          <td>{{ activity.lat }}</td>
+          <td>{{ activity.lng }}</td>
+          <td>
+            <ul *ngFor="let p of activity.participants">
+              <li><span style="color: red">ID: </span>{{p.id}}</li>
+              <li><span style="color: red">Name: </span>{{p.name}}</li>
+            </ul>
+          </td>
+          <td>{{ activity.image }}</td>
+          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'deleteActivity', obj: activity})">
             <i class="trash icon"></i>
           </button></td>
-          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: game})">
+          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: activity})">
             <i class="edit icon"></i>
           </button></td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <th colspan="7">
+          <th colspan="10">
             <app-dialog></app-dialog>
             <div class="ui right floated pagination menu">
               <a class="icon item">

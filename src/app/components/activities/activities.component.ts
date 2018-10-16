@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { ActivitiesService } from '../../services/activities/activities.service';
+import { Activity } from '../../models/activity';
 
 @Component({
   selector: 'app-activities',
@@ -8,47 +10,15 @@ import { DialogService } from '../../services/dialog/dialog.service';
 })
 export class ActivitiesComponent implements OnInit {
 
-  activities = [
-    {
-      name: 'act1',
-      description: 'descrip1',
-      startDate: 'date1',
-      endDate: 'date2',
-      location: 'localtion'
-    },
-    {
-      name: 'act2',
-      description: 'descrip1',
-      startDate: 'date1',
-      endDate: 'date2',
-      location: 'localtion'
-    },
-    {
-      name: 'act3',
-      description: 'descrip1',
-      startDate: 'date1',
-      endDate: 'date2',
-      location: 'localtion'
-    }
-  ];
+  activities = [];
 
   constructor(
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private activitiesService: ActivitiesService
   ) { }
 
   ngOnInit() {
-  }
-
-  addActivity() {
-
-  }
-
-  updateActivity() {
-
-  }
-
-  deleteActivity() {
-
+    this.activities = this.activitiesService.getActivities();
   }
 
   openModal(mode) {

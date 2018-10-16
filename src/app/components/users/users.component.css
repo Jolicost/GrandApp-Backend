@@ -1,3 +1,6 @@
 agm-map {
     height: 700px;
 }
+.controlPanel {
+    margin-top: 20px;
+}

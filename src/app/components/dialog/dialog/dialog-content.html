@@ -94,8 +94,9 @@
                 <label style="text-align: left">
                 Image:
                 </label>
-                <input type="file" (change)="onFileSelected($event)"> 
-                <button class="ui blue basic button" (click)="onUpload"> Upload </button>
+                <!-- <input type="file" (change)="onFileSelected($event)"> 
+                <button class="ui blue basic button" (click)="onUpload"> Upload </button> -->
+                <input type="text" formControlName="image">
             </div>
         </form>
     <div>
@@ -109,7 +110,7 @@
 
 <!--Add & Edit Actions-->
 <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
-  <div class="ui green basic ok button" (click)="onSaveClick(data.mode)">
+  <div class="ui green basic ok button" (click)="onSaveClick(data)">
     <i class="checkmark icon"></i>
     Save
   </div>
@@ -121,7 +122,7 @@
 
 <!--Delete Actions-->
 <div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
-  <div class="ui green basic ok button"  (click)="onDeleteClick(data.mode)">
+  <div class="ui green basic ok button"  (click)="onDeleteClick(data)">
     <i class="checkmark icon"></i>
     Yes
   </div>

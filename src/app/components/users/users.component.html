@@ -7,7 +7,7 @@
     <agm-marker *ngFor = "let p of locationsOfUser;" [latitude]= p.lat [longitude]= p.lng>
         <agm-info-window >
           <p><strong>Latitude:</strong> {{ p.lat }}</p>
-          <p><strong>Longitude:</strong> {{ p.lng }}</p>
+          <p><strong>Longitude:</strong> {{ p.long }}</p>
           <p><strong>Address:</strong> {{ p.address }}</p>
         </agm-info-window>
     </agm-marker>

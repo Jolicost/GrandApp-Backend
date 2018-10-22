@@ -1,5 +1,5 @@
-<div class="activities-content">
-  <h1>Activities list</h1>
+<div class="userActivities-content">
+  <h1>User Activities list</h1>
   <div class="ui divider"></div>
   <div class="top-controls" style="text-align: right; padding: 20px">
     Table size: 
@@ -9,7 +9,7 @@
       <option value="8">8</option>
       <option selected="selected">10</option>
     </select>
-    <button class="ui labeled icon blue button" (click)= "openModal({mode: 'addActivity', obj: null})" style="margin-left: 50px;">
+    <button class="ui labeled icon button" (click)= "openModal({mode: 'addActivity', obj: null})" style="margin-left: 50px;">
         <i class="add icon"></i>
         Add
     </button>
@@ -19,50 +19,34 @@
     <table class="ui celled table">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Name</th>
           <th>Decription</th>
           <th>Start date</th>
           <th>End date</th>
           <th>Latitude</th>
           <th>Longitude</th>
           <th>Participants</th>
-          <th>Address</th>
-          <th>Activity Type</th>
-          <th>Price</th>
-          <th>Capacity</th>
-          <th>Rating</th>
           <th>Image</th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor= 'let activity of activities'>
-          <td>{{ activity.title }}</td>
+        <tr *ngFor= 'let activity of userActivities'>
+          <td>{{ activity.name }}</td>
           <td>{{ activity.description }}</td>
-          <td>{{ activity.timestampStart }}</td>
-          <td>{{ activity.timestampEnd }}</td>
+          <td>{{ activity.startDate }}</td>
+          <td>{{ activity.endDate }}</td>
           <td>{{ activity.lat }}</td>
-          <td>{{ activity.long }}</td>
+          <td>{{ activity.lng }}</td>
           <td>
             <ul *ngFor="let p of activity.participants">
               <li><span style="color: red">ID: </span>{{p.id}}</li>
               <li><span style="color: red">Name: </span>{{p.name}}</li>
             </ul>
           </td>
-          <td>{{ activity.address }}</td>
-          <td>{{ activity.activityType }}</td>
-          <td>{{ activity.price }}</td>
-          <td>{{ activity.capacity }}</td>
-          <td>{{ activity.rating }}</td>
-          <td>
-            <ul *ngFor="let i of activity.images">
-              <li>
-                <img src="{{ activity.images }}" height="70px" width="70px">
-              </li>
-            </ul>
-          </td>
-          <td style="text-align: center"><button class="ui icon red button" (click)="openModal({mode: 'deleteActivity', obj: activity})">
+          <td>{{ activity.image }}</td>
+          <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'deleteActivity', obj: activity})">
             <i class="trash icon"></i>
           </button></td>
           <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: activity})">
@@ -72,7 +56,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <th colspan="15">
+          <th colspan="10">
             <app-dialog></app-dialog>
             <div class="ui right floated pagination menu">
               <a class="icon item">

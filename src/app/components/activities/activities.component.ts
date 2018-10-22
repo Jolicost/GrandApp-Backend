@@ -10,7 +10,7 @@ import { Activity } from '../../models/activity';
 })
 export class ActivitiesComponent implements OnInit {
 
-  activities = [];
+  activities: Array<Activity> = [];
 
   constructor(
     private dialogService: DialogService,
@@ -18,7 +18,10 @@ export class ActivitiesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activities = this.activitiesService.getActivities();
+    this.activitiesService.getActivities().subscribe(res => {
+      console.log(res);
+      this.activities = res;
+    });
   }
 
   openModal(mode) {

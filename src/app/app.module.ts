@@ -21,7 +21,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { UsersComponent } from './components/users/users.component';
-import { EntitiesComponent } from './components/entities/entities.component';
+import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 import { DialogComponent, DialogContentComponent } from './components/dialog/dialog/dialog.component';
 
 // Reactive forms
@@ -31,6 +31,7 @@ import { FormsModule } from '@angular/forms';
 // Angular google map
 import { AgmCoreModule } from '@agm/core';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,9 +40,9 @@ import { AgmCoreModule } from '@agm/core';
     DashboardComponent,
     ActivitiesComponent,
     UsersComponent,
-    EntitiesComponent,
     DialogComponent,
-    DialogContentComponent
+    DialogContentComponent,
+    UserActivitiesComponent
   ],
   entryComponents: [DialogContentComponent], // per fer servir el dialogcontentComponent
   imports: [

@@ -1,15 +1,19 @@
 import { User } from '../models/user';
 
 export interface Activity {
-    name: string;
+    id: number;
+    title: string;
     description: string;
-    startDate: string;
-    endDate: string;
-    images: string;
+    userId: number;
+    rating: number;
+    images: string[];
     lat: number;
-    lng: number;
-    participants: User[];
+    long: number;
+    timestampStart: number;
+    timestampEnd: number;
+    participants: number[];
     address: string;
-    stats: string;
-    points: string;
+    activityType: any;
+    capacity: number;
+    price: number;
 }

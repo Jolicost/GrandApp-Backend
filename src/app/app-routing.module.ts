@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { UsersComponent } from './components/users/users.component';
-import { EntitiesComponent } from './components/entities/entities.component';
+import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'users', component: UsersComponent },
-  { path: 'entities', component: EntitiesComponent }
+  { path: 'userActivities', component: UserActivitiesComponent}
 ];
 
 

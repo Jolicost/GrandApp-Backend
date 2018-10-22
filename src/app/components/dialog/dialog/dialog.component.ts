@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { DialogService } from '../../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../../services/activities/activities.service';
 import { HttpClient } from '@angular/common/http';
+import { Activity } from '../../../models/activity';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -25,16 +26,21 @@ export class DialogComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];      // 为了推出component的时候取消订阅，要不然再次进来的时候回再次订阅就会变成订阅两次
 
   activityForm = new FormGroup({
-    name: new FormControl('', [
+    title: new FormControl('', [
       Validators.required,
       Validators.minLength(3)
     ]),
     description: new FormControl('', Validators.required),
-    startDate: new FormControl('', Validators.required),
-    endDate: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    timestampStart: new FormControl('', Validators.required),
+    timestampEnd: new FormControl('', Validators.required),
+    images: new FormControl('', Validators.required),
     lat: new FormControl('', Validators.required),
-    lng: new FormControl('', Validators.required),
+    long: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    activityType: new FormControl('', Validators.required),
+    price: new FormControl('', Validators.required),
+    rating: new FormControl('', Validators.required),
+    capacity: new FormControl('', Validators.required)
   });
 
   constructor(
@@ -51,13 +57,18 @@ export class DialogComponent implements OnInit, OnDestroy {
         }
         if (mode.mode === 'editActivity') {
           this.activityForm.setValue({
-            name: mode.obj.name,
+            title: mode.obj.title,
             description: mode.obj.description,
-            startDate: mode.obj.startDate,
-            endDate: mode.obj.endDate,
-            image: mode.obj.image,
+            timestampStart: mode.obj.timestampStart,
+            timestampEnd: mode.obj.timestampEnd,
+            images: mode.obj.images,
             lat: mode.obj.lat,
-            lng: mode.obj.lng
+            long: mode.obj.long,
+            address: mode.obj.address,
+            activityType: mode.obj.activityType,
+            price: mode.obj.price,
+            rating: mode.obj.rating,
+            capacity: mode.obj.capacity
           });
           this.openDialog(mode);
         }
@@ -70,7 +81,7 @@ export class DialogComponent implements OnInit, OnDestroy {
 
   openDialog(mode): void {
     const dialogRef = this.dialog.open(DialogContentComponent, {
-      width: '300px',
+      width: '600px',
       // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
       data: {mode: mode.mode, obj: mode.obj, form: this.activityForm}    // dialog-content 可以通过data来读取dialog.component里面的变量
     });
@@ -101,21 +112,28 @@ export class DialogContentComponent implements OnInit {
       private activityService: ActivitiesService
     ) {
       this.activityToDelete = this.data.obj;
-      // console.log(this.activityToDelete);
+
+      console.log(this.activityToDelete);
+
       if (data.mode !== 'addActivity') {
         this.activityForm = data.form;
       } else {
         this.activityForm = new FormGroup({
-          name: new FormControl('', [
+          title: new FormControl('', [
             Validators.required,
             Validators.minLength(3)
           ]),
           description: new FormControl('', Validators.required),
-          startDate: new FormControl('', Validators.required),
-          endDate: new FormControl('', Validators.required),
-          image: new FormControl('', Validators.required),
+          timestampStart: new FormControl('', Validators.required),
+          timestampEnd: new FormControl('', Validators.required),
+          images: new FormControl('', Validators.required),
           lat: new FormControl('', Validators.required),
-          lng: new FormControl('', Validators.required),
+          long: new FormControl('', Validators.required),
+          address: new FormControl('', Validators.required),
+          activityType: new FormControl('', Validators.required),
+          price: new FormControl('', Validators.required),
+          rating: new FormControl('', Validators.required),
+          capacity: new FormControl('', Validators.required)
         });
       }
     }
@@ -136,24 +154,47 @@ export class DialogContentComponent implements OnInit {
       this.dialogRef.close();
     }
     onSaveClick(data): void {
-      const name = this.activityForm.value.name;
-      const description = this.activityForm.value.description;
-      const startDate = this.activityForm.value.startDate;
-      const endDate = this.activityForm.value.endDate;
-      const lat = this.activityForm.value.lat;
-      const lng = this.activityForm.value.lng;
-      const image = this.activityForm.value.image;
-      const participants = [];
-      const address = '';
+      const newActivity: Activity = {
+        id: null,
+        userId: null,
+        title: this.activityForm.value.title,
+        description : this.activityForm.value.description,
+        timestampStart : this.activityForm.value.timestampStart,
+        timestampEnd : this.activityForm.value.timestampEnd,
+        lat : this.activityForm.value.lat,
+        long : this.activityForm.value.long,
+        images : this.activityForm.value.images,
+        participants : [],
+        address : this.activityForm.value.address,
+        activityType : this.activityForm.value.activityType,
+        price : this.activityForm.value.price,
+        rating : this.activityForm.value.rating,
+        capacity : this.activityForm.value.capacity
+      };
+
+      // const title = this.activityForm.value.title;
+      // const description = this.activityForm.value.description;
+      // const timestampStart = this.activityForm.value.timestampStart;
+      // const timestampEnd = this.activityForm.value.timestampEnd;
+      // const lat = this.activityForm.value.lat;
+      // const long = this.activityForm.value.long;
+      // const images = this.activityForm.value.images;
+      // const participants = [];
+      // const address = '';
+      // const address = this.activityForm.value.address;
+      // const activityType = this.activityForm.value.activityType;
+      // const price = this.activityForm.value.price;
+      // const rating = this.activityForm.value.rating;
+      // const capacity = this.activityForm.value.capacity;
 
       if (data.mode === 'addActivity') {
-        this.activityService.addActivitiy({name, description, startDate, endDate, lat, lng, image, participants, address});
+        this.activityService.addActivitiy(newActivity);
         this.dialogRef.close();
       }
       if (data.mode === 'editActivity') {
         const oldAct = data.obj;
         // console.log(oldAct);
-        this.activityService.editActivity(oldAct, {name, description, startDate, endDate, lat, lng, image, participants, address});
+        this.activityService.editActivity(oldAct, newActivity);
         this.dialogRef.close();
       }
     }

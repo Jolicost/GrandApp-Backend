@@ -12,6 +12,7 @@ export class ActivitiesComponent implements OnInit {
 
   activities: Array<Activity> = [];
 
+
   constructor(
     private dialogService: DialogService,
     private activitiesService: ActivitiesService

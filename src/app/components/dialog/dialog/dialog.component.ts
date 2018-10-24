@@ -220,9 +220,19 @@ export class DialogContentComponent implements OnInit {
 
     onDeleteClick(data) {
       if (data.mode === 'deleteActivity') {
-        console.log('1');
-        this.activityService.deleteActivity(this.activityToDelete);
-        this.dialogRef.close();
+        console.log(data);
+        this.activityService.deleteActivity(data.obj.id)
+        .subscribe(res => {
+          if (this.messagesService.getExists()) {
+            this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
+            this.messagesService.setMessage(null);
+          } else {
+            // this.classificationsService.classificationDataChanged('changed');
+            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+            this.onCancelClick();
+          }
+          this.dialogRef.close();
+        });
       }
     }
 }

@@ -68,18 +68,18 @@ export class ActivitiesService {
   getActivities(): Observable<any> {
     return this.http.get<any>(this.actURL)
     .pipe(
-      catchError(this.handleError<any>('createClassification')),
-      tap(resp => console.log('createClassification', resp))
+      catchError(this.handleError<any>('getActivities')),
+      tap(resp => console.log('getActivities', resp))
     );
     // return this.activities;
   }
 
   addActivitiy(activity): Observable<any> {
-    // console.log(activity);
+    console.log('estic a addActivity', activity);
     return this.http.post<any>(this.actURL, activity)
     .pipe(
-      catchError(this.handleError<any>('createClassification')),
-      tap(resp => console.log('createClassification', resp))
+      catchError(this.handleError<any>('addActivities')),
+      tap(resp => console.log('addActivities', resp))
     );
   }
 

@@ -20,7 +20,6 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     this.activitiesService.getActivities().subscribe(res => {
-      console.log(res);
       this.activities = res;
     });
   }

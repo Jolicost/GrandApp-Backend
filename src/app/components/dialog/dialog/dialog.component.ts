@@ -7,6 +7,7 @@ import { DialogService } from '../../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../../services/activities/activities.service';
 import { HttpClient } from '@angular/common/http';
 import { Activity } from '../../../models/activity';
+import { MessagesService } from '../../../services/messages/messages.service';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -109,11 +110,13 @@ export class DialogContentComponent implements OnInit {
       public dialogRef: MatDialogRef<DialogContentComponent>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
       private http: HttpClient,
-      private activityService: ActivitiesService
+      private activityService: ActivitiesService,
+      private messagesService: MessagesService,
+      private dialogService: DialogService
     ) {
       this.activityToDelete = this.data.obj;
 
-      console.log(this.activityToDelete);
+      // console.log(this.activityToDelete);
 
       if (data.mode !== 'addActivity') {
         this.activityForm = data.form;
@@ -172,23 +175,39 @@ export class DialogContentComponent implements OnInit {
         capacity : this.activityForm.value.capacity
       };
 
-      // const title = this.activityForm.value.title;
-      // const description = this.activityForm.value.description;
-      // const timestampStart = this.activityForm.value.timestampStart;
-      // const timestampEnd = this.activityForm.value.timestampEnd;
-      // const lat = this.activityForm.value.lat;
-      // const long = this.activityForm.value.long;
-      // const images = this.activityForm.value.images;
-      // const participants = [];
-      // const address = '';
-      // const address = this.activityForm.value.address;
-      // const activityType = this.activityForm.value.activityType;
-      // const price = this.activityForm.value.price;
-      // const rating = this.activityForm.value.rating;
-      // const capacity = this.activityForm.value.capacity;
+      const title = this.activityForm.value.title;
+      const description = this.activityForm.value.description;
+      const timestampStart = this.activityForm.value.timestampStart;
+      const timestampEnd = this.activityForm.value.timestampEnd;
+      const lat = this.activityForm.value.lat;
+      const long = this.activityForm.value.long;
+      const images = this.activityForm.value.images;
+      const participants = [];
+      const address = this.activityForm.value.address;
+      const activityType = this.activityForm.value.activityType;
+      const price = this.activityForm.value.price;
+      const rating = this.activityForm.value.rating;
+      const capacity = this.activityForm.value.capacity;
+
+      console.log('ASD:', {title: title, description: description, timestampStart: timestampStart, timestampEnd: timestampEnd, lat: lat,
+        long: long, images: images, participants: participants, address: address, activityType: activityType,
+        price: price, rating: rating, capacity: capacity});
 
       if (data.mode === 'addActivity') {
-        this.activityService.addActivitiy(newActivity);
+        this.activityService.addActivitiy(
+          {title: title, description: description, timestampStart: timestampStart, timestampEnd: timestampEnd, lat: lat,
+            long: long, images: images, participants: participants, address: address, activityType: activityType,
+            price: price, rating: rating, capacity: capacity}
+        ).subscribe(res => {
+          if (this.messagesService.getExists()) {
+            this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
+            this.messagesService.setMessage(null);
+          } else {
+            // this.classificationsService.classificationDataChanged('changed');
+            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+            this.onCancelClick();
+          }
+      });
         this.dialogRef.close();
       }
       if (data.mode === 'editActivity') {

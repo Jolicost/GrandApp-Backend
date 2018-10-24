@@ -157,9 +157,8 @@ export class DialogContentComponent implements OnInit {
       this.dialogRef.close();
     }
     onSaveClick(data): void {
-      const idAct = data.obj.id;
       const newActivity: Activity = {
-        id: idAct,
+        id: null,
         userId: null,
         title: this.activityForm.value.title,
         description : this.activityForm.value.description,
@@ -200,7 +199,7 @@ export class DialogContentComponent implements OnInit {
             this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
             this.messagesService.setMessage(null);
           } else {
-            // this.classificationsService.classificationDataChanged('changed');
+            this.activityService.actDataChanged('changed');
             // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
             this.onCancelClick();
           }
@@ -208,7 +207,7 @@ export class DialogContentComponent implements OnInit {
       this.dialogRef.close();
       }
       if (data.mode === 'editActivity') {
-        // console.log(idAct);
+        const idAct = data.obj.id;
         this.activityService.editActivity({id: idAct, title: title, description: description, timestampStart: timestampStart,
           timestampEnd: timestampEnd, lat: lat,
           long: long, images: images, participants: participants, address: address, activityType: activityType,
@@ -218,7 +217,7 @@ export class DialogContentComponent implements OnInit {
               this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
               this.messagesService.setMessage(null);
             } else {
-              // this.classificationsService.classificationDataChanged('changed');
+              this.activityService.actDataChanged('changed');
               // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
               this.onCancelClick();
             }
@@ -236,7 +235,7 @@ export class DialogContentComponent implements OnInit {
             this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
             this.messagesService.setMessage(null);
           } else {
-            // this.classificationsService.classificationDataChanged('changed');
+            this.activityService.actDataChanged('changed');
             // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
             this.onCancelClick();
           }

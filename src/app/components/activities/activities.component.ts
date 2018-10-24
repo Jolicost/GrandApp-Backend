@@ -16,11 +16,17 @@ export class ActivitiesComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private activitiesService: ActivitiesService
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.activitiesService.getActivities().subscribe(res => {
       this.activities = res;
+    });
+  }
+
+  ngOnInit() {
+    this.activitiesService.activity$.subscribe(activityTable => {
+      this.activitiesService.getActivities().subscribe(res => {
+        this.activities = res;
+      });
     });
   }
 

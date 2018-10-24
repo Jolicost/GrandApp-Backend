@@ -12,6 +12,9 @@ export class ActivitiesService {
 
   actURL = 'https://grandapp.herokuapp.com/activities';
 
+  private activitySubject = new Subject<any>(); // 发送器，通知有变化
+  activity$ = this.activitySubject.asObservable();    // 数据储存的地方， 可以被subscribe()然后就可以获取数据
+
   activities: Array<Activity> = [
     {
       id: 1,
@@ -88,6 +91,10 @@ export class ActivitiesService {
       catchError(this.handleError<any>('addActivities')),
       tap(resp => console.log('addActivities', resp))
     );
+  }
+
+  actDataChanged(mode) {
+    this.activitySubject.next(mode);  // emit有变化，并且传送新的value
   }
 
   deleteActivity(idToDelete): Observable<any> {

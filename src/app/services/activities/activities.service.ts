@@ -71,7 +71,6 @@ export class ActivitiesService {
       catchError(this.handleError<any>('getActivities')),
       tap(resp => console.log('getActivities', resp))
     );
-    // return this.activities;
   }
 
   addActivitiy(activity): Observable<any> {
@@ -83,24 +82,12 @@ export class ActivitiesService {
     );
   }
 
-  editActivity(oldActivity, activity) {
-    // console.log('new title', activity.title);
-    // console.log('old title', oldActivity.title);
-    this.activities.forEach(element => {
-        if (element.title === oldActivity.title && element.timestampStart === oldActivity.timestampStart
-          && element.timestampEnd === oldActivity.timestampEnd) {
-          element.title = activity.title;
-          element.description = activity.description;
-          element.timestampStart = activity.timestampStart;
-          element.timestampEnd = activity.timestampEnd;
-          element.lat = activity.lat;
-          element.long = activity.long;
-          element.images = activity.images;
-          element.participants = activity.participants;
-          element.address = activity.address;
-        }
-    });
-    // console.log('activitats', this.activities);
+  editActivity(newActivity): Observable<any> {
+    return this.http.put<any>(`${this.actURL}/${newActivity.id}`, newActivity)
+    .pipe(
+      catchError(this.handleError<any>('addActivities')),
+      tap(resp => console.log('addActivities', resp))
+    );
   }
 
   deleteActivity(idToDelete): Observable<any> {

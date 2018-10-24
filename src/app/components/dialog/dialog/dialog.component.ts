@@ -157,8 +157,9 @@ export class DialogContentComponent implements OnInit {
       this.dialogRef.close();
     }
     onSaveClick(data): void {
+      const idAct = data.obj.id;
       const newActivity: Activity = {
-        id: null,
+        id: idAct,
         userId: null,
         title: this.activityForm.value.title,
         description : this.activityForm.value.description,
@@ -189,10 +190,6 @@ export class DialogContentComponent implements OnInit {
       const rating = this.activityForm.value.rating;
       const capacity = this.activityForm.value.capacity;
 
-      console.log('ASD:', {title: title, description: description, timestampStart: timestampStart, timestampEnd: timestampEnd, lat: lat,
-        long: long, images: images, participants: participants, address: address, activityType: activityType,
-        price: price, rating: rating, capacity: capacity});
-
       if (data.mode === 'addActivity') {
         this.activityService.addActivitiy(
           {title: title, description: description, timestampStart: timestampStart, timestampEnd: timestampEnd, lat: lat,
@@ -208,12 +205,24 @@ export class DialogContentComponent implements OnInit {
             this.onCancelClick();
           }
       });
-        this.dialogRef.close();
+      this.dialogRef.close();
       }
       if (data.mode === 'editActivity') {
-        const oldAct = data.obj;
-        // console.log(oldAct);
-        this.activityService.editActivity(oldAct, newActivity);
+        // console.log(idAct);
+        this.activityService.editActivity({id: idAct, title: title, description: description, timestampStart: timestampStart,
+          timestampEnd: timestampEnd, lat: lat,
+          long: long, images: images, participants: participants, address: address, activityType: activityType,
+          price: price, rating: rating, capacity: capacity})
+          .subscribe(res => {
+            if (this.messagesService.getExists()) {
+              this.dialogService.openDialog({mode: 'infoDialog', obj: this.messagesService.getMessage()});
+              this.messagesService.setMessage(null);
+            } else {
+              // this.classificationsService.classificationDataChanged('changed');
+              // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+              this.onCancelClick();
+            }
+          });
         this.dialogRef.close();
       }
     }

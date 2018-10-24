@@ -103,13 +103,8 @@ export class ActivitiesService {
     // console.log('activitats', this.activities);
   }
 
-  deleteActivity(actToDelete) {
-    for (let i = 0; i < this.activities.length; ++i) {
-      if (this.activities[i].title === actToDelete.title && this.activities[i].timestampStart === actToDelete.timestampStart
-        && this.activities[i].timestampEnd === actToDelete.timestampEnd) {
-          this.activities.splice(i, 1);
-      }
-    }
+  deleteActivity(idToDelete): Observable<any> {
+    return this.http.delete<any>(`${this.actURL}/${idToDelete}`);
   }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

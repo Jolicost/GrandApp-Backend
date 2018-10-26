@@ -12,15 +12,21 @@ export class ActivitiesComponent implements OnInit {
 
   activities: Array<Activity> = [];
 
+
   constructor(
     private dialogService: DialogService,
     private activitiesService: ActivitiesService
-  ) { }
+  ) {
+    this.activitiesService.getActivities().subscribe(res => {
+      this.activities = res;
+    });
+  }
 
   ngOnInit() {
-    this.activitiesService.getActivities().subscribe(res => {
-      console.log(res);
-      this.activities = res;
+    this.activitiesService.activity$.subscribe(activityTable => {
+      this.activitiesService.getActivities().subscribe(res => {
+        this.activities = res;
+      });
     });
   }
 

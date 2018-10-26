@@ -12,6 +12,9 @@ export class ActivitiesService {
 
   actURL = 'https://grandapp.herokuapp.com/activities';
 
+  private activitySubject = new Subject<any>(); // 发送器，通知有变化
+  activity$ = this.activitySubject.asObservable();    // 数据储存的地方， 可以被subscribe()然后就可以获取数据
+
   activities: Array<Activity> = [
     {
       id: 1,
@@ -68,48 +71,34 @@ export class ActivitiesService {
   getActivities(): Observable<any> {
     return this.http.get<any>(this.actURL)
     .pipe(
-      catchError(this.handleError<any>('createClassification')),
-      tap(resp => console.log('createClassification', resp))
+      catchError(this.handleError<any>('getActivities')),
+      tap(resp => console.log('getActivities', resp))
     );
-    // return this.activities;
   }
 
   addActivitiy(activity): Observable<any> {
-    // console.log(activity);
+    console.log('estic a addActivity', activity);
     return this.http.post<any>(this.actURL, activity)
     .pipe(
-      catchError(this.handleError<any>('createClassification')),
-      tap(resp => console.log('createClassification', resp))
+      catchError(this.handleError<any>('addActivities')),
+      tap(resp => console.log('addActivities', resp))
     );
   }
 
-  editActivity(oldActivity, activity) {
-    // console.log('new title', activity.title);
-    // console.log('old title', oldActivity.title);
-    this.activities.forEach(element => {
-        if (element.title === oldActivity.title && element.timestampStart === oldActivity.timestampStart
-          && element.timestampEnd === oldActivity.timestampEnd) {
-          element.title = activity.title;
-          element.description = activity.description;
-          element.timestampStart = activity.timestampStart;
-          element.timestampEnd = activity.timestampEnd;
-          element.lat = activity.lat;
-          element.long = activity.long;
-          element.images = activity.images;
-          element.participants = activity.participants;
-          element.address = activity.address;
-        }
-    });
-    // console.log('activitats', this.activities);
+  editActivity(newActivity): Observable<any> {
+    return this.http.put<any>(`${this.actURL}/${newActivity.id}`, newActivity)
+    .pipe(
+      catchError(this.handleError<any>('addActivities')),
+      tap(resp => console.log('addActivities', resp))
+    );
   }
 
-  deleteActivity(actToDelete) {
-    for (let i = 0; i < this.activities.length; ++i) {
-      if (this.activities[i].title === actToDelete.title && this.activities[i].timestampStart === actToDelete.timestampStart
-        && this.activities[i].timestampEnd === actToDelete.timestampEnd) {
-          this.activities.splice(i, 1);
-      }
-    }
+  actDataChanged(mode) {
+    this.activitySubject.next(mode);  // emit有变化，并且传送新的value
+  }
+
+  deleteActivity(idToDelete): Observable<any> {
+    return this.http.delete<any>(`${this.actURL}/${idToDelete}`);
   }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

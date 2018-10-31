@@ -1,0 +1,35 @@
+<h1>Activity details:</h1>
+<div class="ui divider"></div>
+<p *ngIf="activitySelected">Activity title: {{ activitySelected.title }}</p>
+<p *ngIf="activitySelected">Activity description: {{ activitySelected.description }}</p>
+<p *ngIf="activitySelected">Activity rating: {{ activitySelected.rating }}</p>
+<p *ngIf="activitySelected">Activity latitude: {{ activitySelected.lat }}</p>
+<p *ngIf="activitySelected">Activity longitude: {{ activitySelected.long }}</p>
+<p *ngIf="activitySelected">Activity start: {{ activitySelected.timestampStart }}</p>
+<p *ngIf="activitySelected">Activity end: {{ activitySelected.timestampEnd }}</p>
+<p *ngIf="activitySelected">Activity participants:</p>
+<div *ngIf="activitySelected">
+  <ul *ngFor="let p of activitySelected.participants">
+    <li><span style="color: red">ID: </span>{{p.id}}</li>
+    <li><span style="color: red">Name: </span>{{p.name}}</li>
+  </ul>
+</div>
+
+<p *ngIf="activitySelected">Activity address: {{ activitySelected.address }}</p>
+<p *ngIf="activitySelected">Activity activity type: {{ activitySelected.activityType }}</p>
+<p *ngIf="activitySelected">Activity capacity: {{ activitySelected.capacity }}</p>
+<p *ngIf="activitySelected">Activity price: {{ activitySelected.price }}</p>
+<p *ngIf="activitySelected">Activity images:</p>
+
+<div *ngIf="activitySelected">
+  <ul *ngFor="let i of activitySelected.images">
+    <li>
+      <img src="{{ activitySelected.images }}" height="100px" width="100px">
+    </li>
+  </ul>
+</div>
+
+
+<div class="ui left aligned basic segment">
+  <button class="ui centered aligned button" (click)="goBack()">Back</button>
+</div>

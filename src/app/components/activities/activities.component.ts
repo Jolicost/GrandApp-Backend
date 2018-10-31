@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
 import { Activity } from '../../models/activity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activities',
@@ -15,7 +16,8 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
-    private activitiesService: ActivitiesService
+    private activitiesService: ActivitiesService,
+    private router: Router
   ) {
     this.activitiesService.getActivities().subscribe(res => {
       this.activities = res;
@@ -32,5 +34,10 @@ export class ActivitiesComponent implements OnInit {
 
   openModal(mode) {
     this.dialogService.openDialog(mode);
+  }
+
+  showDetails(id) {
+    console.log('act id', id);
+    this.router.navigate(['/activity', id]);
   }
 }

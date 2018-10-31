@@ -5,6 +5,7 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 import { UsersComponent } from './components/users/users.component';
 import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 import { LoginComponent } from './components/login/login.component';
+import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'activities', component: ActivitiesComponent },
   { path: 'users', component: UsersComponent },
   { path: 'userActivities', component: UserActivitiesComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'activity/:id', component: ActivityDetailsComponent }
 ];
 
 

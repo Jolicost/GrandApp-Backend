@@ -24,6 +24,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 import { DialogComponent, DialogContentComponent } from './components/dialog/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
+import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 
 // Reactive forms
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
 
 // Angular google map
 import { AgmCoreModule } from '@agm/core';
+
 
 
 
@@ -45,7 +47,8 @@ import { AgmCoreModule } from '@agm/core';
     DialogComponent,
     DialogContentComponent,
     UserActivitiesComponent,
-    LoginComponent
+    LoginComponent,
+    ActivityDetailsComponent
   ],
   entryComponents: [DialogContentComponent], // per fer servir el dialogcontentComponent
   imports: [

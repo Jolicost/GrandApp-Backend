@@ -59,13 +59,12 @@ export class ActivitiesService {
 
   }
 
-  getActivity(title, timestampStart, timestampEnd): any {
-    this.activities.forEach(element => {
-      if (element.title === title && element.timestampStart === timestampStart && timestampEnd === timestampEnd) {
-        // console.log(element);
-        return element;
-      }
-    });
+  getActivity(id): Observable<any> {
+    return this.http.get<any>(`${this.actURL}/${id}`)
+    .pipe(
+      catchError(this.handleError<any>('getActivity')),
+      tap(resp => console.log('getActivity', resp))
+    );
   }
 
   getActivities(): Observable<any> {

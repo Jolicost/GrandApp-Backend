@@ -76,7 +76,6 @@ export class ActivitiesService {
   }
 
   addActivitiy(activity): Observable<any> {
-    console.log('estic a addActivity', activity);
     return this.http.post<any>(this.actURL, activity)
     .pipe(
       catchError(this.handleError<any>('addActivities')),

@@ -1,4 +1,4 @@
- <!-- <div class="login-page">
+ <div class="login-page">
   <app-dialog></app-dialog>
   <h1 class="title">Login</h1>
   <div class="form" style="width: 210px;">
@@ -15,10 +15,10 @@
               </div>
           </div>            
   
-          <div class="field">
+          <div class="field" style="margin-top: 15px">
               <label>Password:</label>
               <div class="ui input">
-                  <input type="password" formControlName="password" style="width: 210px; margin-top: 15px;">
+                  <input type="password" formControlName="password" style="width: 210px;">
               </div>
               <div class= "error-message" *ngIf= "loginForm.get('password').invalid && loginForm.get('password').touched" style="text-align: center">
                   <p style="color: red; white-space: nowrap;">7 or more characters!</p>
@@ -33,4 +33,4 @@
 
 
 
- -->
+

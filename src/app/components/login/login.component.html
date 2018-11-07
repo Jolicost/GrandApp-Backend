@@ -1,0 +1,18 @@
+<div class="container">
+ <div class="text">
+    <b> Login </b>
+ </div> 
+  <div class="form">
+    <form (submit)="loginUser($event)"> 
+      User:<br>
+      <input type="text" placeholder="Username" id="username"><br>
+      Password:<br>
+      <input type="password" placeholder="Password" id="password"><br>
+      <br>
+      <button class="ui primary button buttonlogin" (click)="onClickMe()">
+          Login <!-- fer la traduccio dinamica -->
+      </button>
+      <br>
+    </form>
+  </div>
+</div>

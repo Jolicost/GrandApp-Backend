@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
 
 // Angular google map
 import { AgmCoreModule } from '@agm/core';
-
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { AgmCoreModule } from '@agm/core';
     UsersComponent,
     DialogComponent,
     DialogContentComponent,
-    UserActivitiesComponent
+    UserActivitiesComponent,
+    LoginComponent
   ],
   entryComponents: [DialogContentComponent], // per fer servir el dialogcontentComponent
   imports: [

@@ -12,7 +12,12 @@ div.form {
     text-align: left;   
 }
 
-div.buttonlogin {
+.buttonlogin {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    box-align: center;
 }

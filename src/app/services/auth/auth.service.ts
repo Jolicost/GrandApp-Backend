@@ -10,7 +10,7 @@ import { MessagesService } from '../messages/messages.service';
 })
 export class AuthService {
 
-  actURL = 'urllogin';
+  actURL = 'https://grandapp.herokuapp.com/login';
 
   constructor(
     private http: HttpClient,
@@ -33,7 +33,7 @@ export class AuthService {
     return (error: any): Observable<T> => {
       if (error.status !== 200) {
         // TODO: send the error to remote logging infrastructure
-        // console.error(error);
+        console.error(error);
         // TODO: better job of transforming error for user consumption
         // console.log(`${operation} failed: ${error.message}`);
         // Catch the status code and do some actions if it is a particular situation

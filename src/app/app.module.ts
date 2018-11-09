@@ -24,6 +24,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 import { DialogComponent, DialogContentComponent } from './components/dialog/dialog/dialog.component';
 
+
 // Reactive forms
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';

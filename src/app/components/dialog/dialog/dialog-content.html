@@ -17,9 +17,8 @@
     <h1 *ngIf="data.mode === 'addActivity'" >Add activity:</h1>
     <h1 *ngIf="data.mode === 'editActivity'" >Edit activity:</h1>
     <h1 *ngIf="data.mode === 'deleteActivity'" >Delete activity:</h1>
+    <div class="ui divider"></div>
 </div>
-
-<div class="ui divider"></div>
 
 <div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode">
     <div class="ui form">
@@ -172,13 +171,15 @@
             </div>
         </form>
     <div>
+    <div class="ui divider"></div>
 </div>
 
 <div *ngIf="data.mode === 'deleteActivity'">
     <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
+    <div class="ui divider"></div>
 </div>
 
-<div class="ui divider"></div>
+
 
 <!--Add & Edit Actions-->
 <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">

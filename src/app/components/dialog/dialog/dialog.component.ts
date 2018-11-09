@@ -76,6 +76,9 @@ export class DialogComponent implements OnInit, OnDestroy {
         if (mode.mode === 'deleteActivity') {
           this.openDialog(mode);
         }
+        if (mode.mode === 'infoDialog') {
+          this.openDialog(mode);
+        }
       })
     );
   }

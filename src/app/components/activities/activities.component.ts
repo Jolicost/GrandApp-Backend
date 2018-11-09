@@ -5,39 +5,36 @@ import { Activity } from '../../models/activity';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css']
+    selector: 'app-activities',
+    templateUrl: './activities.component.html',
+    styleUrls: ['./activities.component.css']
 })
 export class ActivitiesComponent implements OnInit {
+    activities: Array<Activity> = [];
 
-  activities: Array<Activity> = [];
+    constructor(
+        private dialogService: DialogService,
+        private activitiesService: ActivitiesService,
+        private router: Router
+    ) {
+        this.activitiesService.getActivities().subscribe(res => {
+            this.activities = res;
+        });
+    }
+    ngOnInit() {
+        this.activitiesService.activity$.subscribe(activityTable => {
+            this.activitiesService.getActivities().subscribe(res => {
+                this.activities = res;
+            });
+        });
+    }
 
+    openModal(mode) {
+        this.dialogService.openDialog(mode);
+    }
 
-  constructor(
-    private dialogService: DialogService,
-    private activitiesService: ActivitiesService,
-    private router: Router
-  ) {
-    this.activitiesService.getActivities().subscribe(res => {
-      this.activities = res;
-    });
-  }
-
-  ngOnInit() {
-    this.activitiesService.activity$.subscribe(activityTable => {
-      this.activitiesService.getActivities().subscribe(res => {
-        this.activities = res;
-      });
-    });
-  }
-
-  openModal(mode) {
-    this.dialogService.openDialog(mode);
-  }
-
-  showDetails(id) {
-    console.log('act id', id);
-    this.router.navigate(['/activity', id]);
-  }
+    showDetails(id) {
+        console.log('id: ', id);
+        this.router.navigate(['/activity', id]);
+    }
 }

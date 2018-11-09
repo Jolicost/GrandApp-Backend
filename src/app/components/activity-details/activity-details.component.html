@@ -9,10 +9,10 @@
 <p *ngIf="activitySelected">Activity end: {{ activitySelected.timestampEnd }}</p>
 <p *ngIf="activitySelected">Activity participants:</p>
 <div *ngIf="activitySelected">
-  <ul *ngFor="let p of activitySelected.participants">
-    <li><span style="color: red">ID: </span>{{p.id}}</li>
-    <li><span style="color: red">Name: </span>{{p.name}}</li>
-  </ul>
+    <ul *ngFor="let p of activitySelected.participants">
+        <li><span style="color: red">ID: </span>{{p.id}}</li>
+        <li><span style="color: red">Name: </span>{{p.name}}</li>
+    </ul>
 </div>
 
 <p *ngIf="activitySelected">Activity address: {{ activitySelected.address }}</p>
@@ -22,13 +22,13 @@
 <p *ngIf="activitySelected">Activity images:</p>
 
 <div *ngIf="activitySelected">
-  <ul *ngFor="let i of activitySelected.images">
-    <li>
-      <img src="{{ activitySelected.images }}" height="100px" width="100px">
-    </li>
-  </ul>
+    <ul *ngFor="let i of activitySelected.images">
+        <li>
+            <img src="{{ activitySelected.images }}" height="100px" width="100px">
+        </li>
+    </ul>
 </div>
 
 <div class="ui left aligned basic segment">
-  <button class="ui centered aligned button" (click)="goBack()">Back</button>
+    <button class="ui centered aligned button" (click)="goBack()">Back</button>
 </div>

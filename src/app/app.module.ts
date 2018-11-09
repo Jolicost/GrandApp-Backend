@@ -32,8 +32,8 @@ import { FormsModule } from '@angular/forms';
 
 // Angular google map
 import { AgmCoreModule } from '@agm/core';
-
-
+// Angular authentification
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -70,6 +70,15 @@ import { AgmCoreModule } from '@agm/core';
     MatSelectModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg'
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:3001'],
+        blacklistedRoutes: ['localhost:3001/auth/']
+      }
     })
   ],
   providers: [],

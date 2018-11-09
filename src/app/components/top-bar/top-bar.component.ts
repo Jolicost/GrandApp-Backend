@@ -15,6 +15,7 @@ export class TopBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
   }
 
   toggle() {
@@ -25,7 +26,6 @@ export class TopBarComponent implements OnInit {
       this.sidebarService.changeSidebarStatus('open');
       this.sidebarOpened = true;
     }
-
   }
 
 }

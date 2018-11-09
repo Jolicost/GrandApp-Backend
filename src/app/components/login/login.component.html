@@ -4,13 +4,13 @@
   <div class="form" style="width: 210px;">
       <form [formGroup]= "loginForm">
           <div class="field">
-              <label>Email:</label>
+              <label>Username:</label>
               <div class="ui input">
-                  <input type="text" formControlName="email" style="width: 210px;">
+                  <input type="text" formControlName="username" style="width: 210px;">
               </div>
-              <div class= "error-message" *ngIf= "loginForm.get('email').invalid && loginForm.get('email').touched" style="text-align: center">
+              <div class= "error-message" *ngIf= "loginForm.get('username').invalid && loginForm.get('username').touched" style="text-align: center">
                   <div class="input-err-message" style="text-align: center">
-                      <p style="color: red; white-space: nowrap;">Wrong email format!</p>
+                      <p style="color: red; white-space: nowrap;">Wrong username format!</p>
                   </div>
               </div>
           </div>            

@@ -9,7 +9,7 @@ import { ActivityDetailsComponent } from './components/activity-details/activity
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'users', component: UsersComponent },

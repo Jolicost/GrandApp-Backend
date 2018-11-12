@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {
     FormGroup,
@@ -13,6 +13,9 @@ import { HttpClient } from '@angular/common/http';
 import { Activity } from '../../../models/activity';
 import { MessagesService } from '../../../services/messages/messages.service';
 import { UploadImagesService } from 'src/app/services/upload/upload-images.service';
+
+import { Ng2ImgMaxService } from 'ng2-img-max';
+import { ViewChild } from '@angular/core';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -106,8 +109,14 @@ export class DialogComponent implements OnInit, OnDestroy {
     selector: 'app-dialog-content',
     templateUrl: './dialog-content.html'
 })
+
+
+
 export class DialogContentComponent implements OnInit {
+    @ViewChild('imageInput') imageInputVariable: ElementRef;
+
     base64textString;
+    uploadedImage: File;
     imageUrl;
     activityToDelete;
     activityForm = new FormGroup({});
@@ -121,7 +130,8 @@ export class DialogContentComponent implements OnInit {
         private activityService: ActivitiesService,
         private messagesService: MessagesService,
         private dialogService: DialogService,
-        private uploadImagesService: UploadImagesService
+        private uploadImagesService: UploadImagesService,
+        private ng2ImgMax: Ng2ImgMaxService
     ) {
         this.activityToDelete = this.data.obj;
 
@@ -151,14 +161,21 @@ export class DialogContentComponent implements OnInit {
     }
 
     onFileSelected(event) {
-        const files = event.target.files;
-        const file = files[0];
-
-        if (files && file) {
-            const reader = new FileReader();
-            reader.onload = this._handleReaderLoaded.bind(this);
-            reader.readAsBinaryString(file);
-        }
+        const file = event.target.files[0];
+        // Compress the image to 0.75MB
+        this.ng2ImgMax.compressImage(file, 0.075).subscribe(
+            result => {
+                this.uploadedImage = new File([result], result.name);
+                console.log('imageCompressed', this.uploadedImage);
+                const reader = new FileReader();
+                reader.onload = this._handleReaderLoaded.bind(this);
+                reader.readAsBinaryString(this.uploadedImage);
+            },
+            error => {
+                // console.log('Oh no!', error);
+                this.dialogService.openDialog({mode: 'infoDialog', obj: error.reason + ' Please try with another image!'});
+            }
+        );
     }
 
     _handleReaderLoaded(readerEvt) {
@@ -168,19 +185,20 @@ export class DialogContentComponent implements OnInit {
     }
 
     onUpload() {
-        this.uploadImagesService.upload(this.base64textString)
-        .subscribe(res => {
-            if (this.messagesService.getExists()) {
-                this.dialogService.openDialog({
-                    mode: 'infoDialog',
-                    obj: this.messagesService.getMessage()
-                });
-                this.messagesService.setMessage(null);
-            } else {
-                this.imageUrl = res.imageUrl;
-                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-            }
-        });
+        this.uploadImagesService
+            .upload(this.base64textString)
+            .subscribe(res => {
+                if (this.messagesService.getExists()) {
+                    this.dialogService.openDialog({
+                        mode: 'infoDialog',
+                        obj: this.messagesService.getMessage()
+                    });
+                    this.messagesService.setMessage(null);
+                } else {
+                    this.imageUrl = res.imageUrl;
+                    // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                }
+            });
     }
 
     onCancelClick(): void {

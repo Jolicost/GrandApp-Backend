@@ -165,9 +165,9 @@
                 <label style="text-align: left">
                 Images:
                 </label>
-                <!-- <input type="file" (change)="onFileSelected($event)"> 
-                <button class="ui blue basic button" (click)="onUpload"> Upload </button> -->
-                <input type="text" formControlName="images">
+                <input type="file" (change)="onFileSelected($event)" accept="image/x-png,image/gif,image/jpeg"> 
+                <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
+                <!-- <input type="text" formControlName="images"> -->
             </div>
         </form>
     <div>

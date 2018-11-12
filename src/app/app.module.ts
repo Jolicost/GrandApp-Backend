@@ -33,7 +33,8 @@ import { FormsModule } from '@angular/forms';
 // Angular google map
 import { AgmCoreModule } from '@agm/core';
 
-
+// Angular image compress and edit
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { AgmCoreModule } from '@agm/core';
     MatSelectModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg'
-    })
+    }),
+    Ng2ImgMaxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

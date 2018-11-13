@@ -25,9 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    // private userService: UserService,
     private messageService: MessagesService,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -53,8 +52,9 @@ export class LoginComponent implements OnInit {
           this.messageService.setMessage(null);
         } else {
           localStorage.setItem('token', user.token);
+          localStorage.setItem('username', username);
           // 呼叫userService的方法，让订阅者们收到新的值
-          // this.userService.changeUserStatus('loginSuccess');
+          this.authService.changeUserStatus('loginSuccess');
           this.router.navigate(['/dashboard']);
         }
     });

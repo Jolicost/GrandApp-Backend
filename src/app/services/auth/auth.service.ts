@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, of} from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessagesService } from '../../services/messages/messages.service';
 
@@ -16,6 +16,9 @@ const httpOptions = {
 })
 export class AuthService {
 
+  private user = new Subject<string>(); // 发送器，通知有变化
+  user$ = this.user.asObservable();    // 数据储存的地方， 可以被subscribe()然后就可以获取数据
+
   private authrUrl = 'https://grandapp.herokuapp.com/login';
   constructor(
     private http: HttpClient,
@@ -25,12 +28,21 @@ export class AuthService {
     private messageService: MessagesService,
   ) { }
 
+  changeUserStatus(value) {
+    this.user.next(value);  // emit有变化，并且传送新的value
+  }
+
   login(user): Observable<any> {
     return this.http.post<any>(this.authrUrl, user, httpOptions)
     .pipe(
       catchError(this.handleError<any>('login')),
       tap(resp => console.log('loginResponse', resp))
     );
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

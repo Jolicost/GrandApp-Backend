@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import {
+    Component,
+    Inject,
+    OnInit,
+    OnDestroy,
+    ElementRef
+} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {
     FormGroup,
@@ -41,13 +47,28 @@ export class DialogComponent implements OnInit, OnDestroy {
         timestampStart: new FormControl('', Validators.required),
         timestampEnd: new FormControl('', Validators.required),
         images: new FormControl('', Validators.required),
-        lat: new FormControl('', Validators.required),
-        long: new FormControl('', Validators.required),
+        lat: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]*$')
+        ]),
+        long: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]*$')
+        ]),
         address: new FormControl('', Validators.required),
         activityType: new FormControl('', Validators.required),
-        price: new FormControl('', Validators.required),
-        rating: new FormControl('', Validators.required),
-        capacity: new FormControl('', Validators.required)
+        price: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]*$')
+        ]),
+        rating: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]*$')
+        ]),
+        capacity: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[0-9]*$')
+        ])
     });
 
     constructor(
@@ -64,18 +85,18 @@ export class DialogComponent implements OnInit, OnDestroy {
                 }
                 if (mode.mode === 'editActivity') {
                     this.activityForm.setValue({
-                        title: mode.obj.title,
-                        description: mode.obj.description,
-                        timestampStart: mode.obj.timestampStart,
-                        timestampEnd: mode.obj.timestampEnd,
-                        images: mode.obj.images,
-                        lat: mode.obj.lat,
-                        long: mode.obj.long,
-                        address: mode.obj.address,
-                        activityType: mode.obj.activityType,
-                        price: mode.obj.price,
-                        rating: mode.obj.rating,
-                        capacity: mode.obj.capacity
+                        title: mode.obj.title === undefined ? '' : mode.obj.title,
+                        description: mode.obj.description === undefined ? '' : mode.obj.description,
+                        timestampStart: mode.obj.timestampStart === undefined ? '' : mode.obj.timestampStart,
+                        timestampEnd: mode.obj.timestampEnd === undefined ? '' : mode.obj.timestampEnd,
+                        images: mode.obj.images === undefined ? '' : mode.obj.images,
+                        lat: mode.obj.lat === undefined ? '' : mode.obj.lat,
+                        long: mode.obj.long === undefined ? '' : mode.obj.long,
+                        address: mode.obj.address === undefined ? '' : mode.obj.address,
+                        activityType: mode.obj.activityType === undefined ? '' : mode.obj.activityType,
+                        price: mode.obj.price === undefined ? '' : mode.obj.price,
+                        rating: mode.obj.rating === undefined ? '' : mode.obj.rating,
+                        capacity: mode.obj.capacity === undefined ? '' : mode.obj.capacity
                     });
                     this.openDialog(mode);
                 }
@@ -109,9 +130,6 @@ export class DialogComponent implements OnInit, OnDestroy {
     selector: 'app-dialog-content',
     templateUrl: './dialog-content.html'
 })
-
-
-
 export class DialogContentComponent implements OnInit {
     @ViewChild('imageInput') imageInputVariable: ElementRef;
 
@@ -173,7 +191,10 @@ export class DialogContentComponent implements OnInit {
             },
             error => {
                 // console.log('Oh no!', error);
-                this.dialogService.openDialog({mode: 'infoDialog', obj: error.reason + ' Please try with another image!'});
+                this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: error.reason + ' Please try with another image!'
+                });
             }
         );
     }
@@ -263,6 +284,7 @@ export class DialogContentComponent implements OnInit {
                         this.messagesService.setMessage(null);
                     } else {
                         this.activityService.actDataChanged('changed');
+                        this.dialogService.openDialog({mode: 'infoDialog', obj: res.message });
                         // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                         this.onCancelClick();
                     }

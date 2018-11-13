@@ -153,7 +153,6 @@
                     <label style="text-align: left">
                     Desciption:
                     <textarea rows="3" formControlName="description"></textarea>
-                    <!-- <input type="text" formControlName="description"> -->
                     </label>
                     <div class= "error-message" *ngIf= "activityForm.get('description').invalid && activityForm.get('description').touched" style="text-align: center">
                         <div class="input-err-message" style="text-align: center">
@@ -161,13 +160,14 @@
                         </div>
                     </div>
                 </div>
-            <div class="ui field">
-                <label style="text-align: left">
-                Images:
-                </label>
-                <input type="file" (change)="onFileSelected($event)" accept="image/x-png,image/gif,image/jpeg"> 
-                <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
-                <!-- <input type="text" formControlName="images"> -->
+            <label style="text-align: left"> Images: </label>
+            <div class="two fields">
+                <div class="field">
+                    <input #imageInput type="file" (change)="onFileSelected($event)" accept="image/x-png,image/gif,image/jpeg">
+                </div>
+                <div class="field">
+                    <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
+                </div>    
             </div>
         </form>
     <div>

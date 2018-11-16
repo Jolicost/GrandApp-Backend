@@ -8,15 +8,15 @@
     </div>
     <div class="right items">
         <div *ngIf="logged">
-            <div class="profile" style="position: absolute; right: 135px; top: 6px">
+            <div class="profile" style="position: absolute; right: 125px; top: 6px">
                 <a class="ui label" routerLink="/userinfo">
                     <img class="ui right spaced avatar image" src="/src/assets/image/boy.jpg">
                     {{ username }}
                 </a>
             </div>
-            <div class="logout" style="position: absolute; right: 15px; top: 6px">
-                <button class= "ui red button" style="height: 39.5px; background-color: red" (click)="logout()">
-                    <i class= "sign-out icon"></i>
+            <div class="logout" style="position: absolute; right: 5px; top: 6px">
+                <button class="ui red button" style="height: 39.5px; background-color: red" (click)="logout()">
+                    <i class="sign-out icon"></i>
                     Log out
                 </button>
             </div>

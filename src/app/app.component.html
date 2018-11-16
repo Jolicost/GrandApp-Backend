@@ -1,18 +1,18 @@
 <mat-toolbar style="height: 50px; background-color: grey">
-  <app-top-bar></app-top-bar>
+    <app-top-bar></app-top-bar>
 </mat-toolbar>
 
 <div class="content">
-  <mat-sidenav-container class="side-bar-container" style="position: absolute; width: 100%; height: 100%;">
-      <mat-sidenav id="sidbar" #sidenav [opened]="opened" mode="side" >
-          <div class="side content">
-              <app-side-bar></app-side-bar>
-          </div>
-      </mat-sidenav>
+    <mat-sidenav-container class="side-bar-container" style="position: absolute; width: 100%; height: 100%;">
+        <mat-sidenav id="sidbar" #sidenav [opened]="opened" mode="side">
+            <div class="side content">
+                <app-side-bar></app-side-bar>
+            </div>
+        </mat-sidenav>
 
-      <mat-sidenav-content>
-          <router-outlet></router-outlet>
-      </mat-sidenav-content>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
 
-  </mat-sidenav-container>
+    </mat-sidenav-container>
 </div>

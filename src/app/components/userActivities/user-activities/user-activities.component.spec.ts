@@ -5,24 +5,23 @@ import { DialogComponent } from '../../dialog/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 describe('UserActivitiesComponent', () => {
-  let component: UserActivitiesComponent;
-  let fixture: ComponentFixture<UserActivitiesComponent>;
+    let component: UserActivitiesComponent;
+    let fixture: ComponentFixture<UserActivitiesComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ UserActivitiesComponent, DialogComponent ],
-      imports: [ HttpClientModule, MatDialogModule ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [UserActivitiesComponent, DialogComponent],
+            imports: [HttpClientModule, MatDialogModule]
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UserActivitiesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(UserActivitiesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -2,11 +2,11 @@
     <div class="infoDialog" *ngIf="data.mode === 'infoDialog'" style="text-align: center">
         <div class="content-panel">
             <div class="ui icon header">
-              <i class="exclamation icon"></i>
-              Error Message:
+                <i class="exclamation icon"></i>
+                Error Message:
             </div>
             <div class="content">
-              {{ data.obj }}
+                {{ data.obj }}
             </div>
         </div>
     </div>
@@ -14,9 +14,9 @@
 
 <!--Dialog title-->
 <div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity'">
-    <h1 *ngIf="data.mode === 'addActivity'" >Add activity:</h1>
-    <h1 *ngIf="data.mode === 'editActivity'" >Edit activity:</h1>
-    <h1 *ngIf="data.mode === 'deleteActivity'" >Delete activity:</h1>
+    <h1 *ngIf="data.mode === 'addActivity'">Add activity:</h1>
+    <h1 *ngIf="data.mode === 'editActivity'">Edit activity:</h1>
+    <h1 *ngIf="data.mode === 'deleteActivity'">Delete activity:</h1>
     <div class="ui divider"></div>
 </div>
 
@@ -27,10 +27,11 @@
                 <div class="three fields">
                     <div class="field">
                         <label style="text-align: left">
-                        Title:
-                        <input type="text" formControlName="title">
+                            Title:
+                            <input type="text" formControlName="title">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('title').invalid && activityForm.get('title').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('title').invalid && activityForm.get('title').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
                             </div>
@@ -38,10 +39,11 @@
                     </div>
                     <div class="field">
                         <label style="text-align: left">
-                        Start Date:
-                        <input type="text" formControlName="timestampStart">
+                            Start Date:
+                            <input type="text" formControlName="timestampStart">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('timestampStart').invalid && activityForm.get('timestampStart').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('timestampStart').invalid && activityForm.get('timestampStart').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -49,10 +51,11 @@
                     </div>
                     <div class="field">
                         <label style="text-align: left">
-                        End Date:
-                        <input type="text" formControlName="timestampEnd">
+                            End Date:
+                            <input type="text" formControlName="timestampEnd">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('timestampEnd').invalid && activityForm.get('timestampEnd').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('timestampEnd').invalid && activityForm.get('timestampEnd').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -64,10 +67,11 @@
                 <div class="fields">
                     <div class="four wide field">
                         <label style="text-align: left">
-                        Latitude:
-                        <input type="text" formControlName="lat">
+                            Latitude:
+                            <input type="text" formControlName="lat">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('lat').invalid && activityForm.get('lat').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('lat').invalid && activityForm.get('lat').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -75,10 +79,11 @@
                     </div>
                     <div class="four wide field">
                         <label style="text-align: left">
-                        Longitude:
-                        <input type="text" formControlName="long">
+                            Longitude:
+                            <input type="text" formControlName="long">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('long').invalid && activityForm.get('long').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('long').invalid && activityForm.get('long').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -86,10 +91,11 @@
                     </div>
                     <div class="eight wide field">
                         <label style="text-align: left">
-                        Address:
-                        <input type="text" formControlName="address">
+                            Address:
+                            <input type="text" formControlName="address">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('address').invalid && activityForm.get('address').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('address').invalid && activityForm.get('address').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -101,14 +107,15 @@
                 <div class="four fields">
                     <div class="field">
                         <label style="text-align: left">
-                        Activity type:
-                        <select class="ui search dropdown" formControlName="activityType">
+                            Activity type:
+                            <select class="ui search dropdown" formControlName="activityType">
                                 <option value="EN">Entity</option>
                                 <option value="AL">Alabama</option>
-                        </select>
-                        <!-- <input type="text" formControlName="activityType"> -->
+                            </select>
+                            <!-- <input type="text" formControlName="activityType"> -->
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('activityType').invalid && activityForm.get('activityType').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('activityType').invalid && activityForm.get('activityType').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -116,10 +123,11 @@
                     </div>
                     <div class="field">
                         <label style="text-align: left">
-                        Price:
-                        <input type="text" formControlName="price">
+                            Price:
+                            <input type="text" formControlName="price">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('price').invalid && activityForm.get('price').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('price').invalid && activityForm.get('price').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -127,10 +135,11 @@
                     </div>
                     <div class="field">
                         <label style="text-align: left">
-                        Rating:
-                        <input type="text" formControlName="rating">
+                            Rating:
+                            <input type="text" formControlName="rating">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('rating').invalid && activityForm.get('rating').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('rating').invalid && activityForm.get('rating').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -138,10 +147,11 @@
                     </div>
                     <div class="field">
                         <label style="text-align: left">
-                        Capacity:
-                        <input type="text" formControlName="capacity">
+                            Capacity:
+                            <input type="text" formControlName="capacity">
                         </label>
-                        <div class= "error-message" *ngIf= "activityForm.get('capacity').invalid && activityForm.get('capacity').touched" style="text-align: center">
+                        <div class="error-message" *ngIf="activityForm.get('capacity').invalid && activityForm.get('capacity').touched"
+                            style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                             </div>
@@ -150,16 +160,17 @@
                 </div>
             </div>
             <div class="field">
-                    <label style="text-align: left">
+                <label style="text-align: left">
                     Desciption:
                     <textarea rows="3" formControlName="description"></textarea>
-                    </label>
-                    <div class= "error-message" *ngIf= "activityForm.get('description').invalid && activityForm.get('description').touched" style="text-align: center">
-                        <div class="input-err-message" style="text-align: center">
-                            <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                        </div>
+                </label>
+                <div class="error-message" *ngIf="activityForm.get('description').invalid && activityForm.get('description').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Can't be empty!</p>
                     </div>
                 </div>
+            </div>
             <label style="text-align: left"> Images: </label>
             <div class="two fields">
                 <div class="field">
@@ -167,40 +178,40 @@
                 </div>
                 <div class="field">
                     <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
-                </div>    
+                </div>
             </div>
         </form>
-    <div>
-    <div class="ui divider"></div>
-</div>
+        <div>
+            <div class="ui divider"></div>
+        </div>
 
-<div *ngIf="data.mode === 'deleteActivity'">
-    <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
-    <div class="ui divider"></div>
-</div>
+        <div *ngIf="data.mode === 'deleteActivity'">
+            <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
+            <div class="ui divider"></div>
+        </div>
 
 
 
-<!--Add & Edit Actions-->
-<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
-  <div class="ui green basic ok button" (click)="onSaveClick(data)">
-    <i class="checkmark icon"></i>
-    Save
-  </div>
-  <div class="ui red basic cancel button"  (click)="onCancelClick()">
-    <i class="remove icon"></i>
-    Cancel
-  </div>
-</div>
+        <!--Add & Edit Actions-->
+        <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
+            <div class="ui green basic ok button" (click)="onSaveClick(data)">
+                <i class="checkmark icon"></i>
+                Save
+            </div>
+            <div class="ui red basic cancel button" (click)="onCancelClick()">
+                <i class="remove icon"></i>
+                Cancel
+            </div>
+        </div>
 
-<!--Delete Actions-->
-<div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
-  <div class="ui green basic ok button"  (click)="onDeleteClick(data)">
-    <i class="checkmark icon"></i>
-    Yes
-  </div>
-  <div class="ui red basic cancel button"  (click)="onCancelClick()">
-    <i class="remove icon"></i>
-    No
-  </div>
-</div>
+        <!--Delete Actions-->
+        <div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
+            <div class="ui green basic ok button" (click)="onDeleteClick(data)">
+                <i class="checkmark icon"></i>
+                Yes
+            </div>
+            <div class="ui red basic cancel button" (click)="onCancelClick()">
+                <i class="remove icon"></i>
+                No
+            </div>
+        </div>

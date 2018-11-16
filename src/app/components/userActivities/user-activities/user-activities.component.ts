@@ -4,26 +4,24 @@ import { ActivitiesService } from '../../../services/activities/activities.servi
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-activities',
-  templateUrl: './user-activities.component.html',
-  styleUrls: ['./user-activities.component.css']
+    selector: 'app-user-activities',
+    templateUrl: './user-activities.component.html',
+    styleUrls: ['./user-activities.component.css']
 })
 export class UserActivitiesComponent implements OnInit {
+    actURL = 'https://grandapp.herokuapp.com/activities';
+    userActivities = [];
 
-  actURL = 'https://grandapp.herokuapp.com/activities';
-  userActivities = [];
+    constructor(
+        private dialogService: DialogService,
+        private activitiesService: ActivitiesService
+    ) {}
 
-  constructor(
-    private dialogService: DialogService,
-    private activitiesService: ActivitiesService
-  ) { }
+    ngOnInit() {
+        // this.userActivities = this.activitiesService.getActivities();
+    }
 
-  ngOnInit() {
-    // this.userActivities = this.activitiesService.getActivities();
-  }
-
-  openModal(mode) {
-    this.dialogService.openDialog(mode);
-  }
-
+    openModal(mode) {
+        this.dialogService.openDialog(mode);
+    }
 }

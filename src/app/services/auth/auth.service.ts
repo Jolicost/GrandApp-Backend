@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessagesService } from '../../services/messages/messages.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,7 +23,7 @@ export class AuthService {
   private authrUrl = 'https://grandapp.herokuapp.com/login';
   constructor(
     private http: HttpClient,
-    // public jwtHelper: JwtHelperService,
+    public jwtHelper: JwtHelperService,
     // private cookieService: CookieService,
     private router: Router,
     private messageService: MessagesService,
@@ -30,6 +31,18 @@ export class AuthService {
 
   changeUserStatus(value) {
     this.user.next(value);  // emit有变化，并且传送新的value
+  }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // console.log('==>', token);
+    if (token) {
+      // Check whether the token is expired and return
+      // true or false
+       return !this.jwtHelper.isTokenExpired(token);
+    } else {
+      return false;
+    }
   }
 
   login(user): Observable<any> {

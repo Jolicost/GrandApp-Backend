@@ -36,6 +36,9 @@ import { AgmCoreModule } from '@agm/core';
 // Angular image compress and edit
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 
+// Angular authentification
+import { JwtModule } from '@auth0/angular-jwt';
+
 
 @NgModule({
   declarations: [
@@ -72,7 +75,16 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg'
     }),
-    Ng2ImgMaxModule
+    Ng2ImgMaxModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:3001'],
+        blacklistedRoutes: ['localhost:3001/auth/']
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

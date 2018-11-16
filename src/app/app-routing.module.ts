@@ -6,16 +6,17 @@ import { UsersComponent } from './components/users/users.component';
 import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
 import { LoginComponent } from './components/login/login.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
+import { AuthGuardService as AuthGuard } from './services/guard/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'activities', component: ActivitiesComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'userActivities', component: UserActivitiesComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'activity/:id', component: ActivityDetailsComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'userActivities', component: UserActivitiesComponent, canActivate: [AuthGuard]},
+  { path: 'activity/:id', component: ActivityDetailsComponent, canActivate: [AuthGuard] }
 ];
 
 

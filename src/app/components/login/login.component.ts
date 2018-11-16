@@ -4,6 +4,7 @@ import { DialogService } from '../../services/dialog/dialog.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { MessagesService } from '../../services/messages/messages.service';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
       Validators.minLength(3)
     ])
   });
+  // userStatus: any;
 
   constructor(
     private authService: AuthService,
@@ -31,7 +33,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
   }
 
   login() {
@@ -55,6 +56,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', user.token);
           // 呼叫userService的方法，让订阅者们收到新的值
           // this.userService.changeUserStatus('loginSuccess');
+          // this.userStatus.userStatus('succes');
+          this.authService.userStatus('succes');
           this.router.navigate(['/dashboard']);
         }
     });

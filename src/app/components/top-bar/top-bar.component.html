@@ -2,4 +2,10 @@
   <button class="ui labeled icon button" (click)="toggle()">
       <i class="sidebar icon"></i>Menu
   </button>
+  
+    <div *ngIf="logged">
+      <button id="buttonlo" class="ui secondary button" (click)="logOut()" style = "position: absolute; right: 0;  top:0;">
+      <i class="power off icon"></i>
+      </button>
+    </div>  
 </div>

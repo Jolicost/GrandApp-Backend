@@ -3,6 +3,8 @@ import { ActivitiesComponent } from './activities.component';
 import { DialogComponent } from '../dialog/dialog/dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 describe('ActivitiesComponent', () => {
   let component: ActivitiesComponent;
@@ -16,7 +18,9 @@ describe('ActivitiesComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        MatDialogModule
+        MatDialogModule,
+        Router,
+        NgModule
       ]
     })
     .compileComponents();

@@ -10,14 +10,14 @@ import {
     FormGroup,
     FormControl,
     Validators
-} from '../../../../../node_modules/@angular/forms';
+} from '../../../../node_modules/@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
-import { DialogService } from '../../../services/dialog/dialog.service';
-import { ActivitiesService } from '../../../services/activities/activities.service';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { ActivitiesService } from '../../services/activities/activities.service';
 import { HttpClient } from '@angular/common/http';
-import { Activity } from '../../../models/activity';
-import { MessagesService } from '../../../services/messages/messages.service';
+import { Activity } from '../../models/activity';
+import { MessagesService } from '../../services/messages/messages.service';
 import { UploadImagesService } from 'src/app/services/upload/upload-images.service';
 
 import { Ng2ImgMaxService } from 'ng2-img-max';

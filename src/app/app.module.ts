@@ -21,11 +21,11 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { UsersComponent } from './components/users/users.component';
-import { UserActivitiesComponent } from './components/userActivities/user-activities/user-activities.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import {
     DialogComponent,
     DialogContentComponent
-} from './components/dialog/dialog/dialog.component';
+} from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 

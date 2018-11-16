@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivitiesComponent } from './activities.component';
-import { DialogComponent } from '../dialog/dialog/dialog.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 

@@ -34,7 +34,7 @@ export class ActivitiesComponent implements OnInit {
     }
 
     showDetails(id) {
-        console.log('id: ', id);
+        // console.log('id: ', id);
         this.router.navigate(['/activity', id]);
     }
 }

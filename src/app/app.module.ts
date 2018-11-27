@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -54,7 +55,8 @@ import { JwtModule } from '@auth0/angular-jwt';
         DialogContentComponent,
         UserActivitiesComponent,
         LoginComponent,
-        ActivityDetailsComponent
+        ActivityDetailsComponent,
+        UserProfileComponent
     ],
     entryComponents: [DialogContentComponent], // per fer servir el dialogcontentComponent
     imports: [

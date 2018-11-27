@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-user-activities',

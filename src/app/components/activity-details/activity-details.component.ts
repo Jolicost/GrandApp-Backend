@@ -22,15 +22,15 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.activatedRoute.params.subscribe(params => {
-            console.log('details', params);
+            // console.log('details', params);
             this.id = params['id'];
             // In a real app: dispatch action to load the details here.
         });
-        console.log('id...', this.id);
+        // console.log('id...', this.id);
         this.activitiesServices.getActivity(this.id).subscribe(act => {
             this.activitySelected = act;
-            console.log('act selected', this.activitySelected);
-            console.log('act', act);
+            // console.log('act selected', this.activitySelected);
+            // console.log('act', act);
         });
     }
 

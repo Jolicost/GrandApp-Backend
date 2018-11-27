@@ -13,10 +13,11 @@
 </div>
 
 <!--Dialog title-->
-<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity'">
+<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity' || data.mode === 'editUserInfo'">
     <h1 *ngIf="data.mode === 'addActivity'">Add activity:</h1>
     <h1 *ngIf="data.mode === 'editActivity'">Edit activity:</h1>
     <h1 *ngIf="data.mode === 'deleteActivity'">Delete activity:</h1>
+    <h1 *ngIf="data.mode === 'editUserInfo'">Edit User Information:</h1>
     <div class="ui divider"></div>
 </div>
 
@@ -181,37 +182,94 @@
                 </div>
             </div>
         </form>
-        <div>
-            <div class="ui divider"></div>
-        </div>
-
-        <div *ngIf="data.mode === 'deleteActivity'">
-            <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
-            <div class="ui divider"></div>
-        </div>
-
-
-
-        <!--Add & Edit Actions-->
-        <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'" style="text-align: center; padding-top: 10px;">
-            <div class="ui green basic ok button" (click)="onSaveClick(data)">
-                <i class="checkmark icon"></i>
-                Save
+    </div>
+</div>
+<div *ngIf="data.mode === 'editUserInfo'">
+    <div class="ui form">
+        <form [formGroup]="userInfoForm" *ngIf="data.mode === 'editUserInfo'">
+            <div class="field">
+                <label style="text-align: left">
+                    Email:
+                    <input type="text" formControlName="email">
+                </label>
+                <div class="error-message" *ngIf="userInfoForm.get('email').invalid && userInfoForm.get('email').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
             </div>
-            <div class="ui red basic cancel button" (click)="onCancelClick()">
-                <i class="remove icon"></i>
-                Cancel
+            <div class="field">
+                <label style="text-align: left">
+                    Complete Name:
+                    <input type="text" formControlName="completeName">
+                </label>
+                <div class="error-message" *ngIf="userInfoForm.get('completeName').invalid && userInfoForm.get('completeName').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="field">
+                <label style="text-align: left">
+                    Birthday:
+                    <input type="text" formControlName="birthday">
+                </label>
+                <div class="error-message" *ngIf="userInfoForm.get('birthday').invalid && userInfoForm.get('birthday').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label style="text-align: left">
+                    Phone:
+                    <input type="text" formControlName="phone">
+                </label>
+                <div class="error-message" *ngIf="userInfoForm.get('phone').invalid && userInfoForm.get('phone').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-        <!--Delete Actions-->
-        <div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
-            <div class="ui green basic ok button" (click)="onDeleteClick(data)">
-                <i class="checkmark icon"></i>
-                Yes
-            </div>
-            <div class="ui red basic cancel button" (click)="onCancelClick()">
-                <i class="remove icon"></i>
-                No
-            </div>
-        </div>
+<div>
+    <div class="ui divider"></div>
+</div>
+
+<div *ngIf="data.mode === 'deleteActivity'">
+    <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
+    <div class="ui divider"></div>
+</div>
+
+
+
+<!--Add & Edit Actions-->
+<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'" style="text-align: center; padding-top: 10px;">
+    <div class="ui green basic ok button" (click)="onSaveClick(data)">
+        <i class="checkmark icon"></i>
+        Save
+    </div>
+    <div class="ui red basic cancel button" (click)="onCancelClick()">
+        <i class="remove icon"></i>
+        Cancel
+    </div>
+</div>
+
+<!--Delete Actions-->
+<div class="actions" *ngIf="data.mode === 'deleteActivity'" style="text-align: center; padding-top: 10px;">
+    <div class="ui green basic ok button" (click)="onDeleteClick(data)">
+        <i class="checkmark icon"></i>
+        Yes
+    </div>
+    <div class="ui red basic cancel button" (click)="onCancelClick()">
+        <i class="remove icon"></i>
+        No
+    </div>
+</div>

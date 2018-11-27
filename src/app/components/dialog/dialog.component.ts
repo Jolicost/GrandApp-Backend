@@ -18,6 +18,7 @@ import { ActivitiesService } from '../../services/activities/activities.service'
 import { HttpClient } from '@angular/common/http';
 import { Activity } from '../../models/activity';
 import { MessagesService } from '../../services/messages/messages.service';
+import { UserService } from '../../services/user/user.service';
 import { UploadImagesService } from 'src/app/services/upload/upload-images.service';
 
 import { Ng2ImgMaxService } from 'ng2-img-max';
@@ -71,6 +72,25 @@ export class DialogComponent implements OnInit, OnDestroy {
         ])
     });
 
+    userInfoForm = new FormGroup({
+        email: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3)
+        ]),
+        completeName: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3)
+        ]),
+        birthday: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3)
+        ]),
+        phone: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3)
+        ])
+    });
+
     constructor(
         public dialog: MatDialog,
         private dialogService: DialogService
@@ -106,19 +126,43 @@ export class DialogComponent implements OnInit, OnDestroy {
                 if (mode.mode === 'infoDialog') {
                     this.openDialog(mode);
                 }
+                if (mode.mode === 'editUserInfo') {
+                    console.log('USERINFO: ', mode.obj);
+                    this.userInfoForm.setValue({
+                        email: mode.obj.email === undefined ? '' : mode.obj.email,
+                        completeName: mode.obj.completeName === undefined ? '' : mode.obj.completeName,
+                        birthday: mode.obj.birthday === undefined ? '' : mode.obj.birthday,
+                        phone: mode.obj.phone === undefined ? '' : mode.obj.phone
+                    });
+                    this.openDialog(mode);
+                }
             })
         );
     }
 
     openDialog(mode): void {
-        const dialogRef = this.dialog.open(DialogContentComponent, {
-            width: '600px',
-            // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
-            data: { mode: mode.mode, obj: mode.obj, form: this.activityForm } // dialog-content 可以通过data来读取dialog.component里面的变量
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            //
-        });
+        // ----------------------------------------------
+        // -----------to make auto complete--------------
+        // ----------------------------------------------
+        if (mode.mode === 'editUserInfo') {
+            const dialogRef = this.dialog.open(DialogContentComponent, {
+                width: '600px',
+                // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
+                data: { mode: mode.mode, obj: mode.obj, form: this.userInfoForm } // dialog-content 可以通过data来读取dialog.component里面的变量
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                //
+            });
+        } else {
+            const dialogRef = this.dialog.open(DialogContentComponent, {
+                width: '600px',
+                // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
+                data: { mode: mode.mode, obj: mode.obj, form: this.activityForm } // dialog-content 可以通过data来读取dialog.component里面的变量
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                //
+            });
+        }
     }
 
     ngOnDestroy() {
@@ -138,6 +182,7 @@ export class DialogContentComponent implements OnInit {
     imageUrl;
     activityToDelete;
     activityForm = new FormGroup({});
+    userInfoForm = new FormGroup({});
 
     ngOnInit() {}
 
@@ -149,14 +194,17 @@ export class DialogContentComponent implements OnInit {
         private messagesService: MessagesService,
         private dialogService: DialogService,
         private uploadImagesService: UploadImagesService,
-        private ng2ImgMax: Ng2ImgMaxService
+        private ng2ImgMax: Ng2ImgMaxService,
+        private userService: UserService
     ) {
         this.activityToDelete = this.data.obj;
-
-        // console.log(this.activityToDelete);
-
-        if (data.mode !== 'addActivity') {
+        // ----------------------------------------------
+        // -----------to make auto complete--------------
+        // ----------------------------------------------
+        if (data.mode === 'editActivity') {
             this.activityForm = data.form;
+        } else if (data.mode === 'editUserInfo') {
+            this.userInfoForm = data.form;
         } else {
             this.activityForm = new FormGroup({
                 title: new FormControl('', [
@@ -258,6 +306,11 @@ export class DialogContentComponent implements OnInit {
         const rating = this.activityForm.value.rating;
         const capacity = this.activityForm.value.capacity;
 
+        const email = this.userInfoForm.value.email;
+        const completeName = this.userInfoForm.value.completeName;
+        const birthday = this.userInfoForm.value.birthday;
+        const phone = this.userInfoForm.value.phone;
+
         if (data.mode === 'addActivity') {
             this.activityService
                 .addActivitiy({
@@ -323,6 +376,29 @@ export class DialogContentComponent implements OnInit {
                         this.onCancelClick();
                     }
                 });
+            this.dialogRef.close();
+        }
+        if (data.mode === 'editUserInfo') {
+            const idUser = data.obj._id;
+            this.userService.updateUserInfo({
+                email: email,
+                completeName: completeName,
+                birthday: birthday,
+                phone: phone
+            }, idUser)
+            .subscribe(res => {
+                if (this.messagesService.getExists()) {
+                    this.dialogService.openDialog({
+                        mode: 'infoDialog',
+                        obj: this.messagesService.getMessage()
+                    });
+                    this.messagesService.setMessage(null);
+                } else {
+                    // this.activityService.actDataChanged('changed');
+                    // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                    this.onCancelClick();
+                }
+            });
             this.dialogRef.close();
         }
     }

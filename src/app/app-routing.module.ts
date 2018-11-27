@@ -7,6 +7,7 @@ import { UserActivitiesComponent } from './components/user-activities/user-activ
 import { LoginComponent } from './components/login/login.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { AuthGuardService as AuthGuard } from './services/guard/auth-guard.service';
+import { DadesentitatComponent } from './components/dadesentitat/dadesentitat.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -30,6 +31,11 @@ const routes: Routes = [
     {
         path: 'activity/:id',
         component: ActivityDetailsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'dadesentitat',
+        component: DadesentitatComponent,
         canActivate: [AuthGuard]
     }
 ];

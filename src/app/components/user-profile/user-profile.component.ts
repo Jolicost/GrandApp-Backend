@@ -10,7 +10,9 @@ import { DialogService } from '../../services/dialog/dialog.service';
 export class UserProfileComponent implements OnInit {
     entityId;
     userInfo = {};
+    entitiesInfo = <any>[];
     entityInfo = {};
+    showEntityInfo = false;
 
     constructor(
         private userService: UserService,
@@ -23,15 +25,25 @@ export class UserProfileComponent implements OnInit {
             .subscribe(userInfo => {
                 this.entityId = userInfo.entity;
                 this.userInfo = userInfo;
-            });
-        this.userService
-            .getInfoEntitie({ id: this.entityId })
-            .subscribe(entityInfo => {
-                this.entityInfo = entityInfo;
+
+                this.userService
+                    .getInfoEntitie({ id: this.entityId })
+                    .subscribe(entityInfo => {
+                        this.entitiesInfo = entityInfo;
+                        this.entitiesInfo.forEach(element => {
+                            if (element._id === this.entityId) {
+                                this.entityInfo = element;
+                            }
+                        });
+                    });
             });
     }
 
+    show() {
+        this.showEntityInfo = !this.showEntityInfo;
+    }
+
     openModal(mode) {
-      this.dialogService.openDialog(mode);
-  }
+        this.dialogService.openDialog(mode);
+    }
 }

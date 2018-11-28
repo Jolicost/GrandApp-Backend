@@ -1,20 +1,86 @@
 <div class="userInfo">
-  <h1>User Information:</h1>
-  <pre [innerHTML]="userInfo | json"></pre>
-</div>
-<div class="actions">
-  <button class="ui icon button" (click)="openModal({mode: 'editUserInfo', obj: userInfo})"><i class="edit icon"></i></button>
+    <h1>User Information:</h1>
+    <table class="ui definition table">
+        <tbody>
+            <tr>
+                <td class="two wide column"></td>
+                <td><button class="ui icon button" style="text-align: right" (click)="openModal({mode: 'editUserInfo', obj: userInfo})"><i
+                            class="edit icon"></i></button></td>
+            </tr>
+            <tr>
+                <td class="two wide column">Localitat</td>
+                <td>{{ userInfo.place.placeName }}</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>{{ userInfo.username}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ userInfo.email }}</td>
+            </tr>
+            <tr>
+                <td>Birthday</td>
+                <td>{{ userInfo.birthday }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ userInfo.phone }}</td>
+            </tr>
+            <tr>
+                <td>User type</td>
+                <td>{{ userInfo.userType }}</td>
+            </tr>
+            <tr>
+                <td>Contact phone</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let contact of userInfo.contactPhones">
+                            Name: {{ contact.alias}}, Phone: {{ contact.phone }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Entity</td>
+                <td (click)="show()">
+                  <p style="color: blue" >{{ entityInfo.alias }} </p>
+                  <div class="ui info message">
+                      <i class="close icon"></i>
+                      <div class="header">
+                        Click over to show the entity information.
+                      </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <pre [innerHTML]="userInfo | json"></pre> -->
 </div>
 
-<div class="entityInfo">
-  <h1>Entity Information:</h1>
-  <pre [innerHTML]="entityInfo | json"></pre>
-</div>
-
-<div class="actions">
-  <div class="ui button">
-    Edit
-  </div>
+<div class="entityInfo" style="padding-top: 20px;" *ngIf="showEntityInfo">
+    <h1>Entity Information:</h1>
+    <table class="ui definition table">
+        <tbody>
+            <tr>
+                <td class="two wide column">Localitat</td>
+                <td>{{ entityInfo.address }}</td>
+            </tr>
+            <tr>
+                <td>Entity Name</td>
+                <td>{{ entityInfo.alias}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ entityInfo.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ entityInfo.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <pre [innerHTML]="entityInfo | json"></pre> -->
 </div>
 
 <app-dialog></app-dialog>

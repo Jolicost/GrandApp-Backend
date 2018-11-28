@@ -4,8 +4,6 @@ import { Observable, Subject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessagesService } from '../messages/messages.service';
 
-
-
 const httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -37,8 +35,8 @@ export class UserService {
 
     getInfoEntitie(entitiyId): Observable<any> {
         return this.http.get<any>(this.entitiesURL, entitiyId).pipe(
-            catchError(this.handleError<any>('verify')),
-            tap(resp => console.log('verify', resp))
+            catchError(this.handleError<any>('getEntityInfo')),
+            tap(resp => console.log('getEntityInfo', resp))
         );
     }
 

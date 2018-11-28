@@ -26,7 +26,7 @@ export class UserService {
 
     ) {}
 
-    verify(id): Observable<any> {
+    verify(): Observable<any> {
         return this.http.get<any>(this.verifyURL, httpOptions).pipe(
             catchError(this.handleError<any>('verify')),
             tap(resp => console.log('verify', resp))
@@ -40,10 +40,17 @@ export class UserService {
         );
     }
 
+    getUserInfo(id): Observable<any> {
+        return this.http.get<any>(`${this.userURL}/${id}`, httpOptions).pipe(
+            catchError(this.handleError<any>('getUserInfo')),
+            tap(resp => console.log('getUserInfo', resp))
+        );
+    }
+
     updateUserInfo(newUser, userID): Observable<any> {
         return this.http.put<any>(`${this.userURL}/${userID}`, newUser, httpOptions).pipe(
-            catchError(this.handleError<any>('verify')),
-            tap(resp => console.log('verify', resp))
+            catchError(this.handleError<any>('updateUserInfo')),
+            tap(resp => console.log('updateUserInfo', resp))
         );
     }
     private handleError<T>(operation = 'operation', result?: T) {

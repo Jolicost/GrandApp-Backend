@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
         this.userService
-            .verify(localStorage.getItem('token'))
+            .verify()
             .subscribe(userInfo => {
                 this.entityId = userInfo.entity;
                 this.userInfo = userInfo;

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
     selector: 'app-activity-details',
@@ -13,24 +14,33 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
     id: number;
     private sub: any;
     activitySelected: Activity;
+    usersID = <any>[];
+    participants = <any>[];
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private activitiesServices: ActivitiesService,
-        private router: Router
+        private router: Router,
+        private userService: UserService
     ) {}
 
     ngOnInit() {
         this.sub = this.activatedRoute.params.subscribe(params => {
-            // console.log('details', params);
             this.id = params['id'];
-            // In a real app: dispatch action to load the details here.
         });
-        // console.log('id...', this.id);
+
         this.activitiesServices.getActivity(this.id).subscribe(act => {
             this.activitySelected = act;
-            // console.log('act selected', this.activitySelected);
-            // console.log('act', act);
+            this.usersID = act.participants;
+            this.usersID.forEach(userID => {
+                this.userService.getUserInfo(userID).subscribe(res => {
+                    this.participants.push({
+                        id: res._id,
+                        name: res.completeName
+                    });
+                });
+                // console.log('participants name:', this.participants);
+            });
         });
     }
 

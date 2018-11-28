@@ -10,13 +10,13 @@ import { DadesusuariService } from 'src/app/services/dadesusuari/dadesusuari.ser
 })
 export class DadesentitatComponent implements OnInit {
 
-  id = {};
-  //entityInfo = {};
-  localitat = {};
-  entitat = {};
-  numtlf = {};
-  email = {};
-  address = {};
+  id: string;
+  // entityInfo = {};
+  localitat;
+  entitat;
+  numtlf;
+  email;
+  address;
   constructor(
     private dadesentitatServices: DadesentitatService,
     private dadesusuariServices: DadesusuariService,
@@ -25,12 +25,13 @@ export class DadesentitatComponent implements OnInit {
   ngOnInit() {
     this.dadesusuariServices.getDadesUser().subscribe(act => {
       this.id = act.entity;
-    }),
-    this.dadesentitatServices.getDataEntity(this.id).subscribe(act => { this.localitat = act.place.placeName;
-      this.entitat = act.alias;
-      this.numtlf = act.phone;
-      this.email = act.email;
-      this.address = act.address;
+      console.log('heeeey', this.id);
+      this.dadesentitatServices.getDataEntity(this.id).subscribe(act1 => { this.localitat = act1.place.placeName;
+        this.entitat = act1.alias;
+        this.numtlf = act1.phone;
+        this.email = act1.email;
+        this.address = act1.address;
+      });
     });
   }
   goBack() {

@@ -16,7 +16,8 @@ export class DadesentitatService {
   ) { }
 
   getDataEntity(id): Observable<any> {
-    return this.http.get<any>('${this.actURL}/${id}').pipe(
+    console.log('estic agafant entitat');
+    return this.http.get<any>(`${this.actURL}/${id}`).pipe(
         catchError(this.handleError<any>('getDataEntity')),
         tap(resp => console.log('getDataEntity', resp))
     );
@@ -34,5 +35,5 @@ export class DadesentitatService {
         // Let the app keep running by returning an empty result.
         return of(result as T);
     };
-}
+  }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { UserService } from 'src/app/services/user/user.service';
+import { ActivitiesService } from 'src/app/services/activities/activities.service';
+import { EntityService } from 'src/app/services/entity/entity.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -9,10 +12,28 @@ import { Chart } from 'chart.js';
 export class DashboardComponent implements OnInit {
     chart = [];
     chart2 = [];
+    totalUser = 0;
+    totalAct = 0;
+    totalEnt = 0;
 
-    constructor() {}
+    constructor(
+        private userService: UserService,
+        private actService: ActivitiesService,
+        private entityService: EntityService
+    ) {}
 
     ngOnInit() {
+        this.userService.getAllUsers().subscribe(users => {
+            this.totalUser = users.length;
+        });
+        this.actService.getActivities().subscribe(acts => {
+            this.totalAct = acts.length;
+        });
+
+        this.entityService.getEntities().subscribe(entities => {
+            this.totalEnt = entities.length;
+        });
+
         this.chart = new Chart('myChart', {
             type: 'bar',
             data: {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { EntityService } from 'src/app/services/entity/entity.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -16,7 +17,8 @@ export class UserProfileComponent implements OnInit {
 
     constructor(
         private userService: UserService,
-        private dialogService: DialogService
+        private dialogService: DialogService,
+        private entityService: EntityService
     ) {}
 
     ngOnInit() {
@@ -26,8 +28,8 @@ export class UserProfileComponent implements OnInit {
                 this.entityId = userInfo.entity;
                 this.userInfo = userInfo;
 
-                this.userService
-                    .getInfoEntitie({ id: this.entityId })
+                this.entityService
+                    .getEntityInfo({ id: this.entityId })
                     .subscribe(entityInfo => {
                         this.entitiesInfo = entityInfo;
                         this.entitiesInfo.forEach(element => {

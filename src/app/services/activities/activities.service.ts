@@ -5,6 +5,12 @@ import { Observable, Subject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessagesService } from '../messages/messages.service';
 
+const httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token')
+    })
+};
 @Injectable({
     providedIn: 'root'
 })
@@ -57,21 +63,21 @@ export class ActivitiesService {
     ) {}
 
     getActivity(id): Observable<any> {
-        return this.http.get<any>(`${this.actURL}/${id}`).pipe(
+        return this.http.get<any>(`${this.actURL}/${id}`, httpOptions).pipe(
             catchError(this.handleError<any>('getActivity')),
             tap(resp => console.log('getActivity', resp))
         );
     }
 
     getActivities(): Observable<any> {
-        return this.http.get<any>(this.actURL).pipe(
+        return this.http.get<any>(this.actURL, httpOptions).pipe(
             catchError(this.handleError<any>('getActivities')),
             tap(resp => console.log('getActivities', resp))
         );
     }
 
     addActivitiy(activity): Observable<any> {
-        return this.http.post<any>(this.actURL, activity).pipe(
+        return this.http.post<any>(this.actURL, activity, httpOptions).pipe(
             catchError(this.handleError<any>('addActivities')),
             tap(resp => console.log('addActivities', resp))
         );
@@ -79,10 +85,14 @@ export class ActivitiesService {
 
     editActivity(newActivity): Observable<any> {
         return this.http
-            .put<any>(`${this.actURL}/${newActivity.id}`, newActivity)
+            .put<any>(
+                `${this.actURL}/${newActivity.id}`,
+                newActivity,
+                httpOptions
+            )
             .pipe(
-                catchError(this.handleError<any>('addActivities')),
-                tap(resp => console.log('addActivities', resp))
+                catchError(this.handleError<any>('editActivities')),
+                tap(resp => console.log('editActivities', resp))
             );
     }
 
@@ -91,7 +101,10 @@ export class ActivitiesService {
     }
 
     deleteActivity(idToDelete): Observable<any> {
-        return this.http.delete<any>(`${this.actURL}/${idToDelete}`);
+        return this.http.delete<any>(
+            `${this.actURL}/${idToDelete}`,
+            httpOptions
+        );
     }
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

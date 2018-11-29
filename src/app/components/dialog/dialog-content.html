@@ -25,7 +25,7 @@
     <div class="ui form">
         <form [formGroup]="activityForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
             <div class="field">
-                <div class="three fields">
+                <div class="one fields">
                     <div class="field">
                         <label style="text-align: left">
                             Title:
@@ -34,14 +34,22 @@
                         <div class="error-message" *ngIf="activityForm.get('title').invalid && activityForm.get('title').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                                <p style="color: red; white-space: nowrap;">Must be > 3</p>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="two fields">
                     <div class="field">
                         <label style="text-align: left">
                             Start Date:
-                            <input type="text" formControlName="timestampStart">
+                            <mat-form-field style="width: 250px;">
+                                <input matInput [matDatepicker]="picker" (dateInput)="addDate('start', $event)"
+                                    formControlName="timestampStart">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <!-- <input type="text" formControlName="timestampStart"> -->
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('timestampStart').invalid && activityForm.get('timestampStart').touched"
                             style="text-align: center">
@@ -53,7 +61,13 @@
                     <div class="field">
                         <label style="text-align: left">
                             End Date:
-                            <input type="text" formControlName="timestampEnd">
+                            <mat-form-field style="width: 250px;">
+                                <input matInput [matDatepicker]="picker2" (dateInput)="addDate('end', $event)"
+                                    formControlName="timestampEnd">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                            <!-- <input type="text" formControlName="timestampEnd"> -->
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('timestampEnd').invalid && activityForm.get('timestampEnd').touched"
                             style="text-align: center">
@@ -251,7 +265,8 @@
 
 
 <!--Add & Edit Actions-->
-<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'" style="text-align: center; padding-top: 10px;">
+<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'"
+    style="text-align: center; padding-top: 10px;">
     <div class="ui green basic ok button" (click)="onSaveClick(data)">
         <i class="checkmark icon"></i>
         Save

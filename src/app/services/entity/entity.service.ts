@@ -10,48 +10,31 @@ const httpOptions = {
         'x-access-token': localStorage.getItem('token')
     })
 };
-
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
-    verifyURL = 'https://grandapp.herokuapp.com/verify';
-    userURL = 'https://grandapp.herokuapp.com/users';
+export class EntityService {
+    entitiesURL = 'https://grandapp.herokuapp.com/entities';
 
     constructor(
         private http: HttpClient,
         private messageService: MessagesService
     ) {}
 
-    verify(): Observable<any> {
-        return this.http.get<any>(this.verifyURL, httpOptions).pipe(
-            catchError(this.handleError<any>('verify')),
-            tap(resp => console.log('verify', resp))
+    getEntities(): Observable<any> {
+        return this.http.get<any>(this.entitiesURL, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntities')),
+            tap(resp => console.log('getEntities', resp))
         );
     }
 
-    getUserInfo(id): Observable<any> {
-        return this.http.get<any>(`${this.userURL}/${id}`, httpOptions).pipe(
-            catchError(this.handleError<any>('getUserInfo')),
-            tap(resp => console.log('getUserInfo', resp))
+    getEntityInfo(entitiyId): Observable<any> {
+        return this.http.get<any>(this.entitiesURL, entitiyId, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntityInfo')),
+            tap(resp => console.log('getEntityInfo', resp))
         );
     }
 
-    updateUserInfo(newUser, userID): Observable<any> {
-        return this.http
-            .put<any>(`${this.userURL}/${userID}`, newUser, httpOptions)
-            .pipe(
-                catchError(this.handleError<any>('updateUserInfo')),
-                tap(resp => console.log('updateUserInfo', resp))
-            );
-    }
-
-    getAllUsers(): Observable<any> {
-        return this.http.get<any>(this.userURL, httpOptions).pipe(
-            catchError(this.handleError<any>('getAllUser')),
-            tap(resp => console.log('getAllUser', resp))
-        );
-    }
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

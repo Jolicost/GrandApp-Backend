@@ -33,8 +33,8 @@
                 <tr *ngFor='let activity of activities'>
                     <td>{{ activity.title }}</td>
                     <td>{{ activity.description }}</td>
-                    <td>{{ activity.timestampStart }}</td>
-                    <td>{{ activity.timestampEnd }}</td>
+                    <td [innerHtml]="timeConverter(activity.timestampStart)"></td>
+                    <td [innerHtml]="timeConverter(activity.timestampEnd)"></td>
                     <td>{{ activity.address }}</td>
                     <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(activity.id)">
                             <i class="th list icon"></i>

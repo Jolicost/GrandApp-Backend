@@ -11,7 +11,7 @@ import { EntityService } from 'src/app/services/entity/entity.service';
 })
 export class DashboardComponent implements OnInit {
     chart = [];
-    chart2 = [];
+
     totalUser = 0;
     totalAct = 0;
     totalEnt = 0;

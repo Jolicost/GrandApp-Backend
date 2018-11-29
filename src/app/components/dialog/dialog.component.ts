@@ -183,6 +183,8 @@ export class DialogContentComponent implements OnInit {
     activityToDelete;
     activityForm = new FormGroup({});
     userInfoForm = new FormGroup({});
+    startDate;
+    endDate;
 
     ngOnInit() {}
 
@@ -294,8 +296,8 @@ export class DialogContentComponent implements OnInit {
 
         const title = this.activityForm.value.title;
         const description = this.activityForm.value.description;
-        const timestampStart = this.activityForm.value.timestampStart;
-        const timestampEnd = this.activityForm.value.timestampEnd;
+        // const timestampStart = this.activityForm.value.timestampStart;
+        // const timestampEnd = this.activityForm.value.timestampEnd;
         const lat = this.activityForm.value.lat;
         const long = this.activityForm.value.long;
         const images = this.imageUrl;
@@ -316,8 +318,8 @@ export class DialogContentComponent implements OnInit {
                 .addActivitiy({
                     title: title,
                     description: description,
-                    timestampStart: timestampStart,
-                    timestampEnd: timestampEnd,
+                    timestampStart: this.startDate,
+                    timestampEnd: this.endDate,
                     lat: lat,
                     long: long,
                     images: images,
@@ -330,6 +332,7 @@ export class DialogContentComponent implements OnInit {
                 })
                 .subscribe(res => {
                     if (this.messagesService.getExists()) {
+                        console.log('error: ', this.messagesService.getMessage());
                         this.dialogService.openDialog({
                             mode: 'infoDialog',
                             obj: this.messagesService.getMessage()
@@ -337,7 +340,6 @@ export class DialogContentComponent implements OnInit {
                         this.messagesService.setMessage(null);
                     } else {
                         this.activityService.actDataChanged('changed');
-                        this.dialogService.openDialog({mode: 'infoDialog', obj: res.message });
                         // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                         this.onCancelClick();
                     }
@@ -351,8 +353,8 @@ export class DialogContentComponent implements OnInit {
                     id: idAct,
                     title: title,
                     description: description,
-                    timestampStart: timestampStart,
-                    timestampEnd: timestampEnd,
+                    timestampStart: this.startDate,
+                    timestampEnd: this.endDate,
                     lat: lat,
                     long: long,
                     images: images,
@@ -400,6 +402,22 @@ export class DialogContentComponent implements OnInit {
                 }
             });
             this.dialogRef.close();
+        }
+    }
+
+    // 从Date格式转换到Timestamp为了能够储存到DB里面
+    addDate(type: string, event: MatDatepickerInputEvent<Date>) {
+        let startDate = new Date();
+        let endDate = new Date();
+        startDate = this.activityForm.value.timestampStart;
+        endDate = this.activityForm.value.timestampEnd;
+        if (type === 'start') {
+          this.startDate = startDate.getTime() / 1000 + '';
+          // console.log('startTime: ', this.startDate);
+        }
+        if (type === 'end') {
+          this.endDate = endDate.getTime() / 1000 + '';
+          // console.log('endTime: ', this.endDate);
         }
     }
 

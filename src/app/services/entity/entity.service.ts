@@ -29,7 +29,7 @@ export class EntityService {
     }
 
     getEntityInfo(entitiyId): Observable<any> {
-        return this.http.get<any>(this.entitiesURL, entitiyId).pipe(
+        return this.http.get<any>(this.entitiesURL, entitiyId, httpOptions).pipe(
             catchError(this.handleError<any>('getEntityInfo')),
             tap(resp => console.log('getEntityInfo', resp))
         );

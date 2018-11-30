@@ -8,7 +8,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 const httpOptions = {
     headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token')
     })
 };
 

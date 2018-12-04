@@ -35,15 +35,11 @@
         </tr>
         <tr>
             <td class="two wide column">Activity start</td>
-            <td>
-                <p *ngIf="activitySelected">{{ activitySelected.timestampStart }}</p>
-            </td>
+            <td *ngIf="activitySelected" [innerHtml]="timeConverter(activitySelected.timestampStart)"></td>
         </tr>
         <tr>
             <td class="two wide column">Activity end</td>
-            <td>
-                <p *ngIf="activitySelected">{{ activitySelected.timestampEnd }}</p>
-            </td>
+            <td *ngIf="activitySelected" [innerHtml]="timeConverter(activitySelected.timestampEnd)"></td>
         </tr>
         <tr *ngIf="activitySelected">
             <td class="two wide column">Activity participants</td>

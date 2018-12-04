@@ -39,19 +39,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="two fields">
+                <div class="four fields">
                     <div class="field">
                         <label style="text-align: left">
                             Start Date:
-                            <mat-form-field style="width: 250px;">
+                            <mat-form-field style="width: 120px;">
                                 <input matInput [matDatepicker]="picker" (dateInput)="addDate('start', $event)"
-                                    formControlName="timestampStart">
+                                    formControlName="dateStart">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
-                            <!-- <input type="text" formControlName="timestampStart"> -->
                         </label>
-                        <div class="error-message" *ngIf="activityForm.get('timestampStart').invalid && activityForm.get('timestampStart').touched"
+                        <div class="error-message" *ngIf="activityForm.get('dateStart').invalid && activityForm.get('dateStart').touched"
+                            style="text-align: center">
+                            <div class="input-err-message" style="text-align: center">
+                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label style="text-align: left">
+                            Start Time:
+                        </label>
+                        <div class="ui input left icon" style="padding-top: 12px">
+                            <i class="time icon"></i>
+                            <input type="text" placeholder="Time" formControlName="timeStart">
+                        </div>
+                        <div class="error-message" *ngIf="activityForm.get('timeStart').invalid && activityForm.get('timeStart').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
@@ -61,15 +75,29 @@
                     <div class="field">
                         <label style="text-align: left">
                             End Date:
-                            <mat-form-field style="width: 250px;">
+                            <mat-form-field style="width: 120px;">
                                 <input matInput [matDatepicker]="picker2" (dateInput)="addDate('end', $event)"
-                                    formControlName="timestampEnd">
+                                    formControlName="dateEnd">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
-                            <!-- <input type="text" formControlName="timestampEnd"> -->
                         </label>
-                        <div class="error-message" *ngIf="activityForm.get('timestampEnd').invalid && activityForm.get('timestampEnd').touched"
+                        <div class="error-message" *ngIf="activityForm.get('dateEnd').invalid && activityForm.get('dateEnd').touched"
+                            style="text-align: center">
+                            <div class="input-err-message" style="text-align: center">
+                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label style="text-align: left">
+                            End Time:
+                        </label>
+                        <div class="ui input left icon" style="padding-top: 12px">
+                            <i class="time icon"></i>
+                            <input type="text" placeholder="Time" formControlName="timeEnd">
+                        </div>
+                        <div class="error-message" *ngIf="activityForm.get('timeEnd').invalid && activityForm.get('timeEnd').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>

@@ -25,13 +25,12 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.userService.getAllUsers().subscribe(users => {
             this.totalUser = users.length;
-        });
-        this.actService.getActivities().subscribe(acts => {
-            this.totalAct = acts.length;
-        });
-
-        this.entityService.getEntities().subscribe(entities => {
-            this.totalEnt = entities.length;
+            this.actService.getActivities().subscribe(acts => {
+                this.totalAct = acts.length;
+            });
+            this.entityService.getEntities().subscribe(entities => {
+                this.totalEnt = entities.length;
+            });
         });
 
         this.chart = new Chart('myChart', {

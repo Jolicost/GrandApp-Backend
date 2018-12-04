@@ -34,6 +34,18 @@ export class EntityService {
             tap(resp => console.log('getEntityInfo', resp))
         );
     }
+    getEntityStatisticsActivities(entitiyId): Observable<any> {
+        return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/activities`, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntityStatisticsActivities')),
+            tap(resp => console.log('getEntityStatisticsActivities', resp))
+        );
+    }
+    getEntityStatisticsUsers(entitiyId): Observable<any> {
+        return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/users`, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntityInfo')),
+            tap(resp => console.log('getEntityInfo', resp))
+        );
+    }
 
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

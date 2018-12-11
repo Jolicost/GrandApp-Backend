@@ -26,9 +26,9 @@ export class UserProfileComponent implements OnInit {
             .verify()
             .subscribe(userInfo => {
                 this.userInfo = userInfo;
-                this.entityId = userInfo._id;
-                console.log('userInfo', this.userInfo);
-                console.log('entityId', this.entityId);
+                this.entityId = userInfo.entity;
+                // console.log('userInfo', this.userInfo);
+                // console.log('entityId', this.entityId);
                 this.entityService
                     .getEntityInfo({ id: this.entityId })
                     .subscribe(entityInfo => {

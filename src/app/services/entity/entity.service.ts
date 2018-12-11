@@ -35,6 +35,7 @@ export class EntityService {
         );
     }
     getEntityStatisticsActivities(entitiyId): Observable<any> {
+        console.log('asd: ', entitiyId);
         return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/activities`, httpOptions).pipe(
             catchError(this.handleError<any>('getEntityStatisticsActivities')),
             tap(resp => console.log('getEntityStatisticsActivities', resp))
@@ -42,8 +43,8 @@ export class EntityService {
     }
     getEntityStatisticsUsers(entitiyId): Observable<any> {
         return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/users`, httpOptions).pipe(
-            catchError(this.handleError<any>('getEntityInfo')),
-            tap(resp => console.log('getEntityInfo', resp))
+            catchError(this.handleError<any>('getEntityStatisticsUsers')),
+            tap(resp => console.log('getEntityStatisticsUsers', resp))
         );
     }
 

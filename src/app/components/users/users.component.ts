@@ -13,12 +13,7 @@ export class UsersComponent implements OnInit {
     iniLng = 7.809007;
     usersOfActivity = [];
     activity;
-
-    currentActivity = {
-        name: 'act1',
-        startDate: 'date1',
-        endDate: 'date2'
-    };
+    activities;
 
     locationsOfUser = [];
 
@@ -29,11 +24,13 @@ export class UsersComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.activity = this.activityService.getActivities()[0];
-        console.log('activity', this.activity);
-
-        this.usersOfActivity = this.activity.participants;
-        console.log('usersOfActivity: ', this.usersOfActivity);
+        this.activityService.getActivities().subscribe(res => {
+            this.activities = res;
+            this.activity = res[0];
+            console.log('activity', this.activity);
+            this.usersOfActivity = this.activity.participants;
+            console.log('usersOfActivity: ', this.usersOfActivity);
+        });
 
         this.usersOfActivity.forEach(element => {
             const position = this.userLocationService.getUserLocation(

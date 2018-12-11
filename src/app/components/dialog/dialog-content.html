@@ -281,16 +281,13 @@
     </div>
 </div>
 
+<div *ngIf="data.mode === 'deleteActivity'">
+    <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
+</div>
+
 <div>
     <div class="ui divider"></div>
 </div>
-
-<div *ngIf="data.mode === 'deleteActivity'">
-    <p>Are you sure to delete : <span style="color: red"> {{ activityToDelete.title }}</span></p>
-    <div class="ui divider"></div>
-</div>
-
-
 
 <!--Add & Edit Actions-->
 <div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'"

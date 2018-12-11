@@ -39,14 +39,15 @@ export class AuthService {
         if (token) {
             // Check whether the token is expired and return
             // true or false
-            return !this.jwtHelper.isTokenExpired(token);
+            // return !this.jwtHelper.isTokenExpired(token);
+            return true;
         } else {
             return false;
         }
     }
 
     login(user): Observable<any> {
-        return this.http.post<any>(this.authrUrl, user, httpOptions).pipe(
+        return this.http.post<any>(this.authrUrl, user).pipe(
             catchError(this.handleError<any>('login')),
             tap(resp => console.log('loginResponse', resp))
         );

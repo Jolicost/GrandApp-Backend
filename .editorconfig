@@ -11,6 +11,8 @@ quote_type = single
 insertSpaces = true
 tabSize = 4
 editor.detectIndentation = true
+semi = false
+singleQuote = true
 
 [*.md]
 max_line_length = off

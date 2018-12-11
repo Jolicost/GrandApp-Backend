@@ -20,43 +20,6 @@ export class ActivitiesService {
     private activitySubject = new Subject<any>(); // 发送器，通知有变化
     activity$ = this.activitySubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
 
-    activities: Array<Activity> = [
-        {
-            id: 1,
-            title: 'act1',
-            description: 'descrip1',
-            userId: 1,
-            rating: 5,
-            images: [],
-            lat: 51.410448,
-            long: 7.816027,
-            timestampStart: 345,
-            timestampEnd: 456,
-            participants: [2, 3],
-            address: 'Calle Navarra',
-            activityType: 'd',
-            capacity: 10,
-            price: 10
-        },
-        {
-            id: 2,
-            title: 'act2',
-            description: 'descrip2',
-            userId: 2,
-            rating: 5,
-            images: [],
-            lat: 51.478448,
-            long: 7.809027,
-            timestampStart: 1245,
-            timestampEnd: 45556,
-            participants: [1, 3],
-            address: 'Calle Navarra2',
-            activityType: '',
-            capacity: 10,
-            price: 10
-        }
-    ];
-
     constructor(
         private http: HttpClient,
         private messageService: MessagesService

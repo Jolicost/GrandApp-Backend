@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { ReverseGeocodingService } from 'src/app/services/reverseGeocoding/reverse-geocoding.service';
 
 @Component({
     selector: 'app-activity-details',
@@ -16,12 +17,14 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
     activitySelected: Activity;
     usersID = <any>[];
     participants = <any>[];
+    completeStreetName;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private activitiesServices: ActivitiesService,
         private router: Router,
-        private userService: UserService
+        private userService: UserService,
+        private reverseGeocodingService: ReverseGeocodingService
     ) {}
 
     ngOnInit() {
@@ -40,6 +43,10 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
                     });
                 });
                 // console.log('participants name:', this.participants);
+            });
+            // show the street name with the lat and long
+            this.reverseGeocodingService.convertToStreet(this.activitySelected.lat, this.activitySelected.long).subscribe(res => {
+                this.completeStreetName = res.results[0].formatted_address;
             });
         });
     }

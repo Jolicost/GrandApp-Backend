@@ -1,5 +1,4 @@
 <h1>Activity details:</h1>
-<div class="ui divider"></div>
 
 <table class="ui definition table">
     <tbody>
@@ -22,15 +21,9 @@
             </td>
         </tr>
         <tr>
-            <td class="two wide column">Activity latitude</td>
+            <td class="two wide column">Activity location</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.lat }}</p>
-            </td>
-        </tr>
-        <tr>
-            <td class="two wide column">Activity longitude</td>
-            <td>
-                <p *ngIf="activitySelected">{{ activitySelected.long }}</p>
+                <p *ngIf="activitySelected">{{ completeStreetName }}</p>
             </td>
         </tr>
         <tr>

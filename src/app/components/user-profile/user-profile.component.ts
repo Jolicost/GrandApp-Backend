@@ -25,18 +25,14 @@ export class UserProfileComponent implements OnInit {
         this.userService
             .verify()
             .subscribe(userInfo => {
-                this.entityId = userInfo.entity;
                 this.userInfo = userInfo;
+                this.entityId = userInfo._id;
                 console.log('userInfo', this.userInfo);
+                console.log('entityId', this.entityId);
                 this.entityService
                     .getEntityInfo({ id: this.entityId })
                     .subscribe(entityInfo => {
-                        this.entitiesInfo = entityInfo;
-                        this.entitiesInfo.forEach(element => {
-                            if (element._id === this.entityId) {
-                                this.entityInfo = element;
-                            }
-                        });
+                        this.entityInfo = entityInfo;
                     });
             });
     }

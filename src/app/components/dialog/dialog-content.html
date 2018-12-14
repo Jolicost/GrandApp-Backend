@@ -108,24 +108,12 @@
             </div>
             <div class="field">
                 <div class="fields">
-                    <div class="four wide field">
+                    <div class="eight wide field">
                         <label style="text-align: left">
-                            Latitude:
-                            <input type="text" formControlName="lat">
+                            Location:
+                            <input type="text" formControlName="adressToConvert">
                         </label>
-                        <div class="error-message" *ngIf="activityForm.get('lat').invalid && activityForm.get('lat').touched"
-                            style="text-align: center">
-                            <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="four wide field">
-                        <label style="text-align: left">
-                            Longitude:
-                            <input type="text" formControlName="long">
-                        </label>
-                        <div class="error-message" *ngIf="activityForm.get('long').invalid && activityForm.get('long').touched"
+                        <div class="error-message" *ngIf="activityForm.get('adressToConvert').invalid && activityForm.get('adressToConvert').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>

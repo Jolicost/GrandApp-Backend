@@ -24,6 +24,7 @@ import { UploadImagesService } from 'src/app/services/upload/upload-images.servi
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
+import { GeocodingService } from 'src/app/services/geocoding/geocoding.service';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -51,14 +52,7 @@ export class DialogComponent implements OnInit, OnDestroy {
         timeStart: new FormControl('', Validators.required),
         timeEnd: new FormControl('', Validators.required),
         images: new FormControl('', Validators.required),
-        lat: new FormControl('', [
-            Validators.required,
-            Validators.pattern('^[0-9]*$')
-        ]),
-        long: new FormControl('', [
-            Validators.required,
-            Validators.pattern('^[0-9]*$')
-        ]),
+        adressToConvert: new FormControl('', Validators.required),
         address: new FormControl('', Validators.required),
         activityType: new FormControl('', Validators.required),
         price: new FormControl('', [
@@ -115,33 +109,33 @@ export class DialogComponent implements OnInit, OnDestroy {
                         mode.obj.timestampEnd,
                         'time'
                     );
-                    const humanizeStartYear = this.timeConverter(
-                        mode.obj.timestampStart,
-                        'year'
-                    );
-                    const humanizeStartMonth = this.timeConverter(
-                        mode.obj.timestampStart,
-                        'month'
-                    );
-                    const humanizeStartDay = this.timeConverter(
-                        mode.obj.timestampStart,
-                        'day'
-                    );
-                    const humanizeEndYear = this.timeConverter(
-                        mode.obj.timestampEnd,
-                        'year'
-                    );
-                    const humanizeEndMonth = this.timeConverter(
-                        mode.obj.timestampEnd,
-                        'month'
-                    );
-                    const humanizeEndDay = this.timeConverter(
-                        mode.obj.timestampEnd,
-                        'day'
-                    );
-                    const dateStart = new Date(humanizeStartMonth, humanizeStartDay, humanizeStartYear);
-                    const dateEnd = new Date(humanizeEndMonth, humanizeEndDay, humanizeEndYear);
-                    console.log(dateStart);
+                    // const humanizeStartYear = this.timeConverter(
+                    //     mode.obj.timestampStart,
+                    //     'year'
+                    // );
+                    // const humanizeStartMonth = this.timeConverter(
+                    //     mode.obj.timestampStart,
+                    //     'month'
+                    // );
+                    // const humanizeStartDay = this.timeConverter(
+                    //     mode.obj.timestampStart,
+                    //     'day'
+                    // );
+                    // const humanizeEndYear = this.timeConverter(
+                    //     mode.obj.timestampEnd,
+                    //     'year'
+                    // );
+                    // const humanizeEndMonth = this.timeConverter(
+                    //     mode.obj.timestampEnd,
+                    //     'month'
+                    // );
+                    // const humanizeEndDay = this.timeConverter(
+                    //     mode.obj.timestampEnd,
+                    //     'day'
+                    // );
+                    // const dateStart = new Date(humanizeStartMonth, humanizeStartDay, humanizeStartYear);
+                    // const dateEnd = new Date(humanizeEndMonth, humanizeEndDay, humanizeEndYear);
+                    // console.log(dateStart);
                     this.activityForm.setValue({
                         title:
                             mode.obj.title === undefined ? '' : mode.obj.title,
@@ -149,16 +143,18 @@ export class DialogComponent implements OnInit, OnDestroy {
                             mode.obj.description === undefined
                                 ? ''
                                 : mode.obj.description,
-                        dateStart: new FormControl(dateStart.toISOString()),
-                        dateEnd: new FormControl(dateEnd.toISOString()),
+                        dateStart: '',
+                        dateEnd: '',
                         timeStart: humanizeTimeStart,
                         timeEnd: humanizeTimeEnd,
                         images:
                             mode.obj.images === undefined
                                 ? ''
                                 : mode.obj.images,
-                        lat: mode.obj.lat === undefined ? '' : mode.obj.lat,
-                        long: mode.obj.long === undefined ? '' : mode.obj.long,
+                        adressToConvert:
+                            mode.obj.adressToConvert === undefined
+                                ? ''
+                                : mode.obj.adressToConvert,
                         address:
                             mode.obj.address === undefined
                                 ? ''
@@ -240,7 +236,18 @@ export class DialogComponent implements OnInit, OnDestroy {
         } else if (type === 'day') {
             return date;
         } else {
-            time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+            time =
+                date +
+                ' ' +
+                month +
+                ' ' +
+                year +
+                ' ' +
+                hour +
+                ':' +
+                min +
+                ':' +
+                sec;
         }
         return time;
     }
@@ -300,6 +307,8 @@ export class DialogContentComponent implements OnInit {
     endDate;
     timeStart;
     timeEnd;
+    geoCodedLat;
+    geoCodedLong;
 
     ngOnInit() {}
 
@@ -312,7 +321,8 @@ export class DialogContentComponent implements OnInit {
         private dialogService: DialogService,
         private uploadImagesService: UploadImagesService,
         private ng2ImgMax: Ng2ImgMaxService,
-        private userService: UserService
+        private userService: UserService,
+        private geocodingService: GeocodingService
     ) {
         this.activityToDelete = this.data.obj;
         // ----------------------------------------------
@@ -334,8 +344,7 @@ export class DialogContentComponent implements OnInit {
                 timeStart: new FormControl('', Validators.required),
                 timeEnd: new FormControl('', Validators.required),
                 images: new FormControl('', Validators.required),
-                lat: new FormControl('', Validators.required),
-                long: new FormControl('', Validators.required),
+                adressToConvert: new FormControl('', Validators.required),
                 address: new FormControl('', Validators.required),
                 activityType: new FormControl('', Validators.required),
                 price: new FormControl('', Validators.required),
@@ -393,136 +402,146 @@ export class DialogContentComponent implements OnInit {
         this.dialogRef.close();
     }
     onSaveClick(data): void {
-        const title = this.activityForm.value.title;
-        const description = this.activityForm.value.description;
-        const lat = this.activityForm.value.lat;
-        const long = this.activityForm.value.long;
-        const images = this.imageUrl;
-        const participants = [];
-        const address = this.activityForm.value.address;
-        const activityType = this.activityForm.value.activityType;
-        const price = this.activityForm.value.price;
-        const rating = this.activityForm.value.rating;
-        const capacity = this.activityForm.value.capacity;
-        const email = this.userInfoForm.value.email;
-        const completeName = this.userInfoForm.value.completeName;
-        const birthday = this.userInfoForm.value.birthday;
-        const phone = this.userInfoForm.value.phone;
+        const addressName = this.activityForm.value.adressToConvert;
+        this.geocodingService.getLatLong(addressName).subscribe(res => {
+            console.log('GOOGLE RESPONSE: ', res);
+            this.geoCodedLat = res.results[0].geometry.location.lat;
+            this.geoCodedLong = res.results[0].geometry.location.lng;
+            console.log('GOOGLE lat: ', this.geoCodedLat);
 
-        if (data.mode === 'addActivity') {
-            this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-            this.timeStart = this.activityForm.value.timeStart; // get end time from form
-            const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-            const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
-            const startMoment = moment(start); // create the moment()
-            const endMoment = moment(end);
-            const timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-            const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+            const title = this.activityForm.value.title;
+            const description = this.activityForm.value.description;
+            const lat = this.geoCodedLat;
+            const long = this.geoCodedLong;
+            const images = this.imageUrl;
+            const participants = [];
+            const address = this.activityForm.value.address;
+            const activityType = this.activityForm.value.activityType;
+            const price = this.activityForm.value.price;
+            const rating = this.activityForm.value.rating;
+            const capacity = this.activityForm.value.capacity;
+            const email = this.userInfoForm.value.email;
+            const completeName = this.userInfoForm.value.completeName;
+            const birthday = this.userInfoForm.value.birthday;
+            const phone = this.userInfoForm.value.phone;
 
-            this.activityService
-                .addActivitiy({
-                    title: title,
-                    description: description,
-                    timestampStart: timestampStart,
-                    timestampEnd: timestampEnd,
-                    lat: lat,
-                    long: long,
-                    images: images,
-                    participants: participants,
-                    address: address,
-                    activityType: activityType,
-                    price: price,
-                    rating: rating,
-                    capacity: capacity
-                })
-                .subscribe(res => {
-                    if (this.messagesService.getExists()) {
-                        console.log(
-                            'error: ',
-                            this.messagesService.getMessage()
-                        );
-                        this.dialogService.openDialog({
-                            mode: 'infoDialog',
-                            obj: this.messagesService.getMessage()
-                        });
-                        this.messagesService.setMessage(null);
-                    } else {
-                        this.activityService.actDataChanged('changed');
-                        // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                        this.onCancelClick();
-                    }
-                });
-            this.dialogRef.close();
-        }
-        if (data.mode === 'editActivity') {
-            const idAct = data.obj.id;
-            this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-            this.timeStart = this.activityForm.value.timeStart; // get end time from form
-            const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-            const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
-            const startMoment = moment(start); // create the moment()
-            const endMoment = moment(end);
-            const timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-            const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
-            this.activityService
-                .editActivity({
-                    id: idAct,
-                    title: title,
-                    description: description,
-                    timestampStart: timestampStart,
-                    timestampEnd: timestampEnd,
-                    lat: lat,
-                    long: long,
-                    images: images,
-                    participants: participants,
-                    address: address,
-                    activityType: activityType,
-                    price: price,
-                    rating: rating,
-                    capacity: capacity
-                })
-                .subscribe(res => {
-                    if (this.messagesService.getExists()) {
-                        this.dialogService.openDialog({
-                            mode: 'infoDialog',
-                            obj: this.messagesService.getMessage()
-                        });
-                        this.messagesService.setMessage(null);
-                    } else {
-                        this.activityService.actDataChanged('changed');
-                        // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                        this.onCancelClick();
-                    }
-                });
-            this.dialogRef.close();
-        }
-        if (data.mode === 'editUserInfo') {
-            const idUser = data.obj._id;
-            this.userService
-                .updateUserInfo(
-                    {
-                        email: email,
-                        completeName: completeName,
-                        birthday: birthday,
-                        phone: phone
-                    },
-                    idUser
-                )
-                .subscribe(res => {
-                    if (this.messagesService.getExists()) {
-                        this.dialogService.openDialog({
-                            mode: 'infoDialog',
-                            obj: this.messagesService.getMessage()
-                        });
-                        this.messagesService.setMessage(null);
-                    } else {
-                        // this.activityService.actDataChanged('changed');
-                        // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                        this.onCancelClick();
-                    }
-                });
-            this.dialogRef.close();
-        }
+            if (data.mode === 'addActivity') {
+                this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
+                this.timeStart = this.activityForm.value.timeStart; // get end time from form
+                const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
+                const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                const startMoment = moment(start); // create the moment()
+                const endMoment = moment(end);
+                const timestampStart =
+                    startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+
+                this.activityService
+                    .addActivitiy({
+                        title: title,
+                        description: description,
+                        timestampStart: timestampStart,
+                        timestampEnd: timestampEnd,
+                        lat: lat,
+                        long: long,
+                        images: images,
+                        participants: participants,
+                        address: address,
+                        activityType: activityType,
+                        price: price,
+                        rating: rating,
+                        capacity: capacity
+                    })
+                    .subscribe(res => {
+                        if (this.messagesService.getExists()) {
+                            console.log(
+                                'error: ',
+                                this.messagesService.getMessage()
+                            );
+                            this.dialogService.openDialog({
+                                mode: 'infoDialog',
+                                obj: this.messagesService.getMessage()
+                            });
+                            this.messagesService.setMessage(null);
+                        } else {
+                            this.activityService.actDataChanged('changed');
+                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                            this.onCancelClick();
+                        }
+                    });
+                this.dialogRef.close();
+            }
+            if (data.mode === 'editActivity') {
+                const idAct = data.obj.id;
+                this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
+                this.timeStart = this.activityForm.value.timeStart; // get end time from form
+                const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
+                const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                const startMoment = moment(start); // create the moment()
+                const endMoment = moment(end);
+                const timestampStart =
+                    startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+                this.activityService
+                    .editActivity({
+                        id: idAct,
+                        title: title,
+                        description: description,
+                        timestampStart: timestampStart,
+                        timestampEnd: timestampEnd,
+                        lat: lat,
+                        long: long,
+                        images: images,
+                        participants: participants,
+                        address: address,
+                        activityType: activityType,
+                        price: price,
+                        rating: rating,
+                        capacity: capacity
+                    })
+                    .subscribe(res => {
+                        if (this.messagesService.getExists()) {
+                            this.dialogService.openDialog({
+                                mode: 'infoDialog',
+                                obj: this.messagesService.getMessage()
+                            });
+                            this.messagesService.setMessage(null);
+                        } else {
+                            this.activityService.actDataChanged('changed');
+                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                            this.onCancelClick();
+                        }
+                    });
+                this.dialogRef.close();
+            }
+            if (data.mode === 'editUserInfo') {
+                const idUser = data.obj._id;
+                this.userService
+                    .updateUserInfo(
+                        {
+                            email: email,
+                            completeName: completeName,
+                            birthday: birthday,
+                            phone: phone
+                        },
+                        idUser
+                    )
+                    .subscribe(res => {
+                        if (this.messagesService.getExists()) {
+                            this.dialogService.openDialog({
+                                mode: 'infoDialog',
+                                obj: this.messagesService.getMessage()
+                            });
+                            this.messagesService.setMessage(null);
+                        } else {
+                            // this.activityService.actDataChanged('changed');
+                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                            this.onCancelClick();
+                        }
+                    });
+                this.dialogRef.close();
+            }
+        });
     }
 
     // 从Date格式转换到Timestamp为了能够储存到DB里面

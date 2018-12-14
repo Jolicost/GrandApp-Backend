@@ -115,15 +115,33 @@ export class DialogComponent implements OnInit, OnDestroy {
                         mode.obj.timestampEnd,
                         'time'
                     );
-                    const humanizeDateStart = this.timeConverter(
-                        mode.obj.timestampEnd,
-                        'date'
+                    const humanizeStartYear = this.timeConverter(
+                        mode.obj.timestampStart,
+                        'year'
                     );
-                    const humanizeDateEnd = this.timeConverter(
-                        mode.obj.timestampEnd,
-                        'date'
+                    const humanizeStartMonth = this.timeConverter(
+                        mode.obj.timestampStart,
+                        'month'
                     );
-                    console.log('Type: ', mode.obj.activityType);
+                    const humanizeStartDay = this.timeConverter(
+                        mode.obj.timestampStart,
+                        'day'
+                    );
+                    const humanizeEndYear = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'year'
+                    );
+                    const humanizeEndMonth = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'month'
+                    );
+                    const humanizeEndDay = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'day'
+                    );
+                    const dateStart = new Date(humanizeStartMonth, humanizeStartDay, humanizeStartYear);
+                    const dateEnd = new Date(humanizeEndMonth, humanizeEndDay, humanizeEndYear);
+                    console.log(dateStart);
                     this.activityForm.setValue({
                         title:
                             mode.obj.title === undefined ? '' : mode.obj.title,
@@ -131,8 +149,8 @@ export class DialogComponent implements OnInit, OnDestroy {
                             mode.obj.description === undefined
                                 ? ''
                                 : mode.obj.description,
-                        dateStart: humanizeDateStart,
-                        dateEnd: humanizeDateEnd,
+                        dateStart: new FormControl(dateStart.toISOString()),
+                        dateEnd: new FormControl(dateEnd.toISOString()),
                         timeStart: humanizeTimeStart,
                         timeEnd: humanizeTimeEnd,
                         images:
@@ -193,15 +211,15 @@ export class DialogComponent implements OnInit, OnDestroy {
     timeConverter(UNIX_timestamp, type) {
         const a = new Date(UNIX_timestamp * 1000);
         const months = [
-            '01',
-            '02',
-            '03',
-            '04',
-            '05',
-            '06',
-            '07',
-            '08',
-            '09',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
             '10',
             '11',
             '12'
@@ -215,8 +233,14 @@ export class DialogComponent implements OnInit, OnDestroy {
         let time;
         if (type === 'time') {
             time = hour + ':' + min + ':' + sec;
+        } else if (type === 'year') {
+            return year;
+        } else if (type === 'month') {
+            return month;
+        } else if (type === 'day') {
+            return date;
         } else {
-            time = month + ' ' + date + ' ' + year;
+            time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         }
         return time;
     }

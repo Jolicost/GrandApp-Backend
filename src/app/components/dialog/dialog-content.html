@@ -151,11 +151,7 @@
                     <div class="field">
                         <label style="text-align: left">
                             Activity type:
-                            <select class="ui search dropdown" formControlName="activityType">
-                                <option value="EN">Entity</option>
-                                <option value="AL">Alabama</option>
-                            </select>
-                            <!-- <input type="text" formControlName="activityType"> -->
+                            <input type="text" formControlName="activityType">
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('activityType').invalid && activityForm.get('activityType').touched"
                             style="text-align: center">

@@ -82,8 +82,8 @@ export class DashboardComponent implements OnInit {
                     for (let i = 0; i < this.size1; i++) {
                         borderColorsPick[i] = this.allBorderColors[i];
                         backgroundColorsPick[i] = this.allBackgroundColors[i];
-                        console.log('Border Pick tenim', borderColorsPick[i]);
-                        console.log('Back Pick tenim', borderColorsPick[i]);
+                        // console.log('Border Pick tenim', borderColorsPick[i]);
+                        // console.log('Back Pick tenim', borderColorsPick[i]);
                     }
                     this.chart = new Chart('myChart', {
                         type: 'bar',

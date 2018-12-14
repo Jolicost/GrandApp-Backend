@@ -15,7 +15,7 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class ActivitiesService {
-    actURL = 'https://grandapp.herokuapp.com/activities';
+    actURL = 'https://grandapp.herokuapp.com/entity/activities';
 
     private activitySubject = new Subject<any>(); // 发送器，通知有变化
     activity$ = this.activitySubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据

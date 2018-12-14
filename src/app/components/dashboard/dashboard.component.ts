@@ -11,6 +11,7 @@ import { EntityService } from 'src/app/services/entity/entity.service';
 })
 export class DashboardComponent implements OnInit {
     chart = [];
+    totalCon;
     totalUser;
     totalAct;
     entityId;
@@ -144,6 +145,11 @@ export class DashboardComponent implements OnInit {
                         .subscribe(users => {
                             this.totalUser = users.nRegisteredUsers;
                             // console.log('que tinc a Total Users', this.totalUser);
+                        });
+                    this.entityService
+                        .getTotalConnections(this.entityId)
+                        .subscribe(con => {
+                            this.totalCon = con.nConnections;
                         });
                 });
         });

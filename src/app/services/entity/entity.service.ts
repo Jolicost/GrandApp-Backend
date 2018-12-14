@@ -14,7 +14,7 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class EntityService {
-    entitiesURL = 'https://grandapp.herokuapp.com/entities';
+    entitiesURL = 'https://grandapp.herokuapp.com/entity/entities';
 
     constructor(
         private http: HttpClient,

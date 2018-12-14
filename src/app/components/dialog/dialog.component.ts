@@ -107,6 +107,23 @@ export class DialogComponent implements OnInit, OnDestroy {
                     this.openDialog(mode);
                 }
                 if (mode.mode === 'editActivity') {
+                    const humanizeTimeStart = this.timeConverter(
+                        mode.obj.timestampStart,
+                        'time'
+                    );
+                    const humanizeTimeEnd = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'time'
+                    );
+                    const humanizeDateStart = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'date'
+                    );
+                    const humanizeDateEnd = this.timeConverter(
+                        mode.obj.timestampEnd,
+                        'date'
+                    );
+                    console.log('Type: ', mode.obj.activityType);
                     this.activityForm.setValue({
                         title:
                             mode.obj.title === undefined ? '' : mode.obj.title,
@@ -114,10 +131,10 @@ export class DialogComponent implements OnInit, OnDestroy {
                             mode.obj.description === undefined
                                 ? ''
                                 : mode.obj.description,
-                        dateStart: '',
-                        dateEnd: '',
-                        timeStart: '',
-                        timeEnd: '',
+                        dateStart: humanizeDateStart,
+                        dateEnd: humanizeDateEnd,
+                        timeStart: humanizeTimeStart,
+                        timeEnd: humanizeTimeEnd,
                         images:
                             mode.obj.images === undefined
                                 ? ''
@@ -171,6 +188,37 @@ export class DialogComponent implements OnInit, OnDestroy {
                 }
             })
         );
+    }
+
+    timeConverter(UNIX_timestamp, type) {
+        const a = new Date(UNIX_timestamp * 1000);
+        const months = [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05',
+            '06',
+            '07',
+            '08',
+            '09',
+            '10',
+            '11',
+            '12'
+        ];
+        const year = a.getFullYear();
+        const month = months[a.getMonth()];
+        const date = a.getDate();
+        const hour = a.getHours();
+        const min = a.getMinutes();
+        const sec = a.getSeconds();
+        let time;
+        if (type === 'time') {
+            time = hour + ':' + min + ':' + sec;
+        } else {
+            time = month + ' ' + date + ' ' + year;
+        }
+        return time;
     }
 
     openDialog(mode): void {

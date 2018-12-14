@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class UserService {
     verifyURL = 'https://grandapp.herokuapp.com/verify';
-    userURL = 'https://grandapp.herokuapp.com/users';
+    userURL = 'https://grandapp.herokuapp.com/entity/users';
 
     constructor(
         private http: HttpClient,

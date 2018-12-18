@@ -77,12 +77,20 @@
     </tbody>
 </table>
 
-
-
-
-
-
-
+<div class="agm-map">
+    <!-- Center of the map -->
+    <agm-map [zoom]="zoom" [latitude]="iniLat" [longitude]="iniLng" [scrollwheel]="true" (mapClick)="mapclicked($event)">
+        <!-- Markers -->
+        <agm-marker [latitude]=iniLat [longitude]=iniLng>
+            <agm-info-window>
+                <p><strong>Title:</strong> {{ activitySelected.title }}</p>
+                <p><strong>Description:</strong> {{ activitySelected.description }}</p>
+                <strong>Start:</strong><p [innerHtml]="timeConverter(activitySelected.timestampStart)"></p>
+                <strong>End:</strong><p [innerHtml]="timeConverter(activitySelected.timestampEnd)"></p>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+</div>
 
 <div class="ui left aligned basic segment">
     <button class="ui centered aligned button" (click)="goBack()">Back</button>

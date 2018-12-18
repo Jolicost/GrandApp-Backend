@@ -404,144 +404,160 @@ export class DialogContentComponent implements OnInit {
     onSaveClick(data): void {
         const addressName = this.activityForm.value.adressToConvert;
         this.geocodingService.getLatLong(addressName).subscribe(res => {
-            console.log('GOOGLE RESPONSE: ', res);
-            this.geoCodedLat = res.results[0].geometry.location.lat;
-            this.geoCodedLong = res.results[0].geometry.location.lng;
-            console.log('GOOGLE lat: ', this.geoCodedLat);
+            if (this.messagesService.getExists()) {
+                this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: this.messagesService.getMessage()
+                });
+                this.messagesService.setMessage(null);
+            } else {
+                this.geoCodedLat = res.results[0].geometry.location.lat;
+                this.geoCodedLong = res.results[0].geometry.location.lng;
 
-            const title = this.activityForm.value.title;
-            const description = this.activityForm.value.description;
-            const lat = this.geoCodedLat;
-            const long = this.geoCodedLong;
-            const images = this.imageUrl;
-            const participants = [];
-            const address = this.activityForm.value.address;
-            const activityType = this.activityForm.value.activityType;
-            const price = this.activityForm.value.price;
-            const rating = this.activityForm.value.rating;
-            const capacity = this.activityForm.value.capacity;
-            const email = this.userInfoForm.value.email;
-            const completeName = this.userInfoForm.value.completeName;
-            const birthday = this.userInfoForm.value.birthday;
-            const phone = this.userInfoForm.value.phone;
+                const title = this.activityForm.value.title;
+                const description = this.activityForm.value.description;
+                const lat = this.geoCodedLat;
+                const long = this.geoCodedLong;
+                const images = this.imageUrl;
+                const participants = [];
+                const address = this.activityForm.value.address;
+                const activityType = this.activityForm.value.activityType;
+                const price = this.activityForm.value.price;
+                const rating = this.activityForm.value.rating;
+                const capacity = this.activityForm.value.capacity;
+                const email = this.userInfoForm.value.email;
+                const completeName = this.userInfoForm.value.completeName;
+                const birthday = this.userInfoForm.value.birthday;
+                const phone = this.userInfoForm.value.phone;
 
-            if (data.mode === 'addActivity') {
-                this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-                this.timeStart = this.activityForm.value.timeStart; // get end time from form
-                const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-                const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
-                const startMoment = moment(start); // create the moment()
-                const endMoment = moment(end);
-                const timestampStart =
-                    startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-                const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+                if (data.mode === 'addActivity') {
+                    this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
+                    this.timeStart = this.activityForm.value.timeStart; // get end time from form
+                    const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
+                    const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                    const startMoment = moment(start); // create the moment()
+                    const endMoment = moment(end);
+                    const timestampStart =
+                        startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                    const timestampEnd =
+                        endMoment.toDate().getTime() / 1000 + '';
 
-                this.activityService
-                    .addActivitiy({
-                        title: title,
-                        description: description,
-                        timestampStart: timestampStart,
-                        timestampEnd: timestampEnd,
-                        lat: lat,
-                        long: long,
-                        images: images,
-                        participants: participants,
-                        address: address,
-                        activityType: activityType,
-                        price: price,
-                        rating: rating,
-                        capacity: capacity
-                    })
-                    .subscribe(res => {
-                        if (this.messagesService.getExists()) {
-                            console.log(
-                                'error: ',
-                                this.messagesService.getMessage()
-                            );
-                            this.dialogService.openDialog({
-                                mode: 'infoDialog',
-                                obj: this.messagesService.getMessage()
-                            });
-                            this.messagesService.setMessage(null);
-                        } else {
-                            this.activityService.actDataChanged('changed');
-                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                            this.onCancelClick();
-                        }
-                    });
-                this.dialogRef.close();
-            }
-            if (data.mode === 'editActivity') {
-                const idAct = data.obj.id;
-                this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-                this.timeStart = this.activityForm.value.timeStart; // get end time from form
-                const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-                const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
-                const startMoment = moment(start); // create the moment()
-                const endMoment = moment(end);
-                const timestampStart =
-                    startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-                const timestampEnd = endMoment.toDate().getTime() / 1000 + '';
-                this.activityService
-                    .editActivity({
-                        id: idAct,
-                        title: title,
-                        description: description,
-                        timestampStart: timestampStart,
-                        timestampEnd: timestampEnd,
-                        lat: lat,
-                        long: long,
-                        images: images,
-                        participants: participants,
-                        address: address,
-                        activityType: activityType,
-                        price: price,
-                        rating: rating,
-                        capacity: capacity
-                    })
-                    .subscribe(res => {
-                        if (this.messagesService.getExists()) {
-                            this.dialogService.openDialog({
-                                mode: 'infoDialog',
-                                obj: this.messagesService.getMessage()
-                            });
-                            this.messagesService.setMessage(null);
-                        } else {
-                            this.activityService.actDataChanged('changed');
-                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                            this.onCancelClick();
-                        }
-                    });
-                this.dialogRef.close();
-            }
-            if (data.mode === 'editUserInfo') {
-                const idUser = data.obj._id;
-                this.userService
-                    .updateUserInfo(
-                        {
-                            email: email,
-                            completeName: completeName,
-                            birthday: birthday,
-                            phone: phone
-                        },
-                        idUser
-                    )
-                    .subscribe(res => {
-                        if (this.messagesService.getExists()) {
-                            this.dialogService.openDialog({
-                                mode: 'infoDialog',
-                                obj: this.messagesService.getMessage()
-                            });
-                            this.messagesService.setMessage(null);
-                        } else {
-                            // this.activityService.actDataChanged('changed');
-                            // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                            this.onCancelClick();
-                        }
-                    });
-                this.dialogRef.close();
+                    this.activityService
+                        .addActivitiy({
+                            title: title,
+                            description: description,
+                            timestampStart: timestampStart,
+                            timestampEnd: timestampEnd,
+                            lat: lat,
+                            long: long,
+                            images: images,
+                            participants: participants,
+                            address: address,
+                            activityType: activityType,
+                            price: price,
+                            rating: rating,
+                            capacity: capacity
+                        })
+                        .subscribe(res3 => {
+                            if (this.messagesService.getExists()) {
+                                console.log(
+                                    'error: ',
+                                    this.messagesService.getMessage()
+                                );
+                                this.dialogService.openDialog({
+                                    mode: 'infoDialog',
+                                    obj: this.messagesService.getMessage()
+                                });
+                                this.messagesService.setMessage(null);
+                            } else {
+                                this.activityService.actDataChanged('changed');
+                                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                                this.onCancelClick();
+                            }
+                        });
+                    this.dialogRef.close();
+                }
+                if (data.mode === 'editActivity') {
+                    const idAct = data.obj.id;
+                    this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
+                    this.timeStart = this.activityForm.value.timeStart; // get end time from form
+                    const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
+                    const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                    const startMoment = moment(start); // create the moment()
+                    const endMoment = moment(end);
+                    const timestampStart =
+                        startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                    const timestampEnd =
+                        endMoment.toDate().getTime() / 1000 + '';
+                    this.activityService
+                        .editActivity({
+                            id: idAct,
+                            title: title,
+                            description: description,
+                            timestampStart: timestampStart,
+                            timestampEnd: timestampEnd,
+                            lat: lat,
+                            long: long,
+                            images: images,
+                            participants: participants,
+                            address: address,
+                            activityType: activityType,
+                            price: price,
+                            rating: rating,
+                            capacity: capacity
+                        })
+                        .subscribe(res2 => {
+                            if (this.messagesService.getExists()) {
+                                this.dialogService.openDialog({
+                                    mode: 'infoDialog',
+                                    obj: this.messagesService.getMessage()
+                                });
+                                this.messagesService.setMessage(null);
+                            } else {
+                                this.activityService.actDataChanged('changed');
+                                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                                this.onCancelClick();
+                            }
+                        });
+                    this.dialogRef.close();
+                }
+                if (data.mode === 'editUserInfo') {
+                    const idUser = data.obj._id;
+                    this.userService
+                        .updateUserInfo(
+                            {
+                                email: email,
+                                completeName: completeName,
+                                birthday: birthday,
+                                phone: phone
+                            },
+                            idUser
+                        )
+                        .subscribe(res1 => {
+                            if (this.messagesService.getExists()) {
+                                this.dialogService.openDialog({
+                                    mode: 'infoDialog',
+                                    obj: this.messagesService.getMessage()
+                                });
+                                this.messagesService.setMessage(null);
+                            } else {
+                                // this.activityService.actDataChanged('changed');
+                                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                                this.onCancelClick();
+                            }
+                        });
+                    this.dialogRef.close();
+                }
             }
         });
+        if (this.messagesService.getExists()) {
+            console.log('error: ', this.messagesService.getMessage());
+            this.dialogService.openDialog({
+                mode: 'infoDialog',
+                obj: this.messagesService.getMessage()
+            });
+            this.messagesService.setMessage(null);
+        }
     }
 
     // 从Date格式转换到Timestamp为了能够储存到DB里面

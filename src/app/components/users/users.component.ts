@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReverseGeocodingService } from '../../services/reverseGeocoding/reverse-geocoding.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
 import { UserLocationService } from '../../services/userLocation/user-location.service';
+import { EntityService } from '../../services/entity/entity.service';
 
 @Component({
     selector: 'app-users',
@@ -9,8 +10,8 @@ import { UserLocationService } from '../../services/userLocation/user-location.s
     styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-    iniLat = 51.678418;
-    iniLng = 7.809007;
+    iniLat;
+    iniLng;
     usersOfActivity = [];
     activity;
     activities;
@@ -20,7 +21,7 @@ export class UsersComponent implements OnInit {
     constructor(
         private reverseGeoService: ReverseGeocodingService,
         private activityService: ActivitiesService,
-        private userLocationService: UserLocationService
+        private userLocationService: UserLocationService,
     ) {}
 
     ngOnInit() {

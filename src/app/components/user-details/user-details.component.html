@@ -1,7 +1,7 @@
 <div class="userInfo">
   <h1>User Information:</h1>
   <table class="ui definition table">
-      <tbody>
+      <tbody *ngIf="user">
           <tr>
               <td class="two wide column"></td>
               <td><button class="ui icon button" style="text-align: right" (click)="openModal({mode: 'editUserInfo', obj: userInfo})"><i

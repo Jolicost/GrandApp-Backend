@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
+import { EntityService } from 'src/app/services/entity/entity.service';
 
 @Component({
     selector: 'app-user-activities',
@@ -9,15 +10,18 @@ import { ActivitiesService } from '../../services/activities/activities.service'
 })
 export class UserActivitiesComponent implements OnInit {
     actURL = 'https://grandapp.herokuapp.com/activities';
-    userActivities = [];
+    users;
 
     constructor(
         private dialogService: DialogService,
-        private activitiesService: ActivitiesService
+        private activitiesService: ActivitiesService,
+        private entityService: EntityService
     ) {}
 
     ngOnInit() {
-        // this.userActivities = this.activitiesService.getActivities();
+        this.entityService.getAllUsersOfMyEntity().subscribe(res => {
+            this.users = res;
+        });
     }
 
     openModal(mode) {

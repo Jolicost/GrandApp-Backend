@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
 import { EntityService } from 'src/app/services/entity/entity.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-activities',
@@ -15,7 +17,9 @@ export class UserActivitiesComponent implements OnInit {
     constructor(
         private dialogService: DialogService,
         private activitiesService: ActivitiesService,
-        private entityService: EntityService
+        private entityService: EntityService,
+        private userService: UserService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -26,5 +30,9 @@ export class UserActivitiesComponent implements OnInit {
 
     openModal(mode) {
         this.dialogService.openDialog(mode);
+    }
+
+    showDetails(id) {
+        this.router.navigate(['/users', id]);
     }
 }

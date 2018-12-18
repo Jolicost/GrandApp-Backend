@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class EntityService {
     entitiesURL = 'https://grandapp.herokuapp.com/entity/entities';
+    entitiesURL2 = 'https://grandapp.herokuapp.com/entity/users';
 
     constructor(
         private http: HttpClient,
@@ -53,6 +54,14 @@ export class EntityService {
             tap(resp => console.log('getTotalConnections(', resp))
         );
     }
+
+    getAllUsersOfMyEntity(): Observable<any> {
+        return this.http.get<any>(`${this.entitiesURL2}`, httpOptions).pipe(
+            catchError(this.handleError<any>('getAllUsersOfMyEntity')),
+            tap(resp => console.log('getAllUsersOfMyEntity(', resp))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

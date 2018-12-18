@@ -42,7 +42,7 @@ export class ActivityDetailsComponent implements OnInit, OnDestroy {
             this.usersID.forEach(userID => {
                 this.userService.getUserInfo(userID).subscribe(res => {
                     this.participants.push({
-                        id: res._id,
+                        email: res.email,
                         name: res.completeName
                     });
                 });

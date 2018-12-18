@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { AuthGuardService as AuthGuard } from './services/guard/auth-guard.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,14 +23,19 @@ const routes: Routes = [
         component: ActivitiesComponent,
         canActivate: [AuthGuard]
     },
-    { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+    { path: 'emergency', component: UsersComponent, canActivate: [AuthGuard] },
     {
-        path: 'userActivities',
+        path: 'users',
         component: UserActivitiesComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'activity/:id',
+        path: 'users/:id',
+        component: UserDetailsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'activities/:id',
         component: ActivityDetailsComponent,
         canActivate: [AuthGuard]
     },

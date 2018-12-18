@@ -20,8 +20,6 @@
                     <th>Phone</th>
                     <th>Username</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,15 +28,9 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
                     <td>{{ user.username }}</td> 
-                    <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(activity.id)">
+                    <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(user._id)">
                             <i class="th list icon"></i>
                         </button></td>                   
-                    <td style="text-align: center"><button class="ui icon red button" (click)="openModal({mode: 'deleteActivity', obj: activity})">
-                            <i class="trash icon"></i>
-                        </button></td>
-                    <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: activity})">
-                            <i class="edit icon"></i>
-                        </button></td>
                 </tr>
             </tbody>
             <tfoot>

@@ -1,5 +1,5 @@
 <div class="userActivities-content">
-    <h1>User list <i class="users icon"></i> </h1>
+    <h1>Users List <i class="users icon"></i> </h1>
     <div class="ui divider"></div>
     <div class="top-controls" style="text-align: right; padding: 20px">
         Table size:
@@ -16,43 +16,34 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Decription</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Participants</th>
-                    <th>Image</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Username</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor='let user of users'>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.description }}</td>
-                    <td>{{ user.startDate }}</td>
-                    <td>{{ user.endDate }}</td>
-                    <td>{{ user.lat }}</td>
-                    <td>{{ user.lng }}</td>
-                    <td>
-                        <ul *ngFor="let p of user.participants">
-                            <li><span style="color: red">ID: </span>{{p.id}}</li>
-                            <li><span style="color: red">Name: </span>{{p.name}}</li>
-                        </ul>
-                    </td>
-                    <td>{{ user.image }}</td>
-                    <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'deleteActivity', obj: user})">
+                    <td>{{ user.completeName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.username }}</td> 
+                    <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(activity.id)">
+                            <i class="th list icon"></i>
+                        </button></td>                   
+                    <td style="text-align: center"><button class="ui icon red button" (click)="openModal({mode: 'deleteActivity', obj: activity})">
                             <i class="trash icon"></i>
                         </button></td>
-                    <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: user})">
+                    <td style="text-align: center"><button class="ui icon button" (click)="openModal({mode: 'editActivity', obj: activity})">
                             <i class="edit icon"></i>
                         </button></td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="10">
+                    <th colspan="7">
                         <app-dialog></app-dialog>
                         <div class="ui right floated pagination menu">
                             <a class="icon item">

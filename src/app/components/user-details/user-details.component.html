@@ -3,11 +3,6 @@
   <table class="ui definition table">
       <tbody *ngIf="user">
           <tr>
-              <td class="two wide column"></td>
-              <td><button class="ui icon button" style="text-align: right" (click)="openModal({mode: 'editUserInfo', obj: userInfo})"><i
-                          class="edit icon"></i></button></td>
-          </tr>
-          <tr>
               <td class="two wide column">Localitat</td>
               <td>Latitude: {{ user.place.lat }}  Longitude: {{ user.place.long }}</td>
           </tr>

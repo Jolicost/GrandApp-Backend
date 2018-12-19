@@ -10,9 +10,8 @@ import { EntityService } from 'src/app/services/entity/entity.service';
 })
 export class UserProfileComponent implements OnInit {
     entityId;
-    userInfo = {};
-    entitiesInfo = <any>[];
-    entityInfo = {};
+    userInfo;
+    entityInfo;
     showEntityInfo = false;
 
     constructor(
@@ -26,14 +25,16 @@ export class UserProfileComponent implements OnInit {
             .verify()
             .subscribe(userInfo => {
                 this.userInfo = userInfo;
-                this.entityId = userInfo.entity;
-                // console.log('userInfo', this.userInfo);
-                // console.log('entityId', this.entityId);
-                this.entityService
+                if (this.userInfo !== undefined) {
+                    this.entityId = userInfo.entity;
+                }
+                if (this.entityId !== undefined) {
+                    this.entityService
                     .getEntityInfo({ id: this.entityId })
-                    .subscribe(entityInfo => {
-                        this.entityInfo = entityInfo;
+                    .subscribe(res => {
+                        this.entityInfo = res;
                     });
+                }
             });
     }
 

@@ -1,7 +1,7 @@
 <div class="userInfo">
-    <h1>User Information:</h1>
+    <h1>My profile:</h1>
     <table class="ui definition table">
-        <tbody>
+        <tbody *ngIf="userInfo">
             <tr>
                 <td class="two wide column"></td>
                 <td><button class="ui icon button" style="text-align: right" (click)="openModal({mode: 'editUserInfo', obj: userInfo})"><i
@@ -41,7 +41,7 @@
                     </ul>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="entityInfo">
                 <td>Entity</td>
                 <td (click)="show()">
                   <p style="color: blue" >{{ entityInfo.alias }} </p>
@@ -55,13 +55,12 @@
             </tr>
         </tbody>
     </table>
-    <!-- <pre [innerHTML]="userInfo | json"></pre> -->
 </div>
 
 <div class="entityInfo" style="padding-top: 20px;" *ngIf="showEntityInfo">
     <h1>Entity Information:</h1>
     <table class="ui definition table">
-        <tbody>
+        <tbody *ngIf="entityInfo && userInfo">
             <tr>
                 <td class="two wide column">Localitat</td>
                 <td>{{ entityInfo.address }}</td>
@@ -80,7 +79,6 @@
             </tr>
         </tbody>
     </table>
-    <!-- <pre [innerHTML]="entityInfo | json"></pre> -->
 </div>
 
 <app-dialog></app-dialog>

@@ -30,6 +30,13 @@ export class UserService {
         );
     }
 
+    getEmergencyPhoneById(uid): Observable<any> {
+        return this.http.get<any>(`${this.userURL}/${uid}/emergency`, httpOptions).pipe(
+            catchError(this.handleError<any>('getEmergencyPhoneById')),
+            tap(resp => console.log('getEmergencyPhoneById', resp))
+        );
+    }
+
     getUserInfo(id): Observable<any> {
         return this.http.get<any>(`${this.userURL}/${id}`, httpOptions).pipe(
             catchError(this.handleError<any>('getUserInfo')),

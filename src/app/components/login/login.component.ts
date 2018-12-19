@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         }
         this.authService
             .login({ username: username, password: password })
-            .subscribe(user => {
+            .subscribe(res => {
                 if (this.messageService.getExists()) {
                     this.dialogService.openDialog({
                         mode: 'infoDialog',
@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
                     });
                     this.messageService.setMessage(null);
                 } else {
-                    localStorage.setItem('token', user.token);
+                    localStorage.setItem('token', res.token);
                     localStorage.setItem('username', username);
-                    // 呼叫userService的方法，让订阅者们收到新的值
+                    localStorage.setItem('profilepic', res.user.profilePic);
                     this.authService.changeUserStatus('loginSuccess');
                 }
                 this.router.navigate(['/dashboard']);

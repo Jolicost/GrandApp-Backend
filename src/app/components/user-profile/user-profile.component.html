@@ -12,6 +12,10 @@
                 <td>Latitude: {{ userInfo.place.lat }}  Longitude: {{ userInfo.place.long }}</td>
             </tr>
             <tr>
+                <td>Complete Name</td>
+                <td>{{ userInfo.completeName}}</td>
+            </tr>
+            <tr>
                 <td>Username</td>
                 <td>{{ userInfo.username}}</td>
             </tr>
@@ -31,7 +35,7 @@
                 <td>User type</td>
                 <td>{{ userInfo.userType }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Contact phone</td>
                 <td>
                     <ul>
@@ -40,7 +44,7 @@
                         </li>
                     </ul>
                 </td>
-            </tr>
+            </tr> -->
             <tr *ngIf="entityInfo">
                 <td>Entity</td>
                 <td (click)="show()">

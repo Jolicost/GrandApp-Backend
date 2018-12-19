@@ -87,7 +87,10 @@ export class DialogComponent implements OnInit, OnDestroy {
         phone: new FormControl('', [
             Validators.required,
             Validators.minLength(3)
-        ])
+        ]),
+        profilePic: new FormControl('', [
+            Validators.required,
+        ]),
     });
 
     constructor(
@@ -172,7 +175,9 @@ export class DialogComponent implements OnInit, OnDestroy {
                                 ? ''
                                 : mode.obj.birthday,
                         phone:
-                            mode.obj.phone === undefined ? '' : mode.obj.phone
+                            mode.obj.phone === undefined ? '' : mode.obj.phone,
+                        profilePic:
+                            mode.obj.profilePic === undefined ? '' : mode.obj.profilePic,
                     });
                     this.openDialog(mode);
                 }
@@ -506,6 +511,7 @@ export class DialogContentComponent implements OnInit {
             const completeName = this.userInfoForm.value.completeName;
             const birthday = this.userInfoForm.value.birthday;
             const phone = this.userInfoForm.value.phone;
+            const profilePic = this.userInfoForm.value.profilePic;
             const idUser = data.obj._id;
             this.userService
                 .updateUserInfo(
@@ -513,7 +519,8 @@ export class DialogContentComponent implements OnInit {
                         email: email,
                         completeName: completeName,
                         birthday: birthday,
-                        phone: phone
+                        phone: phone,
+                        profilePic: profilePic
                     },
                     idUser
                 )
@@ -525,7 +532,7 @@ export class DialogContentComponent implements OnInit {
                         });
                         this.messagesService.setMessage(null);
                     } else {
-                        // this.activityService.actDataChanged('changed');
+                        this.userService.userDataChanged('changed');
                         // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                         this.onCancelClick();
                     }

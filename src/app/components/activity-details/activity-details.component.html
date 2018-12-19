@@ -1,40 +1,40 @@
 <h1>Activity details:</h1>
 
 <table class="ui definition table">
-    <tbody>
+    <tbody *ngIf="activitySelected">
         <tr>
             <td class="two wide column">Activity title</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.title }}</p>
+                <p>{{ activitySelected.title }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity description</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.description }}</p>
+                <p>{{ activitySelected.description }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity rating</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.rating }}</p>
+                <p>{{ activitySelected.rating }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity location</td>
             <td>
-                <p *ngIf="activitySelected">{{ completeStreetName }}</p>
+                <p>{{ completeStreetName }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity start</td>
-            <td *ngIf="activitySelected" [innerHtml]="timeConverter(activitySelected.timestampStart)"></td>
+            <td [innerHtml]="timeConverter(activitySelected.timestampStart)"></td>
         </tr>
         <tr>
             <td class="two wide column">Activity end</td>
-            <td *ngIf="activitySelected" [innerHtml]="timeConverter(activitySelected.timestampEnd)"></td>
+            <td [innerHtml]="timeConverter(activitySelected.timestampEnd)"></td>
         </tr>
-        <tr *ngIf="activitySelected">
+        <tr>
             <td class="two wide column">Activity participants</td>
             <td>
                 <ul *ngFor="let p of participants">
@@ -46,25 +46,25 @@
         <tr>
             <td class="two wide column">Activity activity type</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.activityType }}</p>
+                <p>{{ activitySelected.activityType }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity capacity</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.capacity }}</p>
+                <p>{{ activitySelected.capacity }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity price</td>
             <td>
-                <p *ngIf="activitySelected">{{ activitySelected.price }}</p>
+                <p>{{ activitySelected.price }}</p>
             </td>
         </tr>
         <tr>
             <td class="two wide column">Activity images:</td>
             <td>
-                <div *ngIf="activitySelected">
+                <div>
                     <ul *ngFor="let i of activitySelected.images">
                         <li>
                             <img src="{{ activitySelected.images }}" height="100px" width="100px">
@@ -82,11 +82,11 @@
     <agm-map [zoom]="zoom" [latitude]="iniLat" [longitude]="iniLng" [scrollwheel]="true" (mapClick)="mapclicked($event)">
         <!-- Markers -->
         <agm-marker [latitude]=iniLat [longitude]=iniLng>
-            <agm-info-window>
-                <p><strong>Title:</strong> {{ activitySelected.title }}</p>
-                <p><strong>Description:</strong> {{ activitySelected.description }}</p>
-                <strong>Start:</strong><p [innerHtml]="timeConverter(activitySelected.timestampStart)"></p>
-                <strong>End:</strong><p [innerHtml]="timeConverter(activitySelected.timestampEnd)"></p>
+            <agm-info-window *ngIf="activitySelected">
+                <p><strong style="color: red;">Title:</strong> {{ activitySelected.title }}</p>
+                <p><strong style="color: red;">Description:</strong> {{ activitySelected.description }}</p>
+                <strong style="color: red;">Start:</strong><p [innerHtml]="timeConverter(activitySelected.timestampStart)"></p>
+                <strong style="color: red;">End:</strong><p [innerHtml]="timeConverter(activitySelected.timestampEnd)"></p>
             </agm-info-window>
         </agm-marker>
     </agm-map>

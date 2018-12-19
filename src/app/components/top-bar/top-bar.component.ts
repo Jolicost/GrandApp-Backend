@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class TopBarComponent implements OnInit {
     logged = localStorage.getItem('token');
     username = localStorage.getItem('username');
+    profilePicture = localStorage.getItem('profilepic');
 
     sidebarOpened = false;
     constructor(
@@ -23,6 +24,7 @@ export class TopBarComponent implements OnInit {
     }
 
     ngOnInit() {
+
         // 可以从任何组件来订阅user$，来获取改变的值
         this.authService.user$.subscribe(r => {
             if (r === 'loginSuccess') {

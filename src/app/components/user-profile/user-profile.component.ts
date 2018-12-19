@@ -18,24 +18,29 @@ export class UserProfileComponent implements OnInit {
         private userService: UserService,
         private dialogService: DialogService,
         private entityService: EntityService
-    ) {}
-
-    ngOnInit() {
-        this.userService
-            .verify()
-            .subscribe(userInfo => {
-                this.userInfo = userInfo;
-                if (this.userInfo !== undefined) {
-                    this.entityId = userInfo.entity;
-                }
-                if (this.entityId !== undefined) {
-                    this.entityService
+    ) {
+        this.userService.verify().subscribe(userInfo => {
+            this.userInfo = userInfo;
+            if (this.userInfo !== undefined) {
+                this.entityId = userInfo.entity;
+            }
+            if (this.entityId !== undefined) {
+                this.entityService
                     .getEntityInfo({ id: this.entityId })
                     .subscribe(res => {
                         this.entityInfo = res;
                     });
-                }
+            }
+        });
+    }
+
+    ngOnInit() {
+        this.userService.user$.subscribe(newUserInfo => {
+            console.log('asdasd', newUserInfo);
+            this.userService.verify().subscribe(userInfo => {
+                this.userInfo = userInfo;
             });
+        });
     }
 
     show() {

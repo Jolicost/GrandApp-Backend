@@ -18,6 +18,9 @@ export class UserService {
     verifyURL = 'https://grandapp.herokuapp.com/verify';
     userURL = 'https://grandapp.herokuapp.com/entity/users';
 
+    private userSubject = new Subject<any>(); // 发送器，通知有变化
+    user$ = this.userSubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
+
     constructor(
         private http: HttpClient,
         private messageService: MessagesService
@@ -31,10 +34,12 @@ export class UserService {
     }
 
     getEmergencyPhoneById(uid): Observable<any> {
-        return this.http.get<any>(`${this.userURL}/${uid}/emergency`, httpOptions).pipe(
-            catchError(this.handleError<any>('getEmergencyPhoneById')),
-            tap(resp => console.log('getEmergencyPhoneById', resp))
-        );
+        return this.http
+            .get<any>(`${this.userURL}/${uid}/emergency`, httpOptions)
+            .pipe(
+                catchError(this.handleError<any>('getEmergencyPhoneById')),
+                tap(resp => console.log('getEmergencyPhoneById', resp))
+            );
     }
 
     getUserInfo(id): Observable<any> {
@@ -59,6 +64,11 @@ export class UserService {
             tap(resp => console.log('getAllUser', resp))
         );
     }
+
+    userDataChanged(mode) {
+        this.userSubject.next(mode); // emit有变化，并且传送新的value
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

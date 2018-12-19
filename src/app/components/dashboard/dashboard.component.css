@@ -4,10 +4,12 @@
     font-weight: 600;
     color: #87CEEB;
 }
+
 #box {
     border: 1px solid #000000;
     margin-top: 50px;
 }
+
 #myChart {
     height: 100px;
     width: 50px;

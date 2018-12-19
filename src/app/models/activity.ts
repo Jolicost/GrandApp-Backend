@@ -1,5 +1,3 @@
-import { User } from '../models/user';
-
 export interface Activity {
     id: number;
     title: string;

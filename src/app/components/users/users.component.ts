@@ -4,53 +4,53 @@ import { ActivitiesService } from '../../services/activities/activities.service'
 import { UserLocationService } from '../../services/userLocation/user-location.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  iniLat = 51.678418;
-  iniLng = 7.809007;
-  usersOfActivity = [];
-  activity;
+    iniLat = 51.678418;
+    iniLng = 7.809007;
+    usersOfActivity = [];
+    activity;
+    activities;
 
-  currentActivity = {
-    name: 'act1',
-    startDate: 'date1',
-    endDate: 'date2'
-  };
+    locationsOfUser = [];
 
-  locationsOfUser = [];
+    constructor(
+        private reverseGeoService: ReverseGeocodingService,
+        private activityService: ActivitiesService,
+        private userLocationService: UserLocationService
+    ) {}
 
-  constructor(
-    private reverseGeoService: ReverseGeocodingService,
-    private activityService: ActivitiesService,
-    private userLocationService: UserLocationService
-  ) { }
+    ngOnInit() {
+        this.activityService.getActivities().subscribe(res => {
+            this.activities = res;
+            this.activity = res[0];
+            console.log('activity', this.activity);
+            this.usersOfActivity = this.activity.participants;
+            console.log('usersOfActivity: ', this.usersOfActivity);
+        });
 
-  ngOnInit() {
-    this.activity = this.activityService.getActivities()[0];
-    console.log('activity', this.activity);
+        this.usersOfActivity.forEach(element => {
+            const position = this.userLocationService.getUserLocation(
+                element.id
+            );
+            this.reverseGeoService
+                .convertToStreet(position.lat, position.lng)
+                .subscribe(res => {
+                    position['address'] = res.results[0].formatted_address;
+                });
+            this.locationsOfUser.push(position);
+        });
 
-    this.usersOfActivity = this.activity.participants;
-    console.log('usersOfActivity: ', this.usersOfActivity);
+        console.log('locationsOfUser: ', this.locationsOfUser);
+    }
+    mapclicked($event) {
+        // console.log($event);
+    }
 
-    this.usersOfActivity.forEach(element => {
-      const position = this.userLocationService.getUserLocation(element.id);
-      this.reverseGeoService.convertToStreet(position.lat, position.lng).subscribe(res => {
-        position['address'] = res.results[0].formatted_address;
-      });
-      this.locationsOfUser.push(position);
-    });
-
-    console.log('locationsOfUser: ', this.locationsOfUser);
-  }
-  mapclicked($event) {
-    // console.log($event);
-  }
-
-  filterByActivity(event) {
-    const activityName = event.target.value;
-  }
-
+    filterByActivity(event) {
+        const activityName = event.target.value;
+    }
 }

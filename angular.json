@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../grandapp/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -74,7 +76,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

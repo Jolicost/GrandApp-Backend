@@ -14,13 +14,22 @@ export class DashboardComponent implements OnInit {
     totalCon;
     totalUser;
     totalAct;
+    totalAchievements;
     entityId;
     entityStatsTypeAct = {};
     entityStatsHours = {};
+    entityStatsAchievementsPerName = {};
+    entityStatsAchievementsPerType = {};
+
     entityTypeActKeys = [];
     entityTypeActValues = [];
     entityHoursActKeys = [];
     entityHoursActValues = [];
+    entityAchievementsPerNameKeys = [];
+    entityAchievementsPerNameValues = [];
+    entityAchievementsPerTypeKeys = [];
+    entityAchievementsPerTypeValues = [];
+
     allBorderColors = [
         'rgba(183, 28, 28, 1)',
         'rgba(136, 14, 79, 1)',
@@ -157,6 +166,67 @@ export class DashboardComponent implements OnInit {
                             .subscribe(con => {
                                 this.totalCon = con.nConnections;
                             });
+                        this.entityService.getEntityStatisticsAchievements(this.entityId).subscribe(achievements => {
+                            this.totalAchievements = achievements.nAchievements;
+                            this.entityStatsAchievementsPerName = achievements.achievementsPerName;
+                            this.entityStatsAchievementsPerType = achievements.achievementsPerType;
+                            this.entityAchievementsPerNameKeys = Object.keys(this.entityStatsAchievementsPerName);
+                            this.entityAchievementsPerNameValues = Object.values(this.entityStatsAchievementsPerName);
+                            this.entityAchievementsPerTypeKeys = Object.keys(this.entityStatsAchievementsPerType);
+                            this.entityAchievementsPerTypeValues = Object.values(this.entityStatsAchievementsPerType);
+                            this.chart = new Chart('myChart3', {
+                                type: 'bar',
+                                data: {
+                                    labels: this.entityAchievementsPerNameKeys,
+                                    datasets: [
+                                        {
+                                            label: '# Achievements per name',
+                                            data: this.entityAchievementsPerNameValues,
+                                            backgroundColor: backgroundColorsPick,
+                                            borderColor: borderColorsPick,
+                                            borderWidth: 1
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [
+                                            {
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            });
+                            this.chart = new Chart('myChart4', {
+                                type: 'bar',
+                                data: {
+                                    labels: this.entityAchievementsPerTypeKeys,
+                                    datasets: [
+                                        {
+                                            label: '# Achievements per type',
+                                            data: this.entityAchievementsPerTypeValues,
+                                            backgroundColor: backgroundColorsPick,
+                                            borderColor: borderColorsPick,
+                                            borderWidth: 1
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [
+                                            {
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            });
+                        });
                     });
             });
         }

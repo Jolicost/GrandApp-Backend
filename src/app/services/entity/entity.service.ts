@@ -48,6 +48,13 @@ export class EntityService {
         );
     }
 
+    getEntityStatisticsAchievements(entitiyId): Observable<any> {
+        return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/achievements`, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntityStatisticsAchievements')),
+            tap(resp => console.log('getEntityStatisticsAchievements', resp))
+        );
+    }
+
     getTotalConnections(entitiyId): Observable<any> {
         return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/statistics/connections`, httpOptions).pipe(
             catchError(this.handleError<any>('getTotalConnections')),

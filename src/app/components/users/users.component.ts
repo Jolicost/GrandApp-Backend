@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
     activities;
     entityid;
     locationsOfUser = [];
+    emergencyUsers = [];
 
     constructor(
         private reverseGeoService: ReverseGeocodingService,
@@ -40,22 +41,20 @@ export class UsersComponent implements OnInit {
                 this.initLong = rese.place.long;
                 console.log('Tinc long', this.initLong);
             });
+            console.log('Tinc id entitat', this.entityid);
+            this.entityService.getEmergencyContacts(this.entityid).subscribe (emer => {
+                this.emergencyUsers = emer;
+                if (Object.keys(this.emergencyUsers).length > 0) {
+                    this.zoom = 9;
+                }
+            });
         });
 
-        /*this.activityService.getActivities().subscribe(res => {
-            this.activities = res;
-            this.activity = res[0];
-            console.log('activity', this.activity);
-            this.usersOfActivity = this.activity.participants;
-            console.log('usersOfActivity: ', this.usersOfActivity);
-        });
-
-        this.usersOfActivity.forEach(element => {
-            const position = this.userLocationService.getUserLocation(
-                element.id
+        /*this.emergencyUsers.forEach(element => {
+            const position = element;
             );
             this.reverseGeoService
-                .convertToStreet(position.lat, position.lng)
+                .convertToStreet(position.place.lat, position.place.long)
                 .subscribe(res => {
                     position['address'] = res.results[0].formatted_address;
                     // aixo retorna el nom complert en paraules de l'adreça on esta l'individu
@@ -67,9 +66,5 @@ export class UsersComponent implements OnInit {
     }
     mapclicked($event) {
         // console.log($event);
-    }
-
-    filterByActivity(event) {
-        const activityName = event.target.value;
     }
 }

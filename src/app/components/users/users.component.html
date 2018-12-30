@@ -4,13 +4,15 @@
     <!-- Center of the map -->
     <agm-map [zoom]="zoom" [latitude]="initLat" [longitude]="initLong" [scrollwheel]="true" (mapClick)="mapclicked($event)">
         <!-- Markers -->
-        <!-- <agm-marker *ngFor="let p of locationsOfUser;" [latitude]=p.lat [longitude]=p.lng>
+        <agm-marker *ngFor="let p of emergencyUsers;" [latitude]=p.place.lat [longitude]=p.place.long>
             <agm-info-window>
-                <p><strong>Latitude:</strong> {{ p.lat }}</p>
-                <p><strong>Longitude:</strong> {{ p.long }}</p>
-                <p><strong>Address:</strong> {{ p.address }}</p>
+                <p><strong>Latitude:</strong> {{ p.place.lat }}</p>
+                <p><strong>Longitude:</strong> {{ p.place.long }}</p>
+                <p><strong>Address:</strong> {{ p.place.placeName }}</p>
+                <p><strong>Username:</strong> {{ p.username }}</p>
+                <p><strong>Emergency Contacts:</strong> {{p.contactPhones}}</p>
             </agm-info-window>
-        </agm-marker> -->
+        </agm-marker> 
     </agm-map>
 </div>
 

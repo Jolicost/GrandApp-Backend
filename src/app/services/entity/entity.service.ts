@@ -62,6 +62,13 @@ export class EntityService {
         );
     }
 
+    getEmergencyContacts(entitiyId): Observable<any> {
+        return this.http.get<any>(`${this.entitiesURL}/${entitiyId}/emergency`, httpOptions).pipe(
+            catchError(this.handleError<any>('getEntitySos')),
+            tap(resp => console.log('getEntitySos', resp))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

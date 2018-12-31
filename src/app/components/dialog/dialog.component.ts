@@ -458,8 +458,8 @@ export class DialogContentComponent implements OnInit {
                     if (data.mode === 'addActivity') {
                         this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
                         this.timeStart = this.activityForm.value.timeStart; // get end time from form
-                        const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-                        const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                        const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm-dd-yyyy hh:mm in String
+                        const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm-dd-yyyy hh:mm in String
                         const startMoment = moment(start); // create the moment()
                         const endMoment = moment(end);
                         const timestampStart =
@@ -508,8 +508,8 @@ export class DialogContentComponent implements OnInit {
                         const idAct = data.obj.id;
                         this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
                         this.timeStart = this.activityForm.value.timeStart; // get end time from form
-                        const start = `${this.startDate} ${this.timeStart}`; // get the start time in mm/dd/yyyy hh:mm in String
-                        const end = `${this.endDate} ${this.timeEnd}`; // get the end time in mm/dd/yyyy hh:mm in String
+                        const start = `${this.startDate} ${this.timeStart}`; // get the start time in yyyy-mm-dd hh:mm in String
+                        const end = `${this.endDate} ${this.timeEnd}`; // get the end time in yyyy-mm-dd hh:mm in String
                         const startMoment = moment(start); // create the moment()
                         const endMoment = moment(end);
                         const timestampStart =
@@ -598,8 +598,8 @@ export class DialogContentComponent implements OnInit {
             let month = startDate.getMonth();
             month = month + 1;
             const day = startDate.getDate();
-            const dateString = `${month}/${day}/${year}`;
-            // this.endDate is the String mm/dd/yyyy
+            const dateString = `${year}-${month}-${day}`;
+            // this.endDate is the String yyyy-mm-dd
             this.startDate = dateString;
         }
         if (type === 'end') {
@@ -607,8 +607,8 @@ export class DialogContentComponent implements OnInit {
             let month = endDate.getMonth();
             month = month + 1;
             const day = endDate.getDate();
-            const dateString = `${month}/${day}/${year}`;
-            // this.endDate is the String mm/dd/yyyy
+            const dateString = `${year}-${month}-${day}`;
+            // this.endDate is the String yyyy-mm-dd
             this.endDate = dateString;
         }
     }

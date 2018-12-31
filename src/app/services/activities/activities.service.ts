@@ -32,6 +32,13 @@ export class ActivitiesService {
         );
     }
 
+    getActivityByParams(pageNumber, numberPerPage): Observable<any> {
+        return this.http.get<any>(`${this.actURL}/${id}`, httpOptions).pipe(
+            catchError(this.handleError<any>('getActivityByParams')),
+            tap(resp => console.log('getActivityByParams', resp))
+        );
+    }
+
     getActivities(): Observable<any> {
         return this.http.get<any>(this.actURL, httpOptions).pipe(
             catchError(this.handleError<any>('getActivities')),

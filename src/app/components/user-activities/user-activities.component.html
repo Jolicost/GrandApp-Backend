@@ -4,10 +4,14 @@
     <div class="top-controls" style="text-align: right; padding: 20px">
         Table size:
         <select class="ui dropdown" (change)="setPageSize($event)">
+            <option selected="selected">3</option>
             <option value="4">4</option>
+            <option value="5">5</option>
             <option value="6">6</option>
+            <option value="7">7</option>
             <option value="8">8</option>
-            <option selected="selected">10</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
         </select>
     </div>
 
@@ -27,10 +31,10 @@
                     <td>{{ user.completeName }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
-                    <td>{{ user.username }}</td> 
+                    <td>{{ user.username }}</td>
                     <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(user._id)">
                             <i class="th list icon"></i>
-                        </button></td>                   
+                        </button></td>
                 </tr>
             </tbody>
             <tfoot>
@@ -41,7 +45,7 @@
                             <a class="icon item">
                                 <i class="left chevron icon"></i>
                             </a>
-                            <a class="item" *ngFor="let loop of loopTimes" (click)="getGamesPara(loop + 1)">{{loop +
+                            <a class="item" *ngFor="let loop of loopTimes" (click)="getFilteredUsers(loop)">{{loop +
                                 1}}</a>
                             <a class="icon item">
                                 <i class="right chevron icon"></i>

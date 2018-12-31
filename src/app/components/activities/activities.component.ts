@@ -3,6 +3,7 @@ import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
 import { Activity } from '../../models/activity';
 import { Router } from '@angular/router';
+import { MessagesService } from 'src/app/services/messages/messages.service';
 
 @Component({
     selector: 'app-activities',
@@ -11,22 +12,22 @@ import { Router } from '@angular/router';
 })
 export class ActivitiesComponent implements OnInit {
     activities: Array<Activity> = [];
+    loopTimes;
+    totalActivities;
 
     constructor(
         private dialogService: DialogService,
         private activitiesService: ActivitiesService,
-        private router: Router
+        private router: Router,
+        private messageService: MessagesService
     ) {
-        this.activitiesService.getActivities().subscribe(res => {
-            this.activities = res;
-        });
     }
     ngOnInit() {
-        this.activitiesService.activity$.subscribe(activityTable => {
-            this.activitiesService.getActivities().subscribe(res => {
-                this.activities = res;
-            });
+        this.activitiesService.countTotalActivities().subscribe(totalActivities => {
+            this.totalActivities = totalActivities.count;
+            this.activitiesService.setTotalActivities(totalActivities.count);
         });
+        this.getFilteredActivities(0);
     }
 
     timeConverter(UNIX_timestamp) {
@@ -40,6 +41,43 @@ export class ActivitiesComponent implements OnInit {
         const sec = a.getSeconds();
         const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
+    }
+
+    setPageSize(event) {
+        const numPerPage = event.target.value;
+        this.activitiesService.setCurrentPageSize(numPerPage);
+        this.getFilteredActivities(0);
+    }
+
+    getFilteredActivities(pageNumber) {
+        console.log('pagenumber = ', pageNumber);
+        console.log('currentpage = ', this.activitiesService.getCurrentPageNumber());
+        console.log('currentpagesize = ', this.activitiesService.getCurrentPageSize());
+        this.activitiesService.setCurrentPageNumber(pageNumber);
+        this.activitiesService
+            .getActivitiesByParams(
+                this.activitiesService.getCurrentPageNumber() * this.activitiesService.getCurrentPageSize(),
+                this.activitiesService.getCurrentPageSize()
+            )
+            .subscribe(res => {
+                if (this.messageService.getExists()) {
+                    this.dialogService.openDialog({
+                        mode: 'infoDialog',
+                        obj: this.messageService.getMessage()
+                    });
+                    this.messageService.setMessage(null);
+                } else {
+                    const totalPage = Math.ceil(
+                        Number(this.totalActivities) /
+                            this.activitiesService.getCurrentPageSize()
+                    );
+                    this.activitiesService.setTotalActivities(this.totalActivities);
+                    this.loopTimes = Array(totalPage)
+                        .fill(0)
+                        .map((x, i) => i);
+                    this.activities = res;
+                }
+            });
     }
 
     openModal(mode) {

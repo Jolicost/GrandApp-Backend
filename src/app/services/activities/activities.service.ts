@@ -16,6 +16,10 @@ const httpOptions = {
 })
 export class ActivitiesService {
     actURL = 'https://grandapp.herokuapp.com/entity/activities';
+    entityURL = 'https://grandapp.herokuapp.com/entity';
+    totalActivities;
+    currentPagesize = 3; // default pagesize is 3
+    currentPageNumber = 1; // default pageNumber is 1
 
     private activitySubject = new Subject<any>(); // 发送器，通知有变化
     activity$ = this.activitySubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
@@ -25,17 +29,39 @@ export class ActivitiesService {
         private messageService: MessagesService
     ) {}
 
+    setCurrentPageSize(num) {
+        this.currentPagesize = num;
+    }
+    getCurrentPageSize() {
+        return this.currentPagesize;
+    }
+    setCurrentPageNumber(num) {
+        this.currentPageNumber = num;
+    }
+    getCurrentPageNumber() {
+        return this.currentPageNumber;
+    }
+
+    setTotalActivities(total) {
+        this.totalActivities = total;
+    }
+    getTotaluActivities() {
+        return this.totalActivities;
+    }
+
+    countTotalActivities(): Observable<any> {
+        return this.http
+            .get<any>(`${this.entityURL}/count/activities`, httpOptions)
+            .pipe(
+                catchError(this.handleError<any>('countTotalActivities')),
+                tap(resp => console.log('countTotalActivities', resp))
+            );
+    }
+
     getActivity(id): Observable<any> {
         return this.http.get<any>(`${this.actURL}/${id}`, httpOptions).pipe(
             catchError(this.handleError<any>('getActivity')),
             tap(resp => console.log('getActivity', resp))
-        );
-    }
-
-    getActivityByParams(pageNumber, numberPerPage): Observable<any> {
-        return this.http.get<any>(`${this.actURL}/${id}`, httpOptions).pipe(
-            catchError(this.handleError<any>('getActivityByParams')),
-            tap(resp => console.log('getActivityByParams', resp))
         );
     }
 
@@ -44,6 +70,18 @@ export class ActivitiesService {
             catchError(this.handleError<any>('getActivities')),
             tap(resp => console.log('getActivities', resp))
         );
+    }
+
+    getActivitiesByParams(pageNumber, numberPerPage): Observable<any> {
+        return this.http
+            .get<any>(
+                `${this.actURL}?skip=${pageNumber}&limit=${numberPerPage}`,
+                httpOptions
+            )
+            .pipe(
+                catchError(this.handleError<any>('getActivitiesByParams')),
+                tap(resp => console.log('getActivitiesByParams', resp))
+            );
     }
 
     addActivitiy(activity): Observable<any> {

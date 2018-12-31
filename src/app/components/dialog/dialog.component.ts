@@ -496,7 +496,7 @@ export class DialogContentComponent implements OnInit {
                                     this.messagesService.setMessage(null);
                                 } else {
                                     this.activityService.actDataChanged(
-                                        'changed'
+                                        'added'
                                     );
                                     // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                                     this.onCancelClick();
@@ -542,7 +542,7 @@ export class DialogContentComponent implements OnInit {
                                     this.messagesService.setMessage(null);
                                 } else {
                                     this.activityService.actDataChanged(
-                                        'changed'
+                                        'updated'
                                     );
                                     // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                                     this.onCancelClick();

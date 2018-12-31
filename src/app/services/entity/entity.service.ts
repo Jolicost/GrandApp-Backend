@@ -18,7 +18,7 @@ export class EntityService {
     entitiesUsers = 'https://grandapp.herokuapp.com/entity/users';
     entityURL = 'https://grandapp.herokuapp.com/entity';
     totalUsers;
-    currentPagesize = 3; // default pagesize is 3
+    currentPagesize = 5; // default pagesize is 5
     currentPageNumber = 1; // default pageNumber is 1
 
     constructor(

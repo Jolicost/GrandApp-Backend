@@ -34,14 +34,14 @@ export class UsersComponent implements OnInit {
     ngOnInit() {
         this.userService.verify().subscribe (resv => {
             this.entityid = resv.entity;
-            console.log('Id entity', this.entityid);
+            // console.log('Id entity', this.entityid);
             this.entityService.getEntityInfo({id: this.entityid}).subscribe (rese => {
                 this.initLat = rese.place.lat;
-                console.log('Tinc lat', this.initLat);
+                // console.log('Tinc lat', this.initLat);
                 this.initLong = rese.place.long;
-                console.log('Tinc long', this.initLong);
+                // console.log('Tinc long', this.initLong);
             });
-            console.log('Tinc id entitat', this.entityid);
+            // console.log('Tinc id entitat', this.entityid);
             this.entityService.getEmergencyContacts(this.entityid).subscribe (emer => {
                 this.emergencyUsers = emer;
                 if (Object.keys(this.emergencyUsers).length > 0) {

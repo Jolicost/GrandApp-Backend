@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog/dialog.service';
-import { ActivitiesService } from '../../services/activities/activities.service';
 import { EntityService } from 'src/app/services/entity/entity.service';
-import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { MessagesService } from 'src/app/services/messages/messages.service';
+import { interval } from 'rxjs';
 
 @Component({
     selector: 'app-user-activities',
@@ -25,6 +24,12 @@ export class UserActivitiesComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        // auto reaload the activities content
+        const source = interval(1000 * 30);
+        const subscribe = source.subscribe(val => {
+            this.getFilteredUsers(this.entityService.getCurrentPageNumber());
+        });
+
         this.entityService.countTotalUsers().subscribe(totalUser => {
             this.totalUsers = totalUser.count;
             this.entityService.setTotalUsers(totalUser.count);

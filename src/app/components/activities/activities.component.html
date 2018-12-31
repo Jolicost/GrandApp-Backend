@@ -4,9 +4,9 @@
     <div class="top-controls" style="text-align: right; padding: 20px">
         Table size:
         <select class="ui dropdown" (change)="setPageSize($event)">
-            <option selected="selected">3</option>
+            <option value="3">3</option>
             <option value="4">4</option>
-            <option value="5">5</option>
+            <option selected="selected">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
             <option value="8">8</option>
@@ -27,7 +27,6 @@
                     <th>Decription</th>
                     <th>Start date</th>
                     <th>End date</th>
-                    <th>Address</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -39,7 +38,6 @@
                     <td>{{ activity.description }}</td>
                     <td [innerHtml]="timeConverter(activity.timestampStart)"></td>
                     <td [innerHtml]="timeConverter(activity.timestampEnd)"></td>
-                    <td>{{ activity.address }}</td>
                     <td style="text-align: center"><button class="ui icon green button" (click)="showDetails(activity.id)">
                             <i class="th list icon"></i>
                         </button></td>
@@ -53,7 +51,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="8">
+                    <th colspan="7">
                         <app-dialog></app-dialog>
                         <div class="ui right floated pagination menu">
                             <a class="icon item">

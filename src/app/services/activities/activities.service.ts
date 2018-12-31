@@ -18,7 +18,7 @@ export class ActivitiesService {
     actURL = 'https://grandapp.herokuapp.com/entity/activities';
     entityURL = 'https://grandapp.herokuapp.com/entity';
     totalActivities;
-    currentPagesize = 3; // default pagesize is 3
+    currentPagesize = 5; // default pagesize is 5
     currentPageNumber = 1; // default pageNumber is 1
 
     private activitySubject = new Subject<any>(); // 发送器，通知有变化

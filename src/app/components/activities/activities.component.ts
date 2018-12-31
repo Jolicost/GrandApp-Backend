@@ -28,6 +28,9 @@ export class ActivitiesComponent implements OnInit {
             this.activitiesService.setTotalActivities(totalActivities.count);
         });
         this.getFilteredActivities(0);
+        this.activitiesService.activity$.subscribe(cahnge => {
+            this.getFilteredActivities(0);
+        });
     }
 
     timeConverter(UNIX_timestamp) {

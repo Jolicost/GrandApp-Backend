@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
     selector: 'app-user-details',
@@ -13,7 +14,7 @@ export class UserDetailsComponent implements OnInit {
     user;
     emergencyPhones;
 
-    constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {}
+    constructor(private activatedRoute: ActivatedRoute, private userService: UserService, private dialogService: DialogService) {}
     ngOnInit() {
         this.sub = this.activatedRoute.params.subscribe(params => {
             this.id = params['id'];
@@ -25,5 +26,9 @@ export class UserDetailsComponent implements OnInit {
                 });
             });
         });
+    }
+
+    openModal(mode) {
+        this.dialogService.openDialog(mode);
     }
 }

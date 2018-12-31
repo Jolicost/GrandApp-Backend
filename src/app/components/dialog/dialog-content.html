@@ -13,11 +13,13 @@
 </div>
 
 <!--Dialog title-->
-<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity' || data.mode === 'editUserInfo'">
+<div *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity' || data.mode === 'editUserInfo'
+    || data.mode === 'addEmergencyContact'">
     <h1 *ngIf="data.mode === 'addActivity'">Add activity:</h1>
     <h1 *ngIf="data.mode === 'editActivity'">Edit activity:</h1>
     <h1 *ngIf="data.mode === 'deleteActivity'">Delete activity:</h1>
     <h1 *ngIf="data.mode === 'editUserInfo'">Edit User Information:</h1>
+    <h1 *ngIf="data.mode === 'addEmergencyContact'">Add emergency contact:</h1>
     <div class="ui divider"></div>
 </div>
 
@@ -210,6 +212,38 @@
         </form>
     </div>
 </div>
+
+<div *ngIf="data.mode === 'addEmergencyContact'">
+    <div class="ui form">
+        <form [formGroup]="emergencyContactForm" *ngIf="data.mode === 'addEmergencyContact'">
+            <div class="field">
+                <label style="text-align: left">
+                    Alias:
+                    <input type="text" formControlName="alias">
+                </label>
+                <div class="error-message" *ngIf="emergencyContactForm.get('alias').invalid && emergencyContactForm.get('alias').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label style="text-align: left">
+                    Phone:
+                    <input type="text" formControlName="phone">
+                </label>
+                <div class="error-message" *ngIf="emergencyContactForm.get('phone').invalid && emergencyContactForm.get('phone').touched"
+                    style="text-align: center">
+                    <div class="input-err-message" style="text-align: center">
+                        <p style="color: red; white-space: nowrap;">Must be at least 3 characters!</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div *ngIf="data.mode === 'editUserInfo'">
     <div class="ui form">
         <form [formGroup]="userInfoForm" *ngIf="data.mode === 'editUserInfo'">
@@ -286,7 +320,8 @@
 </div>
 
 <!--Add & Edit Actions-->
-<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'"
+<div class="actions" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'
+    || data.mode === 'addEmergencyContact'"
     style="text-align: center; padding-top: 10px;">
     <div class="ui green basic ok button" (click)="onSaveClick(data)">
         <i class="checkmark icon"></i>

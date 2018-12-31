@@ -16,7 +16,6 @@ import { Subscription } from 'rxjs';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ActivitiesService } from '../../services/activities/activities.service';
 import { HttpClient } from '@angular/common/http';
-import { Activity } from '../../models/activity';
 import { MessagesService } from '../../services/messages/messages.service';
 import { UserService } from '../../services/user/user.service';
 import { UploadImagesService } from 'src/app/services/upload/upload-images.service';
@@ -25,6 +24,7 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { GeocodingService } from 'src/app/services/geocoding/geocoding.service';
+import { EntityService } from 'src/app/services/entity/entity.service';
 
 // 为了在dialog-content能够acces
 export interface DialogData {
@@ -91,6 +91,11 @@ export class DialogComponent implements OnInit, OnDestroy {
         profilePic: new FormControl('', [
             Validators.required,
         ]),
+    });
+
+    emergencyContactForm = new FormGroup({
+        phone: new FormControl('', Validators.required),
+        alias: new FormControl('', Validators.required)
     });
 
     constructor(
@@ -181,6 +186,9 @@ export class DialogComponent implements OnInit, OnDestroy {
                     });
                     this.openDialog(mode);
                 }
+                if (mode.mode === 'addEmergencyContact') {
+                    this.openDialog(mode);
+                }
             })
         );
     }
@@ -250,7 +258,7 @@ export class DialogComponent implements OnInit, OnDestroy {
             dialogRef.afterClosed().subscribe(result => {
                 //
             });
-        } else {
+        } else if (mode.mode === 'editActivity') {
             const dialogRef = this.dialog.open(DialogContentComponent, {
                 width: '600px',
                 // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
@@ -258,6 +266,19 @@ export class DialogComponent implements OnInit, OnDestroy {
                     mode: mode.mode,
                     obj: mode.obj,
                     form: this.activityForm
+                } // dialog-content 可以通过data来读取dialog.component里面的变量
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                //
+            });
+        } else {
+            const dialogRef = this.dialog.open(DialogContentComponent, {
+                width: '600px',
+                // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
+                data: {
+                    mode: mode.mode,
+                    obj: mode.obj,
+                    form: this.emergencyContactForm
                 } // dialog-content 可以通过data来读取dialog.component里面的变量
             });
             dialogRef.afterClosed().subscribe(result => {
@@ -284,6 +305,7 @@ export class DialogContentComponent implements OnInit {
     activityToDelete;
     activityForm = new FormGroup({});
     userInfoForm = new FormGroup({});
+    emergencyContactForm = new FormGroup({});
     startDate;
     endDate;
     timeStart;
@@ -303,7 +325,8 @@ export class DialogContentComponent implements OnInit {
         private uploadImagesService: UploadImagesService,
         private ng2ImgMax: Ng2ImgMaxService,
         private userService: UserService,
-        private geocodingService: GeocodingService
+        private geocodingService: GeocodingService,
+        private entityService: EntityService
     ) {
         this.activityToDelete = this.data.obj;
         // ----------------------------------------------
@@ -313,7 +336,7 @@ export class DialogContentComponent implements OnInit {
             this.activityForm = data.form;
         } else if (data.mode === 'editUserInfo') {
             this.userInfoForm = data.form;
-        } else {
+        } else if (data.mode === 'addActivity') {
             this.activityForm = new FormGroup({
                 title: new FormControl('', [
                     Validators.required,
@@ -331,6 +354,11 @@ export class DialogContentComponent implements OnInit {
                 price: new FormControl('', Validators.required),
                 rating: new FormControl('', Validators.required),
                 capacity: new FormControl('', Validators.required)
+            });
+        } else if (data.mode === 'addEmergencyContact') {
+            this.emergencyContactForm = new FormGroup({
+                phone: new FormControl('', Validators.required),
+                alias: new FormControl('', Validators.required)
             });
         }
     }
@@ -383,6 +411,25 @@ export class DialogContentComponent implements OnInit {
         this.dialogRef.close();
     }
     onSaveClick(data): void {
+        if (data.mode === 'addEmergencyContact') {
+            const phone = this.emergencyContactForm.value.phone;
+            const alias = this.emergencyContactForm.value.alias;
+            this.userService.getEmergencyPhoneById(data.obj).subscribe(res => {
+                const oldContacts = res;
+                oldContacts.push({alias: alias, phone: phone});
+                this.entityService.addEmergencyContact(data.obj, oldContacts).subscribe(res2 => {
+                    if (this.messagesService.getExists()) {
+                        this.dialogService.openDialog({
+                            mode: 'infoDialog',
+                            obj: this.messagesService.getMessage()
+                        });
+                        this.messagesService.setMessage(null);
+                    } else {
+                        this.dialogRef.close();
+                    }
+                });
+            });
+        }
         if (data.mode === 'addActivity' || data.mode === 'editActivity') {
             const addressName = this.activityForm.value.adressToConvert;
             this.geocodingService.getLatLong(addressName).subscribe(res => {

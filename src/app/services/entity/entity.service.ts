@@ -76,6 +76,15 @@ export class EntityService {
         );
     }
 
+    addEmergencyContact(uid, newContact): Observable<any> {
+        console.log('uid: ', uid);
+        console.log('newContact: ', newContact);
+        return this.http.post<any>(`${this.entitiesURL2}/${uid}/emergency`, newContact, httpOptions).pipe(
+            catchError(this.handleError<any>('addEmergencyContact')),
+            tap(resp => console.log('addEmergencyContact', resp))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

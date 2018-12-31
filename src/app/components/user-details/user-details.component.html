@@ -1,40 +1,46 @@
 <div class="userInfo">
-  <h1>User Information:</h1>
-  <table class="ui definition table">
-      <tbody *ngIf="user">
-          <tr>
-              <td class="two wide column">Localitat</td>
-              <td>Latitude: {{ user.place.lat }}  Longitude: {{ user.place.long }}</td>
-          </tr>
-          <tr>
-              <td>Username</td>
-              <td>{{ user.username}}</td>
-          </tr>
-          <tr>
-              <td>Email</td>
-              <td>{{ user.email }}</td>
-          </tr>
-          <tr>
-              <td>Birthday</td>
-              <td>{{ user.birthday }}</td>
-          </tr>
-          <tr>
-              <td>Phone</td>
-              <td>{{ user.phone }}</td>
-          </tr>
-          <tr *ngIf="emergencyPhones">
-              <td>Emergency contacts</td>
-              <td>
-                  <ul>
-                      <li *ngFor="let emergencyPhone of emergencyPhones">
-                          Name: {{ emergencyPhone.alias}}, Phone: {{ emergencyPhone.phone }}
-                      </li>
-                  </ul>
-              </td>
-          </tr>
-      </tbody>
-  </table> 
+    <h1>User Information:</h1>
+    <div class="right-controls" style="text-align: right">
+        <button class="ui labeled icon blue button" (click)="openModal({mode: 'addEmergencyContact', obj: id})">
+            <i class="add icon"></i>
+            Add
+        </button>
+    </div>
+    
+    <table class="ui definition table">
+        <tbody *ngIf="user">
+            <tr>
+                <td class="two wide column">Localitat</td>
+                <td>Latitude: {{ user.place.lat }} Longitude: {{ user.place.long }}</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>{{ user.username}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <td>Birthday</td>
+                <td>{{ user.birthday }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr *ngIf="emergencyPhones">
+                <td>Emergency contacts</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let emergencyPhone of emergencyPhones">
+                            Name: {{ emergencyPhone.alias}}, Phone: {{ emergencyPhone.phone }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <app-dialog></app-dialog>
-

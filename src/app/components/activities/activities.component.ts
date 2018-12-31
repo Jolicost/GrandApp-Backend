@@ -4,6 +4,7 @@ import { ActivitiesService } from '../../services/activities/activities.service'
 import { Activity } from '../../models/activity';
 import { Router } from '@angular/router';
 import { MessagesService } from 'src/app/services/messages/messages.service';
+import { interval } from 'rxjs';
 
 @Component({
     selector: 'app-activities',
@@ -23,6 +24,12 @@ export class ActivitiesComponent implements OnInit {
     ) {
     }
     ngOnInit() {
+        // auto reaload the activities content
+        const source = interval(1000 * 30);
+        const subscribe = source.subscribe(val => {
+            this.getFilteredActivities(this.activitiesService.getCurrentPageNumber());
+        });
+
         this.activitiesService.countTotalActivities().subscribe(totalActivities => {
             this.totalActivities = totalActivities.count;
             this.activitiesService.setTotalActivities(totalActivities.count);
@@ -58,9 +65,9 @@ export class ActivitiesComponent implements OnInit {
     }
 
     getFilteredActivities(pageNumber) {
-        console.log('pagenumber = ', pageNumber);
-        console.log('currentpage = ', this.activitiesService.getCurrentPageNumber());
-        console.log('currentpagesize = ', this.activitiesService.getCurrentPageSize());
+        // console.log('pagenumber = ', pageNumber);
+        // console.log('currentpage = ', this.activitiesService.getCurrentPageNumber());
+        // console.log('currentpagesize = ', this.activitiesService.getCurrentPageSize());
         this.activitiesService.setCurrentPageNumber(pageNumber);
         this.activitiesService
             .getActivitiesByParams(

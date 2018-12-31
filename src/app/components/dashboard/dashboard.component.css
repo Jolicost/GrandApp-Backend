@@ -5,9 +5,19 @@
     color: #87CEEB;
 }
 
-#box {
+#box1 {
     border: 1px solid #000000;
     margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+}
+
+#box2 {
+    border: 1px solid #000000;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
 }
 
 #myChart {

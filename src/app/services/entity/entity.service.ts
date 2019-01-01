@@ -166,6 +166,15 @@ export class EntityService {
             );
     }
 
+    searchUserByCompleteName(name): Observable<any> {
+        return this.http
+            .get<any>(`${this.entitiesUsers}?completeName=${name}`, httpOptions)
+            .pipe(
+                catchError(this.handleError<any>('searchUserByCompleteName')),
+                tap(resp => console.log('searchUserByCompleteName', resp))
+            );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             if (error.status !== 200) {

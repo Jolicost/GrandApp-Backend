@@ -8,16 +8,16 @@
 #box1 {
     border: 1px solid #000000;
     margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 100px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 80px;
 }
 
 #box2 {
     border: 1px solid #000000;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 100px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 80px;
 }
 
 #myChart {

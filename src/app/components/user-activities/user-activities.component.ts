@@ -15,6 +15,7 @@ export class UserActivitiesComponent implements OnInit {
     users;
     totalUsers;
     loopTimes;
+    searchedName = '';
 
     constructor(
         private dialogService: DialogService,
@@ -24,7 +25,7 @@ export class UserActivitiesComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // auto reaload the activities content
+        // auto reaload the users content
         const source = interval(1000 * 30);
         const subscribe = source.subscribe(val => {
             this.getFilteredUsers(this.entityService.getCurrentPageNumber());
@@ -33,8 +34,8 @@ export class UserActivitiesComponent implements OnInit {
         this.entityService.countTotalUsers().subscribe(totalUser => {
             this.totalUsers = totalUser.count;
             this.entityService.setTotalUsers(totalUser.count);
+            this.getFilteredUsers(0);
         });
-        this.getFilteredUsers(0);
     }
 
     setPageSize(event) {
@@ -44,7 +45,7 @@ export class UserActivitiesComponent implements OnInit {
     }
 
     getFilteredUsers(pageNumber) {
-        console.log('pagenumber = ', pageNumber);
+        // console.log('pagenumber = ', pageNumber);
         this.entityService.setCurrentPageNumber(pageNumber);
         this.entityService
             .getUsersByParams(
@@ -63,6 +64,7 @@ export class UserActivitiesComponent implements OnInit {
                         Number(this.totalUsers) /
                             this.entityService.getCurrentPageSize()
                     );
+                    console.log('totalUser: ', this.totalUsers);
                     this.entityService.setTotalUsers(this.totalUsers);
                     this.loopTimes = Array(totalPage)
                         .fill(0)
@@ -70,6 +72,32 @@ export class UserActivitiesComponent implements OnInit {
                     this.users = res;
                 }
             });
+    }
+
+    onKey(event) {
+        this.searchedName = event.target.value;
+        if (this.searchedName === '') {
+            this.entityService.countTotalUsers().subscribe(totalUser => {
+                this.totalUsers = totalUser.count;
+                this.entityService.setTotalUsers(totalUser.count);
+                this.getFilteredUsers(0);
+            });
+        }
+    }
+
+    search() {
+        this.entityService.searchUserByCompleteName(this.searchedName).subscribe(res => {
+            this.users = res;
+            this.totalUsers = res.length;
+            const totalPage = Math.ceil(
+                Number(this.totalUsers) /
+                    this.entityService.getCurrentPageSize()
+            );
+            this.entityService.setTotalUsers(this.totalUsers);
+            this.loopTimes = Array(totalPage)
+                .fill(0)
+                .map((x, i) => i);
+        });
     }
 
     openModal(mode) {

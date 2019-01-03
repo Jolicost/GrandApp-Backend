@@ -1,7 +1,7 @@
 <div class="activities-content">
     <h1>Activities list<i class="clipboard list icon"></i></h1>
     <div class="ui divider"></div>
-    <div class="top-controls" style="text-align: right; padding: 20px">
+    <div class="top-controls" style="text-align: right; padding: 20px;">
         Table size:
         <select class="ui dropdown" (change)="setPageSize($event)">
             <option value="3">3</option>
@@ -13,10 +13,16 @@
             <option value="9">9</option>
             <option value="10">10</option>
         </select>
-        <button class="ui labeled icon blue button" (click)="openModal({mode: 'addActivity', obj: null})" style="margin-left: 50px;">
+        <button class="ui labeled icon button" (click)="openModal({mode: 'addActivity', obj: null})" style="margin-left: 50px;">
             <i class="add icon"></i>
             Add
         </button>
+        <div class="ui search" style="margin-left: 15px;">
+            <div class="ui icon input">
+                <input (keyup)="onKey($event)"/> <i class="search icon"></i>
+            </div>
+        </div>
+        <button (click)="search()" class="ui button" style="margin-left: 10px;">Search</button>
     </div>
 
     <div class="table-content">

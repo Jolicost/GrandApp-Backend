@@ -49,6 +49,13 @@ export class ActivitiesService {
         return this.totalActivities;
     }
 
+    searchActByTitle(title): Observable<any> {
+        return this.http.get<any>(`${this.actURL}?title=${title}`, httpOptions).pipe(
+            catchError(this.handleError<any>('searchActByTitle')),
+            tap(resp => console.log('searchActByTitle', resp))
+        );
+    }
+
     countTotalActivities(): Observable<any> {
         return this.http
             .get<any>(`${this.entityURL}/count/activities`, httpOptions)

@@ -15,6 +15,8 @@ export class ActivitiesComponent implements OnInit {
     activities: Array<Activity> = [];
     loopTimes;
     totalActivities;
+    searchedName;
+    inSearch = false;
 
     constructor(
         private dialogService: DialogService,
@@ -24,17 +26,20 @@ export class ActivitiesComponent implements OnInit {
     ) {
     }
     ngOnInit() {
-        // auto reaload the activities content
-        const source = interval(1000 * 30);
-        const subscribe = source.subscribe(val => {
-            this.getFilteredActivities(this.activitiesService.getCurrentPageNumber());
-        });
-
         this.activitiesService.countTotalActivities().subscribe(totalActivities => {
             this.totalActivities = totalActivities.count;
             this.activitiesService.setTotalActivities(totalActivities.count);
+            this.getFilteredActivities(0);
         });
-        this.getFilteredActivities(0);
+
+        // auto reaload the activities content
+        const source = interval(1000 * 30);
+        const subscribe = source.subscribe(val => {
+            if (!this.inSearch) {
+                this.getFilteredActivities(this.activitiesService.getCurrentPageNumber());
+            }
+        });
+
         this.activitiesService.activity$.subscribe(mode => {
             console.log('MODE: ', mode);
             if (mode === 'added') {
@@ -94,6 +99,35 @@ export class ActivitiesComponent implements OnInit {
                 }
             });
     }
+
+    onKey(event) {
+        this.searchedName = event.target.value;
+        if (this.searchedName === '') {
+            this.activitiesService.countTotalActivities().subscribe(totalActivities => {
+                this.totalActivities = totalActivities.count;
+                this.activitiesService.countTotalActivities();
+                this.getFilteredActivities(0);
+                this.inSearch = false;
+            });
+        }
+    }
+
+    search() {
+        this.inSearch = true;
+        this.activitiesService.searchActByTitle(this.searchedName).subscribe(res => {
+            this.activities = res;
+            this.totalActivities = res.length;
+            const totalPage = Math.ceil(
+                Number(this.totalActivities) /
+                    this.activitiesService.getCurrentPageSize()
+            );
+            this.activitiesService.setTotalActivities(this.totalActivities);
+            this.loopTimes = Array(totalPage)
+                .fill(0)
+                .map((x, i) => i);
+        });
+    }
+
 
     openModal(mode) {
         this.dialogService.openDialog(mode);

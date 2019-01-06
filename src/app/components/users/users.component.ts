@@ -55,7 +55,7 @@ export class UsersComponent implements OnInit {
             this.mess = 'There are ' + this.usersOor + ' users out of range';
             console.log(this.mess);
             this.dialogService.openDialog({
-                mode: 'infoUsers',
+                mode: 'infoDialog',
                 obj: this.mess
             });
         });

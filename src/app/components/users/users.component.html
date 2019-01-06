@@ -1,6 +1,7 @@
 <h1>Users out of range location: <i class="location arrow icon"></i></h1>
 
 <div class="agm-map">
+    <app-dialog></app-dialog>
     <!-- Center of the map -->
     <agm-map [zoom]="zoom" [latitude]="initLat" [longitude]="initLong" [scrollwheel]="true" (mapClick)="mapclicked($event)">
         <!-- Markers -->

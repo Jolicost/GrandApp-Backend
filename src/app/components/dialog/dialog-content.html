@@ -10,6 +10,16 @@
             </div>
         </div>
     </div>
+    <div class="infoUsers" *ngIf="data.mode === 'infoUsers'" style="text-align: center">
+        <div class="content-panel">
+            <div class="ui icon header">
+                For your information:
+            </div>
+            <div class="content">
+                {{ data.obj }}
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--Dialog title-->

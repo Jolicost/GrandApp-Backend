@@ -98,6 +98,9 @@ export class DialogComponent implements OnInit, OnDestroy {
         alias: new FormControl('', Validators.required)
     });
 
+    infoUsersForm = new FormGroup({
+        textDisplayed: new FormControl('', Validators.required),
+    });
     constructor(
         public dialog: MatDialog,
         private dialogService: DialogService
@@ -266,6 +269,19 @@ export class DialogComponent implements OnInit, OnDestroy {
                     mode: mode.mode,
                     obj: mode.obj,
                     form: this.activityForm
+                } // dialog-content 可以通过data来读取dialog.component里面的变量
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                //
+            });
+        } else if (mode.mode === 'infoUsers') {
+            const dialogRef = this.dialog.open(DialogContentComponent, {
+                width: '600px',
+                // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
+                data: {
+                    mode: mode.mode,
+                    obj: mode.obj,
+                    form: this.infoUsersForm
                 } // dialog-content 可以通过data来读取dialog.component里面的变量
             });
             dialogRef.afterClosed().subscribe(result => {

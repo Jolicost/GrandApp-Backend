@@ -74,188 +74,187 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.delay(1000).then(any => {
-            this.userService.verify().subscribe(userInfo => {
-                this.entityId = userInfo.entity;
-                console.log('entityID: ', this.entityId);
-                this.entityService
-                    .getEntityStatisticsActivities(this.entityId)
-                    .subscribe(entityInfo => {
-                        if (entityInfo !== undefined) {
-                            this.entityStatsTypeAct = entityInfo.types;
-                            this.entityStatsHours = entityInfo.hours;
-                            this.entityTypeActKeys = Object.keys(
-                                this.entityStatsTypeAct
-                            );
-                            this.entityTypeActValues = Object.values(
-                                this.entityStatsTypeAct
-                            );
-                            this.entityHoursActKeys = Object.keys(
-                                this.entityStatsHours
-                            );
-                            this.entityHoursActValues = Object.values(
-                                this.entityStatsHours
-                            );
-                            this.totalAct = entityInfo.nActivities;
-                            this.size1 = this.entityTypeActKeys.length;
-                            const borderColorsPick = [];
-                            const backgroundColorsPick = [];
-                            for (let i = 0; i < this.size1; i++) {
-                                borderColorsPick[i] = this.allBorderColors[i];
-                                backgroundColorsPick[
-                                    i
-                                ] = this.allBackgroundColors[i];
-                                // console.log('Border Pick tenim', borderColorsPick[i]);
-                                // console.log('Back Pick tenim', borderColorsPick[i]);
-                            }
-                            this.chart = new Chart('myChart', {
-                                type: 'bar',
-                                data: {
-                                    labels: this.entityTypeActKeys,
-                                    datasets: [
-                                        {
-                                            label: '# of Activities per Theme',
-                                            data: this.entityTypeActValues,
-                                            backgroundColor: backgroundColorsPick,
-                                            borderColor: borderColorsPick,
-                                            borderWidth: 1
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    scales: {
-                                        yAxes: [
-                                            {
-                                                ticks: {
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            });
-                            this.chart = new Chart('myChart2', {
-                                type: 'line',
-                                data: {
-                                    labels: this.entityHoursActKeys,
-                                    datasets: [
-                                        {
-                                            label: '# Activities per hour',
-                                            data: this.entityHoursActValues,
-                                            backgroundColor: [
-                                                'rgba(255, 99, 132, 0.2)'
-                                            ],
-                                            borderColor: ['rgba(255,99,132,1)'],
-                                            borderWidth: 1
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    scales: {
-                                        yAxes: [
-                                            {
-                                                ticks: {
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            });
-                            this.entityService
-                                .getEntityStatisticsUsers(this.entityId)
-                                .subscribe(users => {
-                                    this.totalUser = users.nRegisteredUsers;
-                                    // console.log('que tinc a Total Users', this.totalUser);
-                                });
-                            this.entityService
-                                .getTotalConnections(this.entityId)
-                                .subscribe(con => {
-                                    this.totalCon = con.nConnections;
-                                });
-                            this.entityService
-                                .getEntityStatisticsAchievements(this.entityId)
-                                .subscribe(achievements => {
-                                    this.totalAchievements =
-                                        achievements.nAchievements;
-                                    this.entityStatsAchievementsPerName =
-                                        achievements.achievementsPerName;
-                                    this.entityStatsAchievementsPerType =
-                                        achievements.achievementsPerType;
-                                    this.entityAchievementsPerNameKeys = Object.keys(
-                                        this.entityStatsAchievementsPerName
-                                    );
-                                    this.entityAchievementsPerNameValues = Object.values(
-                                        this.entityStatsAchievementsPerName
-                                    );
-                                    this.entityAchievementsPerTypeKeys = Object.keys(
-                                        this.entityStatsAchievementsPerType
-                                    );
-                                    this.entityAchievementsPerTypeValues = Object.values(
-                                        this.entityStatsAchievementsPerType
-                                    );
-                                    this.chart = new Chart('myChart3', {
-                                        type: 'bar',
-                                        data: {
-                                            labels: this
-                                                .entityAchievementsPerNameKeys,
-                                            datasets: [
-                                                {
-                                                    label:
-                                                        '# Achievements per name',
-                                                    data: this
-                                                        .entityAchievementsPerNameValues,
-                                                    backgroundColor: backgroundColorsPick,
-                                                    borderColor: borderColorsPick,
-                                                    borderWidth: 1
-                                                }
-                                            ]
-                                        },
-                                        options: {
-                                            scales: {
-                                                yAxes: [
-                                                    {
-                                                        ticks: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    });
-                                    this.chart = new Chart('myChart4', {
-                                        type: 'bar',
-                                        data: {
-                                            labels: this
-                                                .entityAchievementsPerTypeKeys,
-                                            datasets: [
-                                                {
-                                                    label:
-                                                        '# Achievements per type',
-                                                    data: this
-                                                        .entityAchievementsPerTypeValues,
-                                                    backgroundColor: backgroundColorsPick,
-                                                    borderColor: borderColorsPick,
-                                                    borderWidth: 1
-                                                }
-                                            ]
-                                        },
-                                        options: {
-                                            scales: {
-                                                yAxes: [
-                                                    {
-                                                        ticks: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    });
-                                });
+        this.userService.verify().subscribe(userInfo => {
+            this.entityId = userInfo.entity;
+            // console.log('entityID: ', this.entityId);
+            this.entityService
+                .getEntityStatisticsActivities(this.entityId)
+                .subscribe(entityInfo => {
+                    // console.log('entityInfo: ', entityInfo);
+                    if (entityInfo !== undefined) {
+                        this.entityStatsTypeAct = entityInfo.types;
+                        this.entityStatsHours = entityInfo.hours;
+                        this.entityTypeActKeys = Object.keys(
+                            this.entityStatsTypeAct
+                        );
+                        this.entityTypeActValues = Object.values(
+                            this.entityStatsTypeAct
+                        );
+                        this.entityHoursActKeys = Object.keys(
+                            this.entityStatsHours
+                        );
+                        this.entityHoursActValues = Object.values(
+                            this.entityStatsHours
+                        );
+                        this.totalAct = entityInfo.nActivities;
+                        this.size1 = this.entityTypeActKeys.length;
+                        const borderColorsPick = [];
+                        const backgroundColorsPick = [];
+                        for (let i = 0; i < this.size1; i++) {
+                            borderColorsPick[i] = this.allBorderColors[i];
+                            backgroundColorsPick[i] = this.allBackgroundColors[
+                                i
+                            ];
+                            // console.log('Border Pick tenim', borderColorsPick[i]);
+                            // console.log('Back Pick tenim', borderColorsPick[i]);
                         }
-                    });
-            });
+                        this.chart = new Chart('myChart', {
+                            type: 'bar',
+                            data: {
+                                labels: this.entityTypeActKeys,
+                                datasets: [
+                                    {
+                                        label: '# of Activities per Theme',
+                                        data: this.entityTypeActValues,
+                                        backgroundColor: backgroundColorsPick,
+                                        borderColor: borderColorsPick,
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        });
+                        this.chart = new Chart('myChart2', {
+                            type: 'line',
+                            data: {
+                                labels: this.entityHoursActKeys,
+                                datasets: [
+                                    {
+                                        label: '# Activities per hour',
+                                        data: this.entityHoursActValues,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: ['rgba(255,99,132,1)'],
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        });
+                        this.entityService
+                            .getEntityStatisticsUsers(this.entityId)
+                            .subscribe(users => {
+                                this.totalUser = users.nRegisteredUsers;
+                                // console.log('que tinc a Total Users', this.totalUser);
+                            });
+                        this.entityService
+                            .getTotalConnections(this.entityId)
+                            .subscribe(con => {
+                                this.totalCon = con.nConnections;
+                            });
+                        this.entityService
+                            .getEntityStatisticsAchievements(this.entityId)
+                            .subscribe(achievements => {
+                                this.totalAchievements =
+                                    achievements.nAchievements;
+                                this.entityStatsAchievementsPerName =
+                                    achievements.achievementsPerName;
+                                this.entityStatsAchievementsPerType =
+                                    achievements.achievementsPerType;
+                                this.entityAchievementsPerNameKeys = Object.keys(
+                                    this.entityStatsAchievementsPerName
+                                );
+                                this.entityAchievementsPerNameValues = Object.values(
+                                    this.entityStatsAchievementsPerName
+                                );
+                                this.entityAchievementsPerTypeKeys = Object.keys(
+                                    this.entityStatsAchievementsPerType
+                                );
+                                this.entityAchievementsPerTypeValues = Object.values(
+                                    this.entityStatsAchievementsPerType
+                                );
+                                this.chart = new Chart('myChart3', {
+                                    type: 'bar',
+                                    data: {
+                                        labels: this
+                                            .entityAchievementsPerNameKeys,
+                                        datasets: [
+                                            {
+                                                label:
+                                                    '# Achievements per name',
+                                                data: this
+                                                    .entityAchievementsPerNameValues,
+                                                backgroundColor: backgroundColorsPick,
+                                                borderColor: borderColorsPick,
+                                                borderWidth: 1
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [
+                                                {
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                });
+                                this.chart = new Chart('myChart4', {
+                                    type: 'bar',
+                                    data: {
+                                        labels: this
+                                            .entityAchievementsPerTypeKeys,
+                                        datasets: [
+                                            {
+                                                label:
+                                                    '# Achievements per type',
+                                                data: this
+                                                    .entityAchievementsPerTypeValues,
+                                                backgroundColor: backgroundColorsPick,
+                                                borderColor: borderColorsPick,
+                                                borderWidth: 1
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [
+                                                {
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                });
+                            });
+                    }
+                });
         });
     }
 }

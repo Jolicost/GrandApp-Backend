@@ -9,6 +9,7 @@ import { ActivityDetailsComponent } from './components/activity-details/activity
 import { AuthGuardService as AuthGuard } from './services/guard/auth-guard.service';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { AllusersComponent } from './components/allusers/allusers.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,6 +43,11 @@ const routes: Routes = [
     {
         path: 'userinfo',
         component: UserProfileComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'allusers',
+        component: AllusersComponent,
         canActivate: [AuthGuard]
     }
 ];

@@ -66,15 +66,12 @@ export class DashboardComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (
-            localStorage.getItem('token') !== undefined ||
-            localStorage.getItem('token') !== null
-        ) {
-            this.userService.verify().subscribe(userInfo => {
-                this.entityId = userInfo.entity;
-                this.entityService
-                    .getEntityStatisticsActivities(this.entityId)
-                    .subscribe(entityInfo => {
+        this.userService.verify().subscribe(userInfo => {
+            this.entityId = userInfo.entity;
+            this.entityService
+                .getEntityStatisticsActivities(this.entityId)
+                .subscribe(entityInfo => {
+                    if (entityInfo !== undefined) {
                         this.entityStatsTypeAct = entityInfo.types;
                         this.entityStatsHours = entityInfo.hours;
                         this.entityTypeActKeys = Object.keys(
@@ -166,69 +163,88 @@ export class DashboardComponent implements OnInit {
                             .subscribe(con => {
                                 this.totalCon = con.nConnections;
                             });
-                        this.entityService.getEntityStatisticsAchievements(this.entityId).subscribe(achievements => {
-                            this.totalAchievements = achievements.nAchievements;
-                            this.entityStatsAchievementsPerName = achievements.achievementsPerName;
-                            this.entityStatsAchievementsPerType = achievements.achievementsPerType;
-                            this.entityAchievementsPerNameKeys = Object.keys(this.entityStatsAchievementsPerName);
-                            this.entityAchievementsPerNameValues = Object.values(this.entityStatsAchievementsPerName);
-                            this.entityAchievementsPerTypeKeys = Object.keys(this.entityStatsAchievementsPerType);
-                            this.entityAchievementsPerTypeValues = Object.values(this.entityStatsAchievementsPerType);
-                            this.chart = new Chart('myChart3', {
-                                type: 'bar',
-                                data: {
-                                    labels: this.entityAchievementsPerNameKeys,
-                                    datasets: [
-                                        {
-                                            label: '# Achievements per name',
-                                            data: this.entityAchievementsPerNameValues,
-                                            backgroundColor: backgroundColorsPick,
-                                            borderColor: borderColorsPick,
-                                            borderWidth: 1
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    scales: {
-                                        yAxes: [
+                        this.entityService
+                            .getEntityStatisticsAchievements(this.entityId)
+                            .subscribe(achievements => {
+                                this.totalAchievements =
+                                    achievements.nAchievements;
+                                this.entityStatsAchievementsPerName =
+                                    achievements.achievementsPerName;
+                                this.entityStatsAchievementsPerType =
+                                    achievements.achievementsPerType;
+                                this.entityAchievementsPerNameKeys = Object.keys(
+                                    this.entityStatsAchievementsPerName
+                                );
+                                this.entityAchievementsPerNameValues = Object.values(
+                                    this.entityStatsAchievementsPerName
+                                );
+                                this.entityAchievementsPerTypeKeys = Object.keys(
+                                    this.entityStatsAchievementsPerType
+                                );
+                                this.entityAchievementsPerTypeValues = Object.values(
+                                    this.entityStatsAchievementsPerType
+                                );
+                                this.chart = new Chart('myChart3', {
+                                    type: 'bar',
+                                    data: {
+                                        labels: this
+                                            .entityAchievementsPerNameKeys,
+                                        datasets: [
                                             {
-                                                ticks: {
-                                                    beginAtZero: true
-                                                }
+                                                label:
+                                                    '# Achievements per name',
+                                                data: this
+                                                    .entityAchievementsPerNameValues,
+                                                backgroundColor: backgroundColorsPick,
+                                                borderColor: borderColorsPick,
+                                                borderWidth: 1
                                             }
                                         ]
-                                    }
-                                }
-                            });
-                            this.chart = new Chart('myChart4', {
-                                type: 'bar',
-                                data: {
-                                    labels: this.entityAchievementsPerTypeKeys,
-                                    datasets: [
-                                        {
-                                            label: '# Achievements per type',
-                                            data: this.entityAchievementsPerTypeValues,
-                                            backgroundColor: backgroundColorsPick,
-                                            borderColor: borderColorsPick,
-                                            borderWidth: 1
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    scales: {
-                                        yAxes: [
-                                            {
-                                                ticks: {
-                                                    beginAtZero: true
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [
+                                                {
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
                                                 }
+                                            ]
+                                        }
+                                    }
+                                });
+                                this.chart = new Chart('myChart4', {
+                                    type: 'bar',
+                                    data: {
+                                        labels: this
+                                            .entityAchievementsPerTypeKeys,
+                                        datasets: [
+                                            {
+                                                label:
+                                                    '# Achievements per type',
+                                                data: this
+                                                    .entityAchievementsPerTypeValues,
+                                                backgroundColor: backgroundColorsPick,
+                                                borderColor: borderColorsPick,
+                                                borderWidth: 1
                                             }
                                         ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [
+                                                {
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            ]
+                                        }
                                     }
-                                }
+                                });
                             });
-                        });
-                    });
-            });
-        }
+                    }
+                });
+        });
     }
 }

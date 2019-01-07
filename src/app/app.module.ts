@@ -84,9 +84,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
         Ng2ImgMaxModule,
         JwtModule.forRoot({
             config: {
-                tokenGetter: () => {
-                    return localStorage.getItem('token');
-                },
+                tokenGetter: jwtTokenGetter,
                 whitelistedDomains: ['localhost:3001'],
                 blacklistedRoutes: ['localhost:3001/auth/']
             }
@@ -96,3 +94,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function jwtTokenGetter() {
+    return localStorage.getItem('token');
+  }

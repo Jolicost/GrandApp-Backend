@@ -61,7 +61,7 @@ export class UsersComponent implements OnInit, OnDestroy {
                 });
             });
 
-            const source = interval(1000 * 5);
+            const source = interval(1000 * 30);
             this.loop = source.subscribe(val => {
                 this.entityService.getEmergencyContacts(this.entityid).subscribe (emer => {
                     this.emergencyUsers = emer;

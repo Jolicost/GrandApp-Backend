@@ -46,6 +46,8 @@ export class ActivitiesComponent implements OnInit {
                 this.getFilteredActivities(0);
             } else if (mode === 'updated') {
                 this.getFilteredActivities(this.activitiesService.getCurrentPageNumber());
+            } else if (mode === 'deleted') {
+                this.getFilteredActivities(this.activitiesService.getCurrentPageNumber());
             }
         });
     }

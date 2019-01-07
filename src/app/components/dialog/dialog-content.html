@@ -27,7 +27,7 @@
         <form [formGroup]="activityForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
             <div class="field">
                 <div class="one fields">
-                    <div class="field">
+                    <div class="sixteen wide field">
                         <label style="text-align: left">
                             Title:
                             <input type="text" formControlName="title">
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="field">
-                <div class="four fields">
+                <div class="three fields">
                     <div class="field">
                         <label style="text-align: left">
                             Activity type:
@@ -177,10 +177,10 @@
             </div>
             <label style="text-align: left"> Images: </label>
             <div class="two fields">
-                <div class="field">
+                <div class="twelve wide field">
                     <input #imageInput type="file" (change)="onFileSelected($event)" accept="image/x-png,image/gif,image/jpeg">
                 </div>
-                <div class="field">
+                <div class="four wide field">
                     <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
                 </div>
             </div>

@@ -27,7 +27,7 @@
         <form [formGroup]="activityForm" *ngIf="data.mode === 'addActivity' || data.mode === 'editActivity'">
             <div class="field">
                 <div class="one fields">
-                    <div class="field">
+                    <div class="sixteen wide field">
                         <label style="text-align: left">
                             Title:
                             <input type="text" formControlName="title">
@@ -109,7 +109,7 @@
             </div>
             <div class="field">
                 <div class="fields">
-                    <div class="eight wide field">
+                    <div class="sixteen wide field">
                         <label style="text-align: left">
                             Location:
                             <input type="text" formControlName="adressToConvert">
@@ -121,22 +121,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="eight wide field">
-                        <label style="text-align: left">
-                            Address:
-                            <input type="text" formControlName="address">
-                        </label>
-                        <div class="error-message" *ngIf="activityForm.get('address').invalid && activityForm.get('address').touched"
-                            style="text-align: center">
-                            <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="field">
-                <div class="four fields">
+                <div class="three fields">
                     <div class="field">
                         <label style="text-align: left">
                             Activity type:
@@ -155,18 +143,6 @@
                             <input type="text" formControlName="price">
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('price').invalid && activityForm.get('price').touched"
-                            style="text-align: center">
-                            <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label style="text-align: left">
-                            Rating:
-                            <input type="text" formControlName="rating">
-                        </label>
-                        <div class="error-message" *ngIf="activityForm.get('rating').invalid && activityForm.get('rating').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
@@ -201,10 +177,10 @@
             </div>
             <label style="text-align: left"> Images: </label>
             <div class="two fields">
-                <div class="field">
+                <div class="twelve wide field">
                     <input #imageInput type="file" (change)="onFileSelected($event)" accept="image/x-png,image/gif,image/jpeg">
                 </div>
-                <div class="field">
+                <div class="four wide field">
                     <button class="ui blue basic button" (click)="onUpload()"> Upload </button>
                 </div>
             </div>

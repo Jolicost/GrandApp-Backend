@@ -86,9 +86,7 @@ import { AllusersComponent } from './components/allusers/allusers.component';
         Ng2ImgMaxModule,
         JwtModule.forRoot({
             config: {
-                tokenGetter: () => {
-                    return localStorage.getItem('token');
-                },
+                tokenGetter: jwtTokenGetter,
                 whitelistedDomains: ['localhost:3001'],
                 blacklistedRoutes: ['localhost:3001/auth/']
             }
@@ -98,3 +96,7 @@ import { AllusersComponent } from './components/allusers/allusers.component';
     bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function jwtTokenGetter() {
+    return localStorage.getItem('token');
+  }

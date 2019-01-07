@@ -26,7 +26,7 @@ export class UserActivitiesComponent implements OnInit {
 
     ngOnInit() {
         // auto reaload the users content
-        const source = interval(1000 * 30);
+        const source = interval(1000 * 60);
         const subscribe = source.subscribe(val => {
             this.getFilteredUsers(this.entityService.getCurrentPageNumber());
         });

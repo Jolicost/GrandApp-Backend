@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
                 this.entityService
                     .getEntityInfo({ id: this.entityId })
                     .subscribe(res => {
+                        console.log('ssss: ', res);
                         this.entityInfo = res;
                     });
             }
@@ -35,11 +36,12 @@ export class UserProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userService.user$.subscribe(newUserInfo => {
-            console.log('asdasd', newUserInfo);
-            this.userService.verify().subscribe(userInfo => {
-                this.userInfo = userInfo;
-            });
+        this.userService.user$.subscribe(mode => {
+            if (mode === 'myProfileChanged') {
+                this.userService.verify().subscribe(userInfo => {
+                    this.userInfo = userInfo;
+                });
+            }
         });
     }
 

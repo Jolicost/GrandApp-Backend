@@ -54,13 +54,8 @@ export class DialogComponent implements OnInit, OnDestroy {
         timeEnd: new FormControl('', Validators.required),
         images: new FormControl('', Validators.required),
         adressToConvert: new FormControl('', Validators.required),
-        address: new FormControl('', Validators.required),
         activityType: new FormControl('', Validators.required),
         price: new FormControl('', [
-            Validators.required,
-            Validators.pattern('^[0-9]*$')
-        ]),
-        rating: new FormControl('', [
             Validators.required,
             Validators.pattern('^[0-9]*$')
         ]),
@@ -139,20 +134,12 @@ export class DialogComponent implements OnInit, OnDestroy {
                             mode.obj.adressToConvert === undefined
                                 ? ''
                                 : mode.obj.adressToConvert,
-                        address:
-                            mode.obj.address === undefined
-                                ? ''
-                                : mode.obj.address,
                         activityType:
                             mode.obj.activityType === undefined
                                 ? ''
                                 : mode.obj.activityType,
                         price:
                             mode.obj.price === undefined ? '' : mode.obj.price,
-                        rating:
-                            mode.obj.rating === undefined
-                                ? ''
-                                : mode.obj.rating,
                         capacity:
                             mode.obj.capacity === undefined
                                 ? ''
@@ -348,10 +335,8 @@ export class DialogContentComponent implements OnInit {
                 timeEnd: new FormControl('', Validators.required),
                 images: new FormControl('', Validators.required),
                 adressToConvert: new FormControl('', Validators.required),
-                address: new FormControl('', Validators.required),
                 activityType: new FormControl('', Validators.required),
                 price: new FormControl('', Validators.required),
-                rating: new FormControl('', Validators.required),
                 capacity: new FormControl('', Validators.required)
             });
         } else if (data.mode === 'addEmergencyContact') {
@@ -424,6 +409,7 @@ export class DialogContentComponent implements OnInit {
                         });
                         this.messagesService.setMessage(null);
                     } else {
+                        this.userService.userDataChanged('updated');
                         this.dialogRef.close();
                     }
                 });
@@ -448,10 +434,8 @@ export class DialogContentComponent implements OnInit {
                     const long = this.geoCodedLong;
                     const images = this.imageUrl;
                     const participants = [];
-                    const address = this.activityForm.value.address;
                     const activityType = this.activityForm.value.activityType;
                     const price = this.activityForm.value.price;
-                    const rating = this.activityForm.value.rating;
                     const capacity = this.activityForm.value.capacity;
 
                     if (data.mode === 'addActivity') {
@@ -462,9 +446,9 @@ export class DialogContentComponent implements OnInit {
                         const startMoment = moment(start); // create the moment()
                         const endMoment = moment(end);
                         const timestampStart =
-                            startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                            startMoment.toDate().getTime() + ''; // transform the moment to date and the date to timestamp
                         const timestampEnd =
-                            endMoment.toDate().getTime() / 1000 + '';
+                            endMoment.toDate().getTime() + '';
 
                         this.activityService
                             .addActivitiy({
@@ -476,10 +460,8 @@ export class DialogContentComponent implements OnInit {
                                 long: long,
                                 images: images,
                                 participants: participants,
-                                address: address,
                                 activityType: activityType,
                                 price: price,
-                                rating: rating,
                                 capacity: capacity
                             })
                             .subscribe(res3 => {
@@ -512,9 +494,9 @@ export class DialogContentComponent implements OnInit {
                         const startMoment = moment(start); // create the moment()
                         const endMoment = moment(end);
                         const timestampStart =
-                            startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                            startMoment.toDate().getTime() + ''; // transform the moment to date and the date to timestamp
                         const timestampEnd =
-                            endMoment.toDate().getTime() / 1000 + '';
+                            endMoment.toDate().getTime() + '';
                         this.activityService
                             .editActivity({
                                 id: idAct,
@@ -526,10 +508,8 @@ export class DialogContentComponent implements OnInit {
                                 long: long,
                                 images: images,
                                 participants: participants,
-                                address: address,
                                 activityType: activityType,
                                 price: price,
-                                rating: rating,
                                 capacity: capacity
                             })
                             .subscribe(res2 => {
@@ -578,7 +558,7 @@ export class DialogContentComponent implements OnInit {
                         });
                         this.messagesService.setMessage(null);
                     } else {
-                        this.userService.userDataChanged('changed');
+                        this.userService.userDataChanged('myProfileChanged');
                         // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                         this.onCancelClick();
                     }
@@ -623,7 +603,7 @@ export class DialogContentComponent implements OnInit {
                     });
                     this.messagesService.setMessage(null);
                 } else {
-                    this.activityService.actDataChanged('changed');
+                    this.activityService.actDataChanged('deleted');
                     // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                     this.onCancelClick();
                 }

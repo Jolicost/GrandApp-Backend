@@ -16,9 +16,21 @@ export class UserDetailsComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute, private userService: UserService, private dialogService: DialogService) {}
     ngOnInit() {
+
+        this.userService.user$.subscribe(mode => {
+            if (mode === 'updated') {
+                this.userService.getUserInfo(this.id).subscribe(resUI => {
+                    this.user = resUI;
+                    this.userService.getEmergencyPhoneById(this.id).subscribe(res => {
+                        this.emergencyPhones = res;
+                    });
+                });
+            }
+        });
+
         this.sub = this.activatedRoute.params.subscribe(params => {
             this.id = params['id'];
-            console.log('El meu id es', this.id);
+            // console.log('El meu id es', this.id);
             this.userService.getUserInfo(this.id).subscribe(resUI => {
                 this.user = resUI;
                 this.userService.getEmergencyPhoneById(this.id).subscribe(res => {

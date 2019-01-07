@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('username', username);
                     localStorage.setItem('profilepic', res.user.profilePic);
                     this.authService.changeUserStatus('loginSuccess');
+                    this.router.navigate(['/dashboard']);
                 }
-                this.router.navigate(['/dashboard']);
             });
     }
 }

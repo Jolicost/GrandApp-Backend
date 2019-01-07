@@ -4,6 +4,7 @@ import { ActivitiesService } from '../../services/activities/activities.service'
 import { UserLocationService } from '../../services/userLocation/user-location.service';
 import { EntityService } from 'src/app/services/entity/entity.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 @Component({
     selector: 'app-users',
@@ -22,13 +23,15 @@ export class UsersComponent implements OnInit {
     entityid;
     locationsOfUser = [];
     emergencyUsers = [];
-
+    usersOor;
+    mess;
     constructor(
         private reverseGeoService: ReverseGeocodingService,
         private activityService: ActivitiesService,
         private userLocationService: UserLocationService,
         private entityService: EntityService,
-        private userService: UserService
+        private userService: UserService,
+        private dialogService: DialogService
     ) {}
 
     ngOnInit() {
@@ -44,25 +47,20 @@ export class UsersComponent implements OnInit {
             // console.log('Tinc id entitat', this.entityid);
             this.entityService.getEmergencyContacts(this.entityid).subscribe (emer => {
                 this.emergencyUsers = emer;
-                if (Object.keys(this.emergencyUsers).length > 0) {
+                console.log('tinc un array de length ', this.emergencyUsers.length);
+                if (this.emergencyUsers.length > 0) {
                     this.zoom = 9;
                 }
+                this.usersOor = this.emergencyUsers.length;
+                this.mess = 'There are ' + this.usersOor + ' users out of range';
+                this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: this.mess
+                });
+                console.log('Tinc aquests usuaris perduts', this.usersOor);
+                console.log(this.mess);
             });
         });
-
-        /*this.emergencyUsers.forEach(element => {
-            const position = element;
-            );
-            this.reverseGeoService
-                .convertToStreet(position.place.lat, position.place.long)
-                .subscribe(res => {
-                    position['address'] = res.results[0].formatted_address;
-                    // aixo retorna el nom complert en paraules de l'adreça on esta l'individu
-                });
-            this.locationsOfUser.push(position);
-        });
-        console.log('locationsOfUser: ', this.locationsOfUser);
-        */
     }
     mapclicked($event) {
         // console.log($event);

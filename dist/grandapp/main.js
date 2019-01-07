@@ -136,6 +136,8 @@ var map = {
 	"./kn.js": "./node_modules/moment/locale/kn.js",
 	"./ko": "./node_modules/moment/locale/ko.js",
 	"./ko.js": "./node_modules/moment/locale/ko.js",
+	"./ku": "./node_modules/moment/locale/ku.js",
+	"./ku.js": "./node_modules/moment/locale/ku.js",
 	"./ky": "./node_modules/moment/locale/ky.js",
 	"./ky.js": "./node_modules/moment/locale/ky.js",
 	"./lb": "./node_modules/moment/locale/lb.js",
@@ -323,12 +325,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_activity_details_activity_details_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/activity-details/activity-details.component */ "./src/app/components/activity-details/activity-details.component.ts");
 /* harmony import */ var _services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/guard/auth-guard.service */ "./src/app/services/guard/auth-guard.service.ts");
 /* harmony import */ var _components_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/user-profile/user-profile.component */ "./src/app/components/user-profile/user-profile.component.ts");
+/* harmony import */ var _components_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/user-details/user-details.component */ "./src/app/components/user-details/user-details.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -352,14 +356,19 @@ var routes = [
         component: _components_activities_activities_component__WEBPACK_IMPORTED_MODULE_3__["ActivitiesComponent"],
         canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]]
     },
-    { path: 'users', component: _components_users_users_component__WEBPACK_IMPORTED_MODULE_4__["UsersComponent"], canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]] },
+    { path: 'emergency', component: _components_users_users_component__WEBPACK_IMPORTED_MODULE_4__["UsersComponent"], canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]] },
     {
-        path: 'userActivities',
+        path: 'users',
         component: _components_user_activities_user_activities_component__WEBPACK_IMPORTED_MODULE_5__["UserActivitiesComponent"],
         canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]]
     },
     {
-        path: 'activity/:id',
+        path: 'users/:id',
+        component: _components_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_10__["UserDetailsComponent"],
+        canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]]
+    },
+    {
+        path: 'activities/:id',
         component: _components_activity_details_activity_details_component__WEBPACK_IMPORTED_MODULE_7__["ActivityDetailsComponent"],
         canActivate: [_services_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuardService"]]
     },
@@ -498,6 +507,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _agm_core__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @agm/core */ "./node_modules/@agm/core/index.js");
 /* harmony import */ var ng2_img_max__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ng2-img-max */ "./node_modules/ng2-img-max/dist/ng2-img-max.js");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var _components_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/user-details/user-details.component */ "./src/app/components/user-details/user-details.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -540,6 +550,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 // Angular authentification
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -557,7 +568,8 @@ var AppModule = /** @class */ (function () {
                 _components_user_activities_user_activities_component__WEBPACK_IMPORTED_MODULE_21__["UserActivitiesComponent"],
                 _components_login_login_component__WEBPACK_IMPORTED_MODULE_23__["LoginComponent"],
                 _components_activity_details_activity_details_component__WEBPACK_IMPORTED_MODULE_24__["ActivityDetailsComponent"],
-                _components_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_15__["UserProfileComponent"]
+                _components_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_15__["UserProfileComponent"],
+                _components_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_29__["UserDetailsComponent"]
             ],
             entryComponents: [_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_22__["DialogContentComponent"]],
             imports: [
@@ -609,7 +621,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".top-controls{\r\n    padding: 20px;\r\n    display: -webkit-inline-box;\r\n    float: right\r\n}"
 
 /***/ }),
 
@@ -620,7 +632,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"activities-content\">\r\n    <h1>Activities list</h1>\r\n    <div class=\"ui divider\"></div>\r\n    <div class=\"top-controls\" style=\"text-align: right; padding: 20px\">\r\n        Table size:\r\n        <select class=\"ui dropdown\" (change)=\"setPageSize($event)\">\r\n            <option value=\"4\">4</option>\r\n            <option value=\"6\">6</option>\r\n            <option value=\"8\">8</option>\r\n            <option selected=\"selected\">10</option>\r\n        </select>\r\n        <button class=\"ui labeled icon blue button\" (click)=\"openModal({mode: 'addActivity', obj: null})\" style=\"margin-left: 50px;\">\r\n            <i class=\"add icon\"></i>\r\n            Add\r\n        </button>\r\n    </div>\r\n\r\n    <div class=\"table-content\">\r\n        <table class=\"ui celled table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Title</th>\r\n                    <th>Decription</th>\r\n                    <th>Start date</th>\r\n                    <th>End date</th>\r\n                    <th>Address</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let activity of activities'>\r\n                    <td>{{ activity.title }}</td>\r\n                    <td>{{ activity.description }}</td>\r\n                    <td [innerHtml]=\"timeConverter(activity.timestampStart)\"></td>\r\n                    <td [innerHtml]=\"timeConverter(activity.timestampEnd)\"></td>\r\n                    <td>{{ activity.address }}</td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon green button\" (click)=\"showDetails(activity.id)\">\r\n                            <i class=\"th list icon\"></i>\r\n                        </button></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon red button\" (click)=\"openModal({mode: 'deleteActivity', obj: activity})\">\r\n                            <i class=\"trash icon\"></i>\r\n                        </button></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon button\" (click)=\"openModal({mode: 'editActivity', obj: activity})\">\r\n                            <i class=\"edit icon\"></i>\r\n                        </button></td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <th colspan=\"9\">\r\n                        <app-dialog></app-dialog>\r\n                        <div class=\"ui right floated pagination menu\">\r\n                            <a class=\"icon item\">\r\n                                <i class=\"left chevron icon\"></i>\r\n                            </a>\r\n                            <a class=\"item\" *ngFor=\"let loop of loopTimes\" (click)=\"getGamesPara(loop + 1)\">{{loop +\r\n                                1}}</a>\r\n                            <a class=\"icon item\">\r\n                                <i class=\"right chevron icon\"></i>\r\n                            </a>\r\n                        </div>\r\n                    </th>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--app-snack-bar></app-snack-bar-->\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"activities-content\">\r\n    <h1>Activities list<i class=\"clipboard list icon\"></i></h1>\r\n    <div class=\"ui divider\"></div>\r\n    <div class=\"top-controls\" style=\"text-align: right; padding: 20px;\">\r\n        Table size:\r\n        <select class=\"ui dropdown\" (change)=\"setPageSize($event)\">\r\n            <option value=\"3\">3</option>\r\n            <option value=\"4\">4</option>\r\n            <option selected=\"selected\">5</option>\r\n            <option value=\"6\">6</option>\r\n            <option value=\"7\">7</option>\r\n            <option value=\"8\">8</option>\r\n            <option value=\"9\">9</option>\r\n            <option value=\"10\">10</option>\r\n        </select>\r\n        <button class=\"ui labeled icon button\" (click)=\"openModal({mode: 'addActivity', obj: null})\" style=\"margin-left: 50px;\">\r\n            <i class=\"add icon\"></i>\r\n            Add\r\n        </button>\r\n        <div class=\"ui search\" style=\"margin-left: 15px;\">\r\n            <div class=\"ui icon input\">\r\n                <input (keyup)=\"onKey($event)\"/> <i class=\"search icon\"></i>\r\n            </div>\r\n        </div>\r\n        <button (click)=\"search()\" class=\"ui button\" style=\"margin-left: 10px;\">Search</button>\r\n    </div>\r\n\r\n    <div class=\"table-content\">\r\n        <table class=\"ui celled table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Title</th>\r\n                    <th>Decription</th>\r\n                    <th>Start date</th>\r\n                    <th>End date</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let activity of activities'>\r\n                    <td>{{ activity.title }}</td>\r\n                    <td>{{ activity.description }}</td>\r\n                    <td [innerHtml]=\"timeConverter(activity.timestampStart)\"></td>\r\n                    <td [innerHtml]=\"timeConverter(activity.timestampEnd)\"></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon green button\" (click)=\"showDetails(activity.id)\">\r\n                            <i class=\"th list icon\"></i>\r\n                        </button></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon red button\" (click)=\"openModal({mode: 'deleteActivity', obj: activity})\">\r\n                            <i class=\"trash icon\"></i>\r\n                        </button></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon button\" (click)=\"openModal({mode: 'editActivity', obj: activity})\">\r\n                            <i class=\"edit icon\"></i>\r\n                        </button></td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <th colspan=\"7\">\r\n                        <app-dialog></app-dialog>\r\n                        <div class=\"ui right floated pagination menu\">\r\n                            <a class=\"icon item\">\r\n                                <i class=\"left chevron icon\"></i>\r\n                            </a>\r\n                            <a class=\"item\" *ngFor=\"let loop of loopTimes\" (click)=\"getFilteredActivities(loop)\">{{loop\r\n                                +\r\n                                1}}</a>\r\n                            <a class=\"icon item\">\r\n                                <i class=\"right chevron icon\"></i>\r\n                            </a>\r\n                        </div>\r\n                    </th>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--app-snack-bar></app-snack-bar-->\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -638,6 +650,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/dialog/dialog.service */ "./src/app/services/dialog/dialog.service.ts");
 /* harmony import */ var _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/activities/activities.service */ "./src/app/services/activities/activities.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_messages_messages_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/messages/messages.service */ "./src/app/services/messages/messages.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -651,23 +665,39 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ActivitiesComponent = /** @class */ (function () {
-    function ActivitiesComponent(dialogService, activitiesService, router) {
-        var _this = this;
+    function ActivitiesComponent(dialogService, activitiesService, router, messageService) {
         this.dialogService = dialogService;
         this.activitiesService = activitiesService;
         this.router = router;
+        this.messageService = messageService;
         this.activities = [];
-        this.activitiesService.getActivities().subscribe(function (res) {
-            _this.activities = res;
-        });
+        this.inSearch = false;
     }
     ActivitiesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.activitiesService.activity$.subscribe(function (activityTable) {
-            _this.activitiesService.getActivities().subscribe(function (res) {
-                _this.activities = res;
-            });
+        this.activitiesService.countTotalActivities().subscribe(function (totalActivities) {
+            _this.totalActivities = totalActivities.count;
+            _this.activitiesService.setTotalActivities(totalActivities.count);
+            _this.getFilteredActivities(0);
+        });
+        // auto reaload the activities content
+        var source = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["interval"])(1000 * 30);
+        var subscribe = source.subscribe(function (val) {
+            if (!_this.inSearch) {
+                _this.getFilteredActivities(_this.activitiesService.getCurrentPageNumber());
+            }
+        });
+        this.activitiesService.activity$.subscribe(function (mode) {
+            console.log('MODE: ', mode);
+            if (mode === 'added') {
+                _this.getFilteredActivities(0);
+            }
+            else if (mode === 'updated') {
+                _this.getFilteredActivities(_this.activitiesService.getCurrentPageNumber());
+            }
         });
     };
     ActivitiesComponent.prototype.timeConverter = function (UNIX_timestamp) {
@@ -682,12 +712,69 @@ var ActivitiesComponent = /** @class */ (function () {
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
         return time;
     };
+    ActivitiesComponent.prototype.setPageSize = function (event) {
+        var numPerPage = event.target.value;
+        this.activitiesService.setCurrentPageSize(numPerPage);
+        this.getFilteredActivities(0);
+    };
+    ActivitiesComponent.prototype.getFilteredActivities = function (pageNumber) {
+        var _this = this;
+        // console.log('pagenumber = ', pageNumber);
+        // console.log('currentpage = ', this.activitiesService.getCurrentPageNumber());
+        // console.log('currentpagesize = ', this.activitiesService.getCurrentPageSize());
+        this.activitiesService.setCurrentPageNumber(pageNumber);
+        this.activitiesService
+            .getActivitiesByParams(this.activitiesService.getCurrentPageNumber() * this.activitiesService.getCurrentPageSize(), this.activitiesService.getCurrentPageSize())
+            .subscribe(function (res) {
+            if (_this.messageService.getExists()) {
+                _this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: _this.messageService.getMessage()
+                });
+                _this.messageService.setMessage(null);
+            }
+            else {
+                var totalPage = Math.ceil(Number(_this.totalActivities) /
+                    _this.activitiesService.getCurrentPageSize());
+                _this.activitiesService.setTotalActivities(_this.totalActivities);
+                _this.loopTimes = Array(totalPage)
+                    .fill(0)
+                    .map(function (x, i) { return i; });
+                _this.activities = res;
+            }
+        });
+    };
+    ActivitiesComponent.prototype.onKey = function (event) {
+        var _this = this;
+        this.searchedName = event.target.value;
+        if (this.searchedName === '') {
+            this.activitiesService.countTotalActivities().subscribe(function (totalActivities) {
+                _this.totalActivities = totalActivities.count;
+                _this.activitiesService.countTotalActivities();
+                _this.getFilteredActivities(0);
+                _this.inSearch = false;
+            });
+        }
+    };
+    ActivitiesComponent.prototype.search = function () {
+        var _this = this;
+        this.inSearch = true;
+        this.activitiesService.searchActByTitle(this.searchedName).subscribe(function (res) {
+            _this.activities = res;
+            _this.totalActivities = res.length;
+            var totalPage = Math.ceil(Number(_this.totalActivities) /
+                _this.activitiesService.getCurrentPageSize());
+            _this.activitiesService.setTotalActivities(_this.totalActivities);
+            _this.loopTimes = Array(totalPage)
+                .fill(0)
+                .map(function (x, i) { return i; });
+        });
+    };
     ActivitiesComponent.prototype.openModal = function (mode) {
         this.dialogService.openDialog(mode);
     };
     ActivitiesComponent.prototype.showDetails = function (id) {
-        // console.log('id: ', id);
-        this.router.navigate(['/activity', id]);
+        this.router.navigate(['/activities', id]);
     };
     ActivitiesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -697,7 +784,8 @@ var ActivitiesComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_1__["DialogService"],
             _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__["ActivitiesService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            src_app_services_messages_messages_service__WEBPACK_IMPORTED_MODULE_4__["MessagesService"]])
     ], ActivitiesComponent);
     return ActivitiesComponent;
 }());
@@ -713,7 +801,7 @@ var ActivitiesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "agm-map {\r\n    height: 700px;\r\n}"
 
 /***/ }),
 
@@ -724,7 +812,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Activity details:</h1>\r\n\r\n<table class=\"ui definition table\">\r\n    <tbody>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity title</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.title }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity description</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.description }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity rating</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.rating }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity location</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ completeStreetName }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity start</td>\r\n            <td *ngIf=\"activitySelected\" [innerHtml]=\"timeConverter(activitySelected.timestampStart)\"></td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity end</td>\r\n            <td *ngIf=\"activitySelected\" [innerHtml]=\"timeConverter(activitySelected.timestampEnd)\"></td>\r\n        </tr>\r\n        <tr *ngIf=\"activitySelected\">\r\n            <td class=\"two wide column\">Activity participants</td>\r\n            <td>\r\n                <ul *ngFor=\"let p of participants\">\r\n                    <li><span style=\"color: red\">ID: </span>{{p.id}}</li>\r\n                    <li><span style=\"color: red\">Name: </span>{{p.name}}</li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity address</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.address }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity activity type</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.activityType }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity capacity</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.capacity }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity price</td>\r\n            <td>\r\n                <p *ngIf=\"activitySelected\">{{ activitySelected.price }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity images:</td>\r\n            <td>\r\n                <div *ngIf=\"activitySelected\">\r\n                    <ul *ngFor=\"let i of activitySelected.images\">\r\n                        <li>\r\n                            <img src=\"{{ activitySelected.images }}\" height=\"100px\" width=\"100px\">\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n\r\n    </tbody>\r\n</table>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"ui left aligned basic segment\">\r\n    <button class=\"ui centered aligned button\" (click)=\"goBack()\">Back</button>\r\n</div>\r\n"
+module.exports = "<h1>Activity details:</h1>\r\n\r\n<table class=\"ui definition table\">\r\n    <tbody *ngIf=\"activitySelected\">\r\n        <tr>\r\n            <td class=\"two wide column\">Activity title</td>\r\n            <td>\r\n                <p>{{ activitySelected.title }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity description</td>\r\n            <td>\r\n                <p>{{ activitySelected.description }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity rating</td>\r\n            <td>\r\n                <p>{{ activitySelected.rating }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity location</td>\r\n            <td>\r\n                <p>{{ completeStreetName }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity start</td>\r\n            <td [innerHtml]=\"timeConverter(activitySelected.timestampStart)\"></td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity end</td>\r\n            <td [innerHtml]=\"timeConverter(activitySelected.timestampEnd)\"></td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity participants</td>\r\n            <td>\r\n                <ul *ngFor=\"let p of participants\">\r\n                    <li><span style=\"color: red\">Email: </span>{{p.email}}</li>\r\n                    <li><span style=\"color: red\">Name: </span>{{p.name}}</li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity activity type</td>\r\n            <td>\r\n                <p>{{ activitySelected.activityType }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity capacity</td>\r\n            <td>\r\n                <p>{{ activitySelected.capacity }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity price</td>\r\n            <td>\r\n                <p>{{ activitySelected.price }}</p>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"two wide column\">Activity images:</td>\r\n            <td>\r\n                <div>\r\n                    <ul *ngFor=\"let i of activitySelected.images\">\r\n                        <li>\r\n                            <img src=\"{{ activitySelected.images }}\" height=\"100px\" width=\"100px\">\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n\r\n    </tbody>\r\n</table>\r\n\r\n<div class=\"agm-map\">\r\n    <!-- Center of the map -->\r\n    <agm-map [zoom]=\"zoom\" [latitude]=\"iniLat\" [longitude]=\"iniLng\" [scrollwheel]=\"true\" (mapClick)=\"mapclicked($event)\">\r\n        <!-- Markers -->\r\n        <agm-marker [latitude]=iniLat [longitude]=iniLng>\r\n            <agm-info-window *ngIf=\"activitySelected\">\r\n                <p><strong style=\"color: red;\">Title:</strong> {{ activitySelected.title }}</p>\r\n                <p><strong style=\"color: red;\">Description:</strong> {{ activitySelected.description }}</p>\r\n                <strong style=\"color: red;\">Start:</strong><p [innerHtml]=\"timeConverter(activitySelected.timestampStart)\"></p>\r\n                <strong style=\"color: red;\">End:</strong><p [innerHtml]=\"timeConverter(activitySelected.timestampEnd)\"></p>\r\n            </agm-info-window>\r\n        </agm-marker>\r\n    </agm-map>\r\n</div>\r\n\r\n<div class=\"ui left aligned basic segment\">\r\n    <button class=\"ui centered aligned button\" (click)=\"goBack()\">Back</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -767,6 +855,7 @@ var ActivityDetailsComponent = /** @class */ (function () {
         this.reverseGeocodingService = reverseGeocodingService;
         this.usersID = [];
         this.participants = [];
+        this.zoom = 16;
     }
     ActivityDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -775,18 +864,22 @@ var ActivityDetailsComponent = /** @class */ (function () {
         });
         this.activitiesServices.getActivity(this.id).subscribe(function (act) {
             _this.activitySelected = act;
+            _this.iniLat = _this.activitySelected.lat;
+            _this.iniLng = _this.activitySelected.long;
             _this.usersID = act.participants;
             _this.usersID.forEach(function (userID) {
                 _this.userService.getUserInfo(userID).subscribe(function (res) {
                     _this.participants.push({
-                        id: res._id,
+                        email: res.email,
                         name: res.completeName
                     });
                 });
                 // console.log('participants name:', this.participants);
             });
             // show the street name with the lat and long
-            _this.reverseGeocodingService.convertToStreet(_this.activitySelected.lat, _this.activitySelected.long).subscribe(function (res) {
+            _this.reverseGeocodingService
+                .convertToStreet(_this.activitySelected.lat, _this.activitySelected.long)
+                .subscribe(function (res) {
                 _this.completeStreetName = res.results[0].formatted_address;
             });
         });
@@ -799,14 +892,37 @@ var ActivityDetailsComponent = /** @class */ (function () {
     };
     ActivityDetailsComponent.prototype.timeConverter = function (UNIX_timestamp) {
         var a = new Date(UNIX_timestamp * 1000);
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
         var year = a.getFullYear();
         var month = months[a.getMonth()];
         var date = a.getDate();
         var hour = a.getHours();
         var min = a.getMinutes();
         var sec = a.getSeconds();
-        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        var time = date +
+            ' ' +
+            month +
+            ' ' +
+            year +
+            ' ' +
+            hour +
+            ':' +
+            min +
+            ':' +
+            sec;
         return time;
     };
     ActivityDetailsComponent = __decorate([
@@ -835,7 +951,7 @@ var ActivityDetailsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".countNumber {\r\n    font-size: 30px;\r\n    line-height: 47px;\r\n    font-weight: 600;\r\n    color: #87CEEB;\r\n}\r\n\r\n#box {\r\n    border: 1px solid #000000;\r\n    margin-top: 50px;\r\n}\r\n\r\n#myChart {\r\n    height: 100px;\r\n    width: 50px;\r\n}\r\n"
+module.exports = ".countNumber {\r\n    font-size: 30px;\r\n    line-height: 47px;\r\n    font-weight: 600;\r\n    color: #87CEEB;\r\n}\r\n\r\n#box1 {\r\n    border: 1px solid #000000;\r\n    margin-top: 50px;\r\n    margin-left: 80px;\r\n    margin-right: 80px;\r\n    margin-bottom: 80px;\r\n}\r\n\r\n#box2 {\r\n    border: 1px solid #000000;\r\n    margin-left: 80px;\r\n    margin-right: 80px;\r\n    margin-bottom: 80px;\r\n}\r\n\r\n#myChart {\r\n    height: 100px;\r\n    width: 50px;\r\n}\r\n"
 
 /***/ }),
 
@@ -846,7 +962,7 @@ module.exports = ".countNumber {\r\n    font-size: 30px;\r\n    line-height: 47p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui grid\" id='box'>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalUsers\">\r\n            <i class=\"user icon\" style=\"white-space: nowrap;\"> Total Users</i>\r\n            <p class='countNumber'>{{ totalUser }}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalActivities\">\r\n            <i class=\"game icon\" style=\"white-space: nowrap;\"> Total Activities</i>\r\n            <p class='countNumber'>{{ totalAct }}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalConnections\">\r\n            <i class=\"world icon\" style=\"white-space: nowrap;\"> Total Connections</i>\r\n            <p class='countNumber'>9049</p>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class='ui grid' id='box'>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart\"></canvas>\r\n    </div>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart2\"></canvas>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"ui grid\" id='box1'>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalUsers\">\r\n            <i class=\"user icon\" style=\"white-space: nowrap;\"> Total Users</i>\r\n            <p class='countNumber'>{{ totalUser }}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalActivities\">\r\n            <i class=\"game icon\" style=\"white-space: nowrap;\"> Total Activities</i>\r\n            <p class='countNumber'>{{ totalAct }}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalActivities\">\r\n            <i class=\"chess queen icon\" style=\"white-space: nowrap;\"> Total Achievements</i>\r\n            <p class='countNumber'>{{ totalAchievements }}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"four wide column\">\r\n        <div class=\"totalConnections\">\r\n            <i class=\"world icon\" style=\"white-space: nowrap;\"> Total Connections</i>\r\n            <p class='countNumber'>{{ totalCon }}</p>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class='ui grid' id='box2'>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart\"></canvas>\r\n    </div>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart2\"></canvas>\r\n    </div>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart3\"></canvas>\r\n    </div>\r\n    <div class=\"eight wide column\">\r\n        <canvas id=\"myChart4\"></canvas>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -888,10 +1004,16 @@ var DashboardComponent = /** @class */ (function () {
         this.chart = [];
         this.entityStatsTypeAct = {};
         this.entityStatsHours = {};
+        this.entityStatsAchievementsPerName = {};
+        this.entityStatsAchievementsPerType = {};
         this.entityTypeActKeys = [];
         this.entityTypeActValues = [];
         this.entityHoursActKeys = [];
         this.entityHoursActValues = [];
+        this.entityAchievementsPerNameKeys = [];
+        this.entityAchievementsPerNameValues = [];
+        this.entityAchievementsPerTypeKeys = [];
+        this.entityAchievementsPerTypeValues = [];
         this.allBorderColors = [
             'rgba(183, 28, 28, 1)',
             'rgba(136, 14, 79, 1)',
@@ -923,89 +1045,158 @@ var DashboardComponent = /** @class */ (function () {
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService.verify().subscribe(function (userInfo) {
-            _this.entityId = userInfo.entity;
-            _this.entityService
-                .getEntityStatisticsActivities(_this.entityId)
-                .subscribe(function (entityInfo) {
-                _this.entityStatsTypeAct = entityInfo.types;
-                _this.entityStatsHours = entityInfo.hours;
-                _this.entityTypeActKeys = Object.keys(_this.entityStatsTypeAct);
-                _this.entityTypeActValues = Object.values(_this.entityStatsTypeAct);
-                _this.entityHoursActKeys = Object.keys(_this.entityStatsHours);
-                _this.entityHoursActValues = Object.values(_this.entityStatsHours);
-                _this.totalAct = entityInfo.nActivities;
-                _this.size1 = _this.entityTypeActKeys.length;
-                var borderColorsPick = [];
-                var backgroundColorsPick = [];
-                for (var i = 0; i < _this.size1; i++) {
-                    borderColorsPick[i] = _this.allBorderColors[i];
-                    backgroundColorsPick[i] = _this.allBackgroundColors[i];
-                    console.log('Border Pick tenim', borderColorsPick[i]);
-                    console.log('Back Pick tenim', borderColorsPick[i]);
-                }
-                _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart', {
-                    type: 'bar',
-                    data: {
-                        labels: _this.entityTypeActKeys,
-                        datasets: [
-                            {
-                                label: '# of Activities per Theme',
-                                data: _this.entityTypeActValues,
-                                backgroundColor: backgroundColorsPick,
-                                borderColor: borderColorsPick,
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [
-                                {
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                });
-                _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart2', {
-                    type: 'line',
-                    data: {
-                        labels: _this.entityHoursActKeys,
-                        datasets: [
-                            {
-                                label: '# Activities per hour',
-                                data: _this.entityHoursActValues,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)'
-                                ],
-                                borderColor: ['rgba(255,99,132,1)'],
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [
-                                {
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                });
+        if (localStorage.getItem('token') !== undefined ||
+            localStorage.getItem('token') !== null) {
+            this.userService.verify().subscribe(function (userInfo) {
+                _this.entityId = userInfo.entity;
                 _this.entityService
-                    .getEntityStatisticsUsers(_this.entityId)
-                    .subscribe(function (users) {
-                    _this.totalUser = users.nRegisteredUsers;
-                    // console.log('que tinc a Total Users', this.totalUser);
+                    .getEntityStatisticsActivities(_this.entityId)
+                    .subscribe(function (entityInfo) {
+                    _this.entityStatsTypeAct = entityInfo.types;
+                    _this.entityStatsHours = entityInfo.hours;
+                    _this.entityTypeActKeys = Object.keys(_this.entityStatsTypeAct);
+                    _this.entityTypeActValues = Object.values(_this.entityStatsTypeAct);
+                    _this.entityHoursActKeys = Object.keys(_this.entityStatsHours);
+                    _this.entityHoursActValues = Object.values(_this.entityStatsHours);
+                    _this.totalAct = entityInfo.nActivities;
+                    _this.size1 = _this.entityTypeActKeys.length;
+                    var borderColorsPick = [];
+                    var backgroundColorsPick = [];
+                    for (var i = 0; i < _this.size1; i++) {
+                        borderColorsPick[i] = _this.allBorderColors[i];
+                        backgroundColorsPick[i] = _this.allBackgroundColors[i];
+                        // console.log('Border Pick tenim', borderColorsPick[i]);
+                        // console.log('Back Pick tenim', borderColorsPick[i]);
+                    }
+                    _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart', {
+                        type: 'bar',
+                        data: {
+                            labels: _this.entityTypeActKeys,
+                            datasets: [
+                                {
+                                    label: '# of Activities per Theme',
+                                    data: _this.entityTypeActValues,
+                                    backgroundColor: backgroundColorsPick,
+                                    borderColor: borderColorsPick,
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [
+                                    {
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    });
+                    _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart2', {
+                        type: 'line',
+                        data: {
+                            labels: _this.entityHoursActKeys,
+                            datasets: [
+                                {
+                                    label: '# Activities per hour',
+                                    data: _this.entityHoursActValues,
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)'
+                                    ],
+                                    borderColor: ['rgba(255,99,132,1)'],
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [
+                                    {
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    });
+                    _this.entityService
+                        .getEntityStatisticsUsers(_this.entityId)
+                        .subscribe(function (users) {
+                        _this.totalUser = users.nRegisteredUsers;
+                        // console.log('que tinc a Total Users', this.totalUser);
+                    });
+                    _this.entityService
+                        .getTotalConnections(_this.entityId)
+                        .subscribe(function (con) {
+                        _this.totalCon = con.nConnections;
+                    });
+                    _this.entityService.getEntityStatisticsAchievements(_this.entityId).subscribe(function (achievements) {
+                        _this.totalAchievements = achievements.nAchievements;
+                        _this.entityStatsAchievementsPerName = achievements.achievementsPerName;
+                        _this.entityStatsAchievementsPerType = achievements.achievementsPerType;
+                        _this.entityAchievementsPerNameKeys = Object.keys(_this.entityStatsAchievementsPerName);
+                        _this.entityAchievementsPerNameValues = Object.values(_this.entityStatsAchievementsPerName);
+                        _this.entityAchievementsPerTypeKeys = Object.keys(_this.entityStatsAchievementsPerType);
+                        _this.entityAchievementsPerTypeValues = Object.values(_this.entityStatsAchievementsPerType);
+                        _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart3', {
+                            type: 'bar',
+                            data: {
+                                labels: _this.entityAchievementsPerNameKeys,
+                                datasets: [
+                                    {
+                                        label: '# Achievements per name',
+                                        data: _this.entityAchievementsPerNameValues,
+                                        backgroundColor: backgroundColorsPick,
+                                        borderColor: borderColorsPick,
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        });
+                        _this.chart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"]('myChart4', {
+                            type: 'bar',
+                            data: {
+                                labels: _this.entityAchievementsPerTypeKeys,
+                                datasets: [
+                                    {
+                                        label: '# Achievements per type',
+                                        data: _this.entityAchievementsPerTypeValues,
+                                        backgroundColor: backgroundColorsPick,
+                                        borderColor: borderColorsPick,
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        });
+                    });
                 });
             });
-        });
+        }
     };
     DashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1031,7 +1222,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-panel\">\r\n    <div class=\"infoDialog\" *ngIf=\"data.mode === 'infoDialog'\" style=\"text-align: center\">\r\n        <div class=\"content-panel\">\r\n            <div class=\"ui icon header\">\r\n                <i class=\"exclamation icon\"></i>\r\n                Error Message:\r\n            </div>\r\n            <div class=\"content\">\r\n                {{ data.obj }}\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!--Dialog title-->\r\n<div *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity' || data.mode === 'editUserInfo'\">\r\n    <h1 *ngIf=\"data.mode === 'addActivity'\">Add activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'editActivity'\">Edit activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'deleteActivity'\">Delete activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'editUserInfo'\">Edit User Information:</h1>\r\n    <div class=\"ui divider\"></div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode\">\r\n    <div class=\"ui form\">\r\n        <form [formGroup]=\"activityForm\" *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity'\">\r\n            <div class=\"field\">\r\n                <div class=\"one fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Title:\r\n                            <input type=\"text\" formControlName=\"title\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('title').invalid && activityForm.get('title').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Must be > 3</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"four fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Start Date:\r\n                            <mat-form-field style=\"width: 120px;\">\r\n                                <input matInput [matDatepicker]=\"picker\" (dateInput)=\"addDate('start', $event)\"\r\n                                    formControlName=\"dateStart\">\r\n                                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n                                <mat-datepicker #picker></mat-datepicker>\r\n                            </mat-form-field>\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('dateStart').invalid && activityForm.get('dateStart').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Start Time:\r\n                        </label>\r\n                        <div class=\"ui input left icon\" style=\"padding-top: 12px\">\r\n                            <i class=\"time icon\"></i>\r\n                            <input type=\"text\" placeholder=\"Time\" formControlName=\"timeStart\">\r\n                        </div>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('timeStart').invalid && activityForm.get('timeStart').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            End Date:\r\n                            <mat-form-field style=\"width: 120px;\">\r\n                                <input matInput [matDatepicker]=\"picker2\" (dateInput)=\"addDate('end', $event)\"\r\n                                    formControlName=\"dateEnd\">\r\n                                <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\r\n                                <mat-datepicker #picker2></mat-datepicker>\r\n                            </mat-form-field>\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('dateEnd').invalid && activityForm.get('dateEnd').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            End Time:\r\n                        </label>\r\n                        <div class=\"ui input left icon\" style=\"padding-top: 12px\">\r\n                            <i class=\"time icon\"></i>\r\n                            <input type=\"text\" placeholder=\"Time\" formControlName=\"timeEnd\">\r\n                        </div>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('timeEnd').invalid && activityForm.get('timeEnd').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <div class=\"fields\">\r\n                    <div class=\"four wide field\">\r\n                        <label style=\"text-align: left\">\r\n                            Latitude:\r\n                            <input type=\"text\" formControlName=\"lat\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('lat').invalid && activityForm.get('lat').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"four wide field\">\r\n                        <label style=\"text-align: left\">\r\n                            Longitude:\r\n                            <input type=\"text\" formControlName=\"long\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('long').invalid && activityForm.get('long').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"eight wide field\">\r\n                        <label style=\"text-align: left\">\r\n                            Address:\r\n                            <input type=\"text\" formControlName=\"address\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('address').invalid && activityForm.get('address').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <div class=\"four fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Activity type:\r\n                            <select class=\"ui search dropdown\" formControlName=\"activityType\">\r\n                                <option value=\"EN\">Entity</option>\r\n                                <option value=\"AL\">Alabama</option>\r\n                            </select>\r\n                            <!-- <input type=\"text\" formControlName=\"activityType\"> -->\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('activityType').invalid && activityForm.get('activityType').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Price:\r\n                            <input type=\"text\" formControlName=\"price\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('price').invalid && activityForm.get('price').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Rating:\r\n                            <input type=\"text\" formControlName=\"rating\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('rating').invalid && activityForm.get('rating').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Capacity:\r\n                            <input type=\"text\" formControlName=\"capacity\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('capacity').invalid && activityForm.get('capacity').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Desciption:\r\n                    <textarea rows=\"3\" formControlName=\"description\"></textarea>\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"activityForm.get('description').invalid && activityForm.get('description').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <label style=\"text-align: left\"> Images: </label>\r\n            <div class=\"two fields\">\r\n                <div class=\"field\">\r\n                    <input #imageInput type=\"file\" (change)=\"onFileSelected($event)\" accept=\"image/x-png,image/gif,image/jpeg\">\r\n                </div>\r\n                <div class=\"field\">\r\n                    <button class=\"ui blue basic button\" (click)=\"onUpload()\"> Upload </button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"data.mode === 'editUserInfo'\">\r\n    <div class=\"ui form\">\r\n        <form [formGroup]=\"userInfoForm\" *ngIf=\"data.mode === 'editUserInfo'\">\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Email:\r\n                    <input type=\"text\" formControlName=\"email\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('email').invalid && userInfoForm.get('email').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Complete Name:\r\n                    <input type=\"text\" formControlName=\"completeName\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('completeName').invalid && userInfoForm.get('completeName').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Birthday:\r\n                    <input type=\"text\" formControlName=\"birthday\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('birthday').invalid && userInfoForm.get('birthday').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Phone:\r\n                    <input type=\"text\" formControlName=\"phone\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('phone').invalid && userInfoForm.get('phone').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'deleteActivity'\">\r\n    <p>Are you sure to delete : <span style=\"color: red\"> {{ activityToDelete.title }}</span></p>\r\n</div>\r\n\r\n<div>\r\n    <div class=\"ui divider\"></div>\r\n</div>\r\n\r\n<!--Add & Edit Actions-->\r\n<div class=\"actions\" *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'\"\r\n    style=\"text-align: center; padding-top: 10px;\">\r\n    <div class=\"ui green basic ok button\" (click)=\"onSaveClick(data)\">\r\n        <i class=\"checkmark icon\"></i>\r\n        Save\r\n    </div>\r\n    <div class=\"ui red basic cancel button\" (click)=\"onCancelClick()\">\r\n        <i class=\"remove icon\"></i>\r\n        Cancel\r\n    </div>\r\n</div>\r\n\r\n<!--Delete Actions-->\r\n<div class=\"actions\" *ngIf=\"data.mode === 'deleteActivity'\" style=\"text-align: center; padding-top: 10px;\">\r\n    <div class=\"ui green basic ok button\" (click)=\"onDeleteClick(data)\">\r\n        <i class=\"checkmark icon\"></i>\r\n        Yes\r\n    </div>\r\n    <div class=\"ui red basic cancel button\" (click)=\"onCancelClick()\">\r\n        <i class=\"remove icon\"></i>\r\n        No\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"content-panel\">\r\n    <div class=\"infoDialog\" *ngIf=\"data.mode === 'infoDialog'\" style=\"text-align: center\">\r\n        <div class=\"content-panel\">\r\n            <div class=\"ui icon header\">\r\n                <i class=\"exclamation icon\"></i>\r\n                Error Message:\r\n            </div>\r\n            <div class=\"content\">\r\n                {{ data.obj }}\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!--Dialog title-->\r\n<div *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'deleteActivity' || data.mode === 'editUserInfo'\r\n    || data.mode === 'addEmergencyContact'\">\r\n    <h1 *ngIf=\"data.mode === 'addActivity'\">Add activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'editActivity'\">Edit activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'deleteActivity'\">Delete activity:</h1>\r\n    <h1 *ngIf=\"data.mode === 'editUserInfo'\">Edit User Information:</h1>\r\n    <h1 *ngIf=\"data.mode === 'addEmergencyContact'\">Add emergency contact:</h1>\r\n    <div class=\"ui divider\"></div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode\">\r\n    <div class=\"ui form\">\r\n        <form [formGroup]=\"activityForm\" *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity'\">\r\n            <div class=\"field\">\r\n                <div class=\"one fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Title:\r\n                            <input type=\"text\" formControlName=\"title\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('title').invalid && activityForm.get('title').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Must be > 3</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"four fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Start Date:\r\n                            <mat-form-field style=\"width: 120px;\">\r\n                                <input matInput [matDatepicker]=\"picker\" (dateInput)=\"addDate('start', $event)\"\r\n                                    formControlName=\"dateStart\">\r\n                                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n                                <mat-datepicker #picker></mat-datepicker>\r\n                            </mat-form-field>\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('dateStart').invalid && activityForm.get('dateStart').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Start Time:\r\n                        </label>\r\n                        <div class=\"ui input left icon\" style=\"padding-top: 12px\">\r\n                            <i class=\"time icon\"></i>\r\n                            <input type=\"text\" placeholder=\"Time\" formControlName=\"timeStart\">\r\n                        </div>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('timeStart').invalid && activityForm.get('timeStart').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            End Date:\r\n                            <mat-form-field style=\"width: 120px;\">\r\n                                <input matInput [matDatepicker]=\"picker2\" (dateInput)=\"addDate('end', $event)\"\r\n                                    formControlName=\"dateEnd\">\r\n                                <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\r\n                                <mat-datepicker #picker2></mat-datepicker>\r\n                            </mat-form-field>\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('dateEnd').invalid && activityForm.get('dateEnd').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            End Time:\r\n                        </label>\r\n                        <div class=\"ui input left icon\" style=\"padding-top: 12px\">\r\n                            <i class=\"time icon\"></i>\r\n                            <input type=\"text\" placeholder=\"Time\" formControlName=\"timeEnd\">\r\n                        </div>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('timeEnd').invalid && activityForm.get('timeEnd').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <div class=\"fields\">\r\n                    <div class=\"eight wide field\">\r\n                        <label style=\"text-align: left\">\r\n                            Location:\r\n                            <input type=\"text\" formControlName=\"adressToConvert\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('adressToConvert').invalid && activityForm.get('adressToConvert').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"eight wide field\">\r\n                        <label style=\"text-align: left\">\r\n                            Address:\r\n                            <input type=\"text\" formControlName=\"address\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('address').invalid && activityForm.get('address').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <div class=\"four fields\">\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Activity type:\r\n                            <input type=\"text\" formControlName=\"activityType\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('activityType').invalid && activityForm.get('activityType').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Price:\r\n                            <input type=\"text\" formControlName=\"price\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('price').invalid && activityForm.get('price').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Rating:\r\n                            <input type=\"text\" formControlName=\"rating\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('rating').invalid && activityForm.get('rating').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"field\">\r\n                        <label style=\"text-align: left\">\r\n                            Capacity:\r\n                            <input type=\"text\" formControlName=\"capacity\">\r\n                        </label>\r\n                        <div class=\"error-message\" *ngIf=\"activityForm.get('capacity').invalid && activityForm.get('capacity').touched\"\r\n                            style=\"text-align: center\">\r\n                            <div class=\"input-err-message\" style=\"text-align: center\">\r\n                                <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Desciption:\r\n                    <textarea rows=\"3\" formControlName=\"description\"></textarea>\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"activityForm.get('description').invalid && activityForm.get('description').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <label style=\"text-align: left\"> Images: </label>\r\n            <div class=\"two fields\">\r\n                <div class=\"field\">\r\n                    <input #imageInput type=\"file\" (change)=\"onFileSelected($event)\" accept=\"image/x-png,image/gif,image/jpeg\">\r\n                </div>\r\n                <div class=\"field\">\r\n                    <button class=\"ui blue basic button\" (click)=\"onUpload()\"> Upload </button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'addEmergencyContact'\">\r\n    <div class=\"ui form\">\r\n        <form [formGroup]=\"emergencyContactForm\" *ngIf=\"data.mode === 'addEmergencyContact'\">\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Alias:\r\n                    <input type=\"text\" formControlName=\"alias\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"emergencyContactForm.get('alias').invalid && emergencyContactForm.get('alias').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Phone:\r\n                    <input type=\"text\" formControlName=\"phone\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"emergencyContactForm.get('phone').invalid && emergencyContactForm.get('phone').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'editUserInfo'\">\r\n    <div class=\"ui form\">\r\n        <form [formGroup]=\"userInfoForm\" *ngIf=\"data.mode === 'editUserInfo'\">\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Email:\r\n                    <input type=\"text\" formControlName=\"email\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('email').invalid && userInfoForm.get('email').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Complete Name:\r\n                    <input type=\"text\" formControlName=\"completeName\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('completeName').invalid && userInfoForm.get('completeName').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Birthday:\r\n                    <input type=\"text\" formControlName=\"birthday\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('birthday').invalid && userInfoForm.get('birthday').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Phone:\r\n                    <input type=\"text\" formControlName=\"phone\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('phone').invalid && userInfoForm.get('phone').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Must be at least 3 characters!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"field\">\r\n                <label style=\"text-align: left\">\r\n                    Profile picture:\r\n                    <input type=\"text\" formControlName=\"profilePic\">\r\n                </label>\r\n                <div class=\"error-message\" *ngIf=\"userInfoForm.get('profilePic').invalid && userInfoForm.get('profilePic').touched\"\r\n                    style=\"text-align: center\">\r\n                    <div class=\"input-err-message\" style=\"text-align: center\">\r\n                        <p style=\"color: red; white-space: nowrap;\">Can't be empty!</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div *ngIf=\"data.mode === 'deleteActivity'\">\r\n    <p>Are you sure to delete : <span style=\"color: red\"> {{ activityToDelete.title }}</span></p>\r\n</div>\r\n\r\n<div>\r\n    <div class=\"ui divider\"></div>\r\n</div>\r\n\r\n<!--Add & Edit Actions-->\r\n<div class=\"actions\" *ngIf=\"data.mode === 'addActivity' || data.mode === 'editActivity' || data.mode === 'editUserInfo'\r\n    || data.mode === 'addEmergencyContact'\"\r\n    style=\"text-align: center; padding-top: 10px;\">\r\n    <div class=\"ui green basic ok button\" (click)=\"onSaveClick(data)\">\r\n        <i class=\"checkmark icon\"></i>\r\n        Save\r\n    </div>\r\n    <div class=\"ui red basic cancel button\" (click)=\"onCancelClick()\">\r\n        <i class=\"remove icon\"></i>\r\n        Cancel\r\n    </div>\r\n</div>\r\n\r\n<!--Delete Actions-->\r\n<div class=\"actions\" *ngIf=\"data.mode === 'deleteActivity'\" style=\"text-align: center; padding-top: 10px;\">\r\n    <div class=\"ui green basic ok button\" (click)=\"onDeleteClick(data)\">\r\n        <i class=\"checkmark icon\"></i>\r\n        Yes\r\n    </div>\r\n    <div class=\"ui red basic cancel button\" (click)=\"onCancelClick()\">\r\n        <i class=\"remove icon\"></i>\r\n        No\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1080,6 +1271,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_img_max__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng2-img-max */ "./node_modules/ng2-img-max/dist/ng2-img-max.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var src_app_services_geocoding_geocoding_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/services/geocoding/geocoding.service */ "./src/app/services/geocoding/geocoding.service.ts");
+/* harmony import */ var src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/services/entity/entity.service */ "./src/app/services/entity/entity.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1104,11 +1297,14 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 
+
+
 var DialogComponent = /** @class */ (function () {
     function DialogComponent(dialog, dialogService) {
         this.dialog = dialog;
         this.dialogService = dialogService;
         this.subscriptions = []; // 为了推出component的时候取消订阅，要不然再次进来的时候回再次订阅就会变成订阅两次
+        // ACTIVITY FORM CREATION
         this.activityForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             title: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
                 _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
@@ -1120,14 +1316,7 @@ var DialogComponent = /** @class */ (function () {
             timeStart: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             timeEnd: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             images: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
-            lat: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[0-9]*$')
-            ]),
-            long: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[0-9]*$')
-            ]),
+            adressToConvert: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             address: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             activityType: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
             price: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
@@ -1143,6 +1332,7 @@ var DialogComponent = /** @class */ (function () {
                 _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[0-9]*$')
             ])
         });
+        // USER FORM CREATION
         this.userInfoForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             email: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
                 _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
@@ -1159,17 +1349,28 @@ var DialogComponent = /** @class */ (function () {
             phone: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
                 _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
                 _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)
-            ])
+            ]),
+            profilePic: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
+                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+            ]),
+        });
+        this.emergencyContactForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            phone: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            alias: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
         });
     }
     DialogComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.subscriptions.push(this.dialogService.dialog$.subscribe(function (mode) {
             // mode （从HTML传过来的）传过来的时候是个obj {mode: 他的action类别, obj: optional的，可以选择传过来任何一个obj如果需要的话}
+            // in this section we do all of necessary operation before to open the dialog
             if (mode.mode === 'addActivity') {
                 _this.openDialog(mode);
             }
             if (mode.mode === 'editActivity') {
+                // EVERYTHING OF HERE IS FOR AUTO FILLING THE FORM
+                var humanizeTimeStart = _this.timeConverter(mode.obj.timestampStart, 'time');
+                var humanizeTimeEnd = _this.timeConverter(mode.obj.timestampEnd, 'time');
                 _this.activityForm.setValue({
                     title: mode.obj.title === undefined ? '' : mode.obj.title,
                     description: mode.obj.description === undefined
@@ -1177,13 +1378,14 @@ var DialogComponent = /** @class */ (function () {
                         : mode.obj.description,
                     dateStart: '',
                     dateEnd: '',
-                    timeStart: '',
-                    timeEnd: '',
+                    timeStart: humanizeTimeStart,
+                    timeEnd: humanizeTimeEnd,
                     images: mode.obj.images === undefined
                         ? ''
                         : mode.obj.images,
-                    lat: mode.obj.lat === undefined ? '' : mode.obj.lat,
-                    long: mode.obj.long === undefined ? '' : mode.obj.long,
+                    adressToConvert: mode.obj.adressToConvert === undefined
+                        ? ''
+                        : mode.obj.adressToConvert,
                     address: mode.obj.address === undefined
                         ? ''
                         : mode.obj.address,
@@ -1207,7 +1409,6 @@ var DialogComponent = /** @class */ (function () {
                 _this.openDialog(mode);
             }
             if (mode.mode === 'editUserInfo') {
-                console.log('USERINFO: ', mode.obj);
                 _this.userInfoForm.setValue({
                     email: mode.obj.email === undefined ? '' : mode.obj.email,
                     completeName: mode.obj.completeName === undefined
@@ -1216,11 +1417,66 @@ var DialogComponent = /** @class */ (function () {
                     birthday: mode.obj.birthday === undefined
                         ? ''
                         : mode.obj.birthday,
-                    phone: mode.obj.phone === undefined ? '' : mode.obj.phone
+                    phone: mode.obj.phone === undefined ? '' : mode.obj.phone,
+                    profilePic: mode.obj.profilePic === undefined ? '' : mode.obj.profilePic,
                 });
                 _this.openDialog(mode);
             }
+            if (mode.mode === 'addEmergencyContact') {
+                _this.openDialog(mode);
+            }
         }));
+    };
+    DialogComponent.prototype.timeConverter = function (UNIX_timestamp, type) {
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = [
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            '10',
+            '11',
+            '12'
+        ];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time;
+        if (type === 'time') {
+            time = hour + ':' + min + ':' + sec;
+        }
+        else if (type === 'year') {
+            return year;
+        }
+        else if (type === 'month') {
+            return month;
+        }
+        else if (type === 'day') {
+            return date;
+        }
+        else {
+            time =
+                date +
+                    ' ' +
+                    month +
+                    ' ' +
+                    year +
+                    ' ' +
+                    hour +
+                    ':' +
+                    min +
+                    ':' +
+                    sec;
+        }
+        return time;
     };
     DialogComponent.prototype.openDialog = function (mode) {
         // ----------------------------------------------
@@ -1240,7 +1496,7 @@ var DialogComponent = /** @class */ (function () {
                 //
             });
         }
-        else {
+        else if (mode.mode === 'editActivity') {
             var dialogRef = this.dialog.open(DialogContentComponent, {
                 width: '600px',
                 // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
@@ -1248,6 +1504,20 @@ var DialogComponent = /** @class */ (function () {
                     mode: mode.mode,
                     obj: mode.obj,
                     form: this.activityForm
+                } // dialog-content 可以通过data来读取dialog.component里面的变量
+            });
+            dialogRef.afterClosed().subscribe(function (result) {
+                //
+            });
+        }
+        else {
+            var dialogRef = this.dialog.open(DialogContentComponent, {
+                width: '600px',
+                // 这里有一个form 是为了打开dialog之后立马能加载里面的内容
+                data: {
+                    mode: mode.mode,
+                    obj: mode.obj,
+                    form: this.emergencyContactForm
                 } // dialog-content 可以通过data来读取dialog.component里面的变量
             });
             dialogRef.afterClosed().subscribe(function (result) {
@@ -1271,7 +1541,7 @@ var DialogComponent = /** @class */ (function () {
 }());
 
 var DialogContentComponent = /** @class */ (function () {
-    function DialogContentComponent(dialogRef, data, http, activityService, messagesService, dialogService, uploadImagesService, ng2ImgMax, userService) {
+    function DialogContentComponent(dialogRef, data, http, activityService, messagesService, dialogService, uploadImagesService, ng2ImgMax, userService, geocodingService, entityService) {
         this.dialogRef = dialogRef;
         this.data = data;
         this.http = http;
@@ -1281,8 +1551,11 @@ var DialogContentComponent = /** @class */ (function () {
         this.uploadImagesService = uploadImagesService;
         this.ng2ImgMax = ng2ImgMax;
         this.userService = userService;
+        this.geocodingService = geocodingService;
+        this.entityService = entityService;
         this.activityForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({});
         this.userInfoForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({});
+        this.emergencyContactForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({});
         this.activityToDelete = this.data.obj;
         // ----------------------------------------------
         // -----------to make auto complete--------------
@@ -1293,7 +1566,7 @@ var DialogContentComponent = /** @class */ (function () {
         else if (data.mode === 'editUserInfo') {
             this.userInfoForm = data.form;
         }
-        else {
+        else if (data.mode === 'addActivity') {
             this.activityForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
                 title: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [
                     _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
@@ -1305,13 +1578,18 @@ var DialogContentComponent = /** @class */ (function () {
                 timeStart: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 timeEnd: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 images: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
-                lat: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
-                long: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+                adressToConvert: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 address: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 activityType: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 price: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 rating: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
                 capacity: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
+            });
+        }
+        else if (data.mode === 'addEmergencyContact') {
+            this.emergencyContactForm = new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                phone: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+                alias: new _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
             });
         }
     }
@@ -1362,91 +1640,29 @@ var DialogContentComponent = /** @class */ (function () {
     };
     DialogContentComponent.prototype.onSaveClick = function (data) {
         var _this = this;
-        var title = this.activityForm.value.title;
-        var description = this.activityForm.value.description;
-        var lat = this.activityForm.value.lat;
-        var long = this.activityForm.value.long;
-        var images = this.imageUrl;
-        var participants = [];
-        var address = this.activityForm.value.address;
-        var activityType = this.activityForm.value.activityType;
-        var price = this.activityForm.value.price;
-        var rating = this.activityForm.value.rating;
-        var capacity = this.activityForm.value.capacity;
-        var email = this.userInfoForm.value.email;
-        var completeName = this.userInfoForm.value.completeName;
-        var birthday = this.userInfoForm.value.birthday;
-        var phone = this.userInfoForm.value.phone;
-        if (data.mode === 'addActivity') {
-            this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-            this.timeStart = this.activityForm.value.timeStart; // get end time from form
-            var start = this.startDate + " " + this.timeStart; // get the start time in mm/dd/yyyy hh:mm in String
-            var end = this.endDate + " " + this.timeEnd; // get the end time in mm/dd/yyyy hh:mm in String
-            var startMoment = moment__WEBPACK_IMPORTED_MODULE_10__(start); // create the moment()
-            var endMoment = moment__WEBPACK_IMPORTED_MODULE_10__(end);
-            var timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-            var timestampEnd = endMoment.toDate().getTime() / 1000 + '';
-            this.activityService
-                .addActivitiy({
-                title: title,
-                description: description,
-                timestampStart: timestampStart,
-                timestampEnd: timestampEnd,
-                lat: lat,
-                long: long,
-                images: images,
-                participants: participants,
-                address: address,
-                activityType: activityType,
-                price: price,
-                rating: rating,
-                capacity: capacity
-            })
-                .subscribe(function (res) {
-                if (_this.messagesService.getExists()) {
-                    console.log('error: ', _this.messagesService.getMessage());
-                    _this.dialogService.openDialog({
-                        mode: 'infoDialog',
-                        obj: _this.messagesService.getMessage()
-                    });
-                    _this.messagesService.setMessage(null);
-                }
-                else {
-                    _this.activityService.actDataChanged('changed');
-                    // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                    _this.onCancelClick();
-                }
+        if (data.mode === 'addEmergencyContact') {
+            var phone_1 = this.emergencyContactForm.value.phone;
+            var alias_1 = this.emergencyContactForm.value.alias;
+            this.userService.getEmergencyPhoneById(data.obj).subscribe(function (res) {
+                var oldContacts = res;
+                oldContacts.push({ alias: alias_1, phone: phone_1 });
+                _this.entityService.addEmergencyContact(data.obj, oldContacts).subscribe(function (res2) {
+                    if (_this.messagesService.getExists()) {
+                        _this.dialogService.openDialog({
+                            mode: 'infoDialog',
+                            obj: _this.messagesService.getMessage()
+                        });
+                        _this.messagesService.setMessage(null);
+                    }
+                    else {
+                        _this.dialogRef.close();
+                    }
+                });
             });
-            this.dialogRef.close();
         }
-        if (data.mode === 'editActivity') {
-            var idAct = data.obj.id;
-            this.timeEnd = this.activityForm.value.timeEnd; // get start time from form
-            this.timeStart = this.activityForm.value.timeStart; // get end time from form
-            var start = this.startDate + " " + this.timeStart; // get the start time in mm/dd/yyyy hh:mm in String
-            var end = this.endDate + " " + this.timeEnd; // get the end time in mm/dd/yyyy hh:mm in String
-            var startMoment = moment__WEBPACK_IMPORTED_MODULE_10__(start); // create the moment()
-            var endMoment = moment__WEBPACK_IMPORTED_MODULE_10__(end);
-            var timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
-            var timestampEnd = endMoment.toDate().getTime() / 1000 + '';
-            this.activityService
-                .editActivity({
-                id: idAct,
-                title: title,
-                description: description,
-                timestampStart: timestampStart,
-                timestampEnd: timestampEnd,
-                lat: lat,
-                long: long,
-                images: images,
-                participants: participants,
-                address: address,
-                activityType: activityType,
-                price: price,
-                rating: rating,
-                capacity: capacity
-            })
-                .subscribe(function (res) {
+        if (data.mode === 'addActivity' || data.mode === 'editActivity') {
+            var addressName = this.activityForm.value.adressToConvert;
+            this.geocodingService.getLatLong(addressName).subscribe(function (res) {
                 if (_this.messagesService.getExists()) {
                     _this.dialogService.openDialog({
                         mode: 'infoDialog',
@@ -1455,23 +1671,123 @@ var DialogContentComponent = /** @class */ (function () {
                     _this.messagesService.setMessage(null);
                 }
                 else {
-                    _this.activityService.actDataChanged('changed');
-                    // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
-                    _this.onCancelClick();
+                    _this.geoCodedLat = res.results[0].geometry.location.lat;
+                    _this.geoCodedLong = res.results[0].geometry.location.lng;
+                    var title = _this.activityForm.value.title;
+                    var description = _this.activityForm.value.description;
+                    var lat = _this.geoCodedLat;
+                    var long = _this.geoCodedLong;
+                    var images = _this.imageUrl;
+                    var participants = [];
+                    var address = _this.activityForm.value.address;
+                    var activityType = _this.activityForm.value.activityType;
+                    var price = _this.activityForm.value.price;
+                    var rating = _this.activityForm.value.rating;
+                    var capacity = _this.activityForm.value.capacity;
+                    if (data.mode === 'addActivity') {
+                        _this.timeEnd = _this.activityForm.value.timeEnd; // get start time from form
+                        _this.timeStart = _this.activityForm.value.timeStart; // get end time from form
+                        var start = _this.startDate + " " + _this.timeStart; // get the start time in mm-dd-yyyy hh:mm in String
+                        var end = _this.endDate + " " + _this.timeEnd; // get the end time in mm-dd-yyyy hh:mm in String
+                        var startMoment = moment__WEBPACK_IMPORTED_MODULE_10__(start); // create the moment()
+                        var endMoment = moment__WEBPACK_IMPORTED_MODULE_10__(end);
+                        var timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                        var timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+                        _this.activityService
+                            .addActivitiy({
+                            title: title,
+                            description: description,
+                            timestampStart: timestampStart,
+                            timestampEnd: timestampEnd,
+                            lat: lat,
+                            long: long,
+                            images: images,
+                            participants: participants,
+                            address: address,
+                            activityType: activityType,
+                            price: price,
+                            rating: rating,
+                            capacity: capacity
+                        })
+                            .subscribe(function (res3) {
+                            if (_this.messagesService.getExists()) {
+                                console.log('error: ', _this.messagesService.getMessage());
+                                _this.dialogService.openDialog({
+                                    mode: 'infoDialog',
+                                    obj: _this.messagesService.getMessage()
+                                });
+                                _this.messagesService.setMessage(null);
+                            }
+                            else {
+                                _this.activityService.actDataChanged('added');
+                                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                                _this.onCancelClick();
+                            }
+                        });
+                        _this.dialogRef.close();
+                    }
+                    if (data.mode === 'editActivity') {
+                        var idAct = data.obj.id;
+                        _this.timeEnd = _this.activityForm.value.timeEnd; // get start time from form
+                        _this.timeStart = _this.activityForm.value.timeStart; // get end time from form
+                        var start = _this.startDate + " " + _this.timeStart; // get the start time in yyyy-mm-dd hh:mm in String
+                        var end = _this.endDate + " " + _this.timeEnd; // get the end time in yyyy-mm-dd hh:mm in String
+                        var startMoment = moment__WEBPACK_IMPORTED_MODULE_10__(start); // create the moment()
+                        var endMoment = moment__WEBPACK_IMPORTED_MODULE_10__(end);
+                        var timestampStart = startMoment.toDate().getTime() / 1000 + ''; // transform the moment to date and the date to timestamp
+                        var timestampEnd = endMoment.toDate().getTime() / 1000 + '';
+                        _this.activityService
+                            .editActivity({
+                            id: idAct,
+                            title: title,
+                            description: description,
+                            timestampStart: timestampStart,
+                            timestampEnd: timestampEnd,
+                            lat: lat,
+                            long: long,
+                            images: images,
+                            participants: participants,
+                            address: address,
+                            activityType: activityType,
+                            price: price,
+                            rating: rating,
+                            capacity: capacity
+                        })
+                            .subscribe(function (res2) {
+                            if (_this.messagesService.getExists()) {
+                                _this.dialogService.openDialog({
+                                    mode: 'infoDialog',
+                                    obj: _this.messagesService.getMessage()
+                                });
+                                _this.messagesService.setMessage(null);
+                            }
+                            else {
+                                _this.activityService.actDataChanged('updated');
+                                // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
+                                _this.onCancelClick();
+                            }
+                        });
+                        _this.dialogRef.close();
+                    }
                 }
             });
-            this.dialogRef.close();
         }
         if (data.mode === 'editUserInfo') {
+            var email = this.userInfoForm.value.email;
+            var completeName = this.userInfoForm.value.completeName;
+            var birthday = this.userInfoForm.value.birthday;
+            var phone = this.userInfoForm.value.phone;
+            var profilePic = this.userInfoForm.value.profilePic;
             var idUser = data.obj._id;
             this.userService
                 .updateUserInfo({
                 email: email,
                 completeName: completeName,
                 birthday: birthday,
-                phone: phone
+                phone: phone,
+                profilePic: profilePic
             }, idUser)
-                .subscribe(function (res) {
+                .subscribe(function (res1) {
                 if (_this.messagesService.getExists()) {
                     _this.dialogService.openDialog({
                         mode: 'infoDialog',
@@ -1480,7 +1796,7 @@ var DialogContentComponent = /** @class */ (function () {
                     _this.messagesService.setMessage(null);
                 }
                 else {
-                    // this.activityService.actDataChanged('changed');
+                    _this.userService.userDataChanged('changed');
                     // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                     _this.onCancelClick();
                 }
@@ -1497,8 +1813,8 @@ var DialogContentComponent = /** @class */ (function () {
             var month = startDate.getMonth();
             month = month + 1;
             var day = startDate.getDate();
-            var dateString = month + "/" + day + "/" + year;
-            // this.endDate is the String mm/dd/yyyy
+            var dateString = year + "-" + month + "-" + day;
+            // this.endDate is the String yyyy-mm-dd
             this.startDate = dateString;
         }
         if (type === 'end') {
@@ -1506,8 +1822,8 @@ var DialogContentComponent = /** @class */ (function () {
             var month = endDate.getMonth();
             month = month + 1;
             var day = endDate.getDate();
-            var dateString = month + "/" + day + "/" + year;
-            // this.endDate is the String mm/dd/yyyy
+            var dateString = year + "-" + month + "-" + day;
+            // this.endDate is the String yyyy-mm-dd
             this.endDate = dateString;
         }
     };
@@ -1548,7 +1864,9 @@ var DialogContentComponent = /** @class */ (function () {
             _services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_3__["DialogService"],
             src_app_services_upload_upload_images_service__WEBPACK_IMPORTED_MODULE_8__["UploadImagesService"],
             ng2_img_max__WEBPACK_IMPORTED_MODULE_9__["Ng2ImgMaxService"],
-            _services_user_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"]])
+            _services_user_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"],
+            src_app_services_geocoding_geocoding_service__WEBPACK_IMPORTED_MODULE_11__["GeocodingService"],
+            src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_12__["EntityService"]])
     ], DialogContentComponent);
     return DialogContentComponent;
 }());
@@ -1639,25 +1957,20 @@ var LoginComponent = /** @class */ (function () {
         }
         this.authService
             .login({ username: username, password: password })
-            .subscribe(function (user) {
-            // console.log('auth response', user);
-            // if (this.messageService.getExists()) {
-            //     this.dialogService.openDialog({
-            //         mode: 'infoDialog',
-            //         obj: this.messageService.getMessage()
-            //     });
-            //     this.messageService.setMessage(null);
-            // } else {
-            //     localStorage.setItem('token', user.token);
-            //     localStorage.setItem('username', username);
-            //     // 呼叫userService的方法，让订阅者们收到新的值
-            //     this.authService.changeUserStatus('loginSuccess');
-            //     this.router.navigate(['/dashboard']);
-            // }
-            localStorage.setItem('token', user.token);
-            localStorage.setItem('username', username);
-            // 呼叫userService的方法，让订阅者们收到新的值
-            _this.authService.changeUserStatus('loginSuccess');
+            .subscribe(function (res) {
+            if (_this.messageService.getExists()) {
+                _this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: _this.messageService.getMessage()
+                });
+                _this.messageService.setMessage(null);
+            }
+            else {
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('username', username);
+                localStorage.setItem('profilepic', res.user.profilePic);
+                _this.authService.changeUserStatus('loginSuccess');
+            }
             _this.router.navigate(['/dashboard']);
         });
     };
@@ -1697,7 +2010,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui secondary vertical pointing menu\">\r\n    <div class='title'>\r\n    </div>\r\n    <a class=\"item\" routerLink=\"/dashboard\">\r\n        Dashboard\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/activities\">\r\n        Activitats Entitats Publiques\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/userActivities\">\r\n        Activitats Usuari\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/users\">\r\n        Users\r\n    </a>\r\n</div>\r\n"
+module.exports = "<div class=\"ui secondary vertical pointing menu\">\r\n    <div class='title'>\r\n    </div>\r\n    <a class=\"item\" routerLink=\"/dashboard\">\r\n        Dashboard\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/activities\">\r\n        Activities List\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/users\">\r\n        Users List\r\n    </a>\r\n    <a class=\"item\" routerLink=\"/emergency\">\r\n        Emergency\r\n    </a>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1759,7 +2072,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"top-bar-content\">\r\n    <div class=\"left items\">\r\n        <div class=\"sidebar button\">\r\n            <button class=\"ui labeled icon button\" (click)=\"toggle()\">\r\n                <i class=\"sidebar icon\"></i>Menu\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"right items\">\r\n        <div *ngIf=\"logged\">\r\n            <div class=\"profile\" style=\"position: absolute; right: 125px; top: 6px\">\r\n                <a class=\"ui label\" routerLink=\"/userinfo\">\r\n                    <img class=\"ui right spaced avatar image\" src=\"/src/assets/image/boy.jpg\">\r\n                    {{ username }}\r\n                </a>\r\n            </div>\r\n            <div class=\"logout\" style=\"position: absolute; right: 5px; top: 6px\">\r\n                <button class=\"ui red button\" style=\"height: 39.5px; background-color: red\" (click)=\"logout()\">\r\n                    <i class=\"sign-out icon\"></i>\r\n                    Log out\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"top-bar-content\">\r\n    <div class=\"left items\">\r\n        <div class=\"sidebar button\">\r\n            <button class=\"ui labeled icon button\" (click)=\"toggle()\">\r\n                <i class=\"sidebar icon\"></i>Menu\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"right items\">\r\n        <div *ngIf=\"logged\">\r\n            <div class=\"profile\" style=\"position: absolute; right: 125px; top: 6px\" *ngIf=\"profilePicture !== undefined\">\r\n                <a class=\"ui label\" routerLink=\"/userinfo\">\r\n                    <img class=\"ui right spaced avatar image\" src= \"{{ profilePicture }}\" >\r\n                    {{ username }}\r\n                </a>\r\n            </div>\r\n            <div class=\"logout\" style=\"position: absolute; right: 5px; top: 6px\">\r\n                <button class=\"ui red button\" style=\"height: 39.5px; background-color: red\" (click)=\"logout()\">\r\n                    <i class=\"sign-out icon\"></i>\r\n                    Log out\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1794,6 +2107,7 @@ var TopBarComponent = /** @class */ (function () {
         this.authService = authService;
         this.logged = localStorage.getItem('token');
         this.username = localStorage.getItem('username');
+        this.profilePicture = localStorage.getItem('profilepic');
         this.sidebarOpened = false;
     }
     TopBarComponent.prototype.logout = function () {
@@ -1843,7 +2157,7 @@ var TopBarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".top-controls{\r\n    padding: 20px;\r\n    display: -webkit-inline-box;\r\n    float: right\r\n}"
 
 /***/ }),
 
@@ -1854,7 +2168,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userActivities-content\">\r\n    <h1>User Activities list</h1>\r\n    <div class=\"ui divider\"></div>\r\n    <div class=\"top-controls\" style=\"text-align: right; padding: 20px\">\r\n        Table size:\r\n        <select class=\"ui dropdown\" (change)=\"setPageSize($event)\">\r\n            <option value=\"4\">4</option>\r\n            <option value=\"6\">6</option>\r\n            <option value=\"8\">8</option>\r\n            <option selected=\"selected\">10</option>\r\n        </select>\r\n        <button class=\"ui labeled icon button\" (click)=\"openModal({mode: 'addActivity', obj: null})\" style=\"margin-left: 50px;\">\r\n            <i class=\"add icon\"></i>\r\n            Add\r\n        </button>\r\n    </div>\r\n\r\n    <div class=\"table-content\">\r\n        <table class=\"ui celled table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Name</th>\r\n                    <th>Decription</th>\r\n                    <th>Start date</th>\r\n                    <th>End date</th>\r\n                    <th>Latitude</th>\r\n                    <th>Longitude</th>\r\n                    <th>Participants</th>\r\n                    <th>Image</th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor='let activity of userActivities'>\r\n                    <td>{{ activity.name }}</td>\r\n                    <td>{{ activity.description }}</td>\r\n                    <td>{{ activity.startDate }}</td>\r\n                    <td>{{ activity.endDate }}</td>\r\n                    <td>{{ activity.lat }}</td>\r\n                    <td>{{ activity.lng }}</td>\r\n                    <td>\r\n                        <ul *ngFor=\"let p of activity.participants\">\r\n                            <li><span style=\"color: red\">ID: </span>{{p.id}}</li>\r\n                            <li><span style=\"color: red\">Name: </span>{{p.name}}</li>\r\n                        </ul>\r\n                    </td>\r\n                    <td>{{ activity.image }}</td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon button\" (click)=\"openModal({mode: 'deleteActivity', obj: activity})\">\r\n                            <i class=\"trash icon\"></i>\r\n                        </button></td>\r\n                    <td style=\"text-align: center\"><button class=\"ui icon button\" (click)=\"openModal({mode: 'editActivity', obj: activity})\">\r\n                            <i class=\"edit icon\"></i>\r\n                        </button></td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <th colspan=\"10\">\r\n                        <app-dialog></app-dialog>\r\n                        <div class=\"ui right floated pagination menu\">\r\n                            <a class=\"icon item\">\r\n                                <i class=\"left chevron icon\"></i>\r\n                            </a>\r\n                            <a class=\"item\" *ngFor=\"let loop of loopTimes\" (click)=\"getGamesPara(loop + 1)\">{{loop +\r\n                                1}}</a>\r\n                            <a class=\"icon item\">\r\n                                <i class=\"right chevron icon\"></i>\r\n                            </a>\r\n                        </div>\r\n                    </th>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--app-snack-bar></app-snack-bar-->\r\n        <div class=\"ui center aligned basic segment\">\r\n            <button class=\"ui centered aligned button\" (click)=\"goBack()\">Back</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"userActivities-content\">\r\n    <h1>Users List <i class=\"users icon\"></i></h1>\r\n    <div class=\"ui divider\"></div>\r\n    <div class=\"top-controls\">\r\n        Table size:\r\n        <select class=\"ui dropdown\" (change)=\"setPageSize($event)\">\r\n            <option value=\"3\">3</option>\r\n            <option value=\"4\">4</option>\r\n            <option selected=\"selected\">5</option>\r\n            <option value=\"6\">6</option>\r\n            <option value=\"7\">7</option>\r\n            <option value=\"8\">8</option>\r\n            <option value=\"9\">9</option>\r\n            <option value=\"10\">10</option>\r\n        </select>\r\n        <div class=\"ui search\" style=\"margin-left: 15px;\">\r\n            <div class=\"ui icon input\">\r\n                <input (keyup)=\"onKey($event)\"/> <i class=\"search icon\"></i>\r\n            </div>\r\n        </div>\r\n        <button (click)=\"search()\" class=\"ui button\" style=\"margin-left: 10px;\">Search</button>\r\n    </div>\r\n\r\n    <div class=\"table-content\">\r\n        <table class=\"ui celled table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>Name</th>\r\n                    <th>Email</th>\r\n                    <th>Phone</th>\r\n                    <th>Username</th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let user of users\">\r\n                    <td>{{ user.completeName }}</td>\r\n                    <td>{{ user.email }}</td>\r\n                    <td>{{ user.phone }}</td>\r\n                    <td>{{ user.username }}</td>\r\n                    <td style=\"text-align: center\">\r\n                        <button\r\n                            class=\"ui icon green button\"\r\n                            (click)=\"showDetails(user._id)\"\r\n                        >\r\n                            <i class=\"th list icon\"></i>\r\n                        </button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <th colspan=\"7\">\r\n                        <app-dialog></app-dialog>\r\n                        <div class=\"ui right floated pagination menu\">\r\n                            <a class=\"icon item\">\r\n                                <i class=\"left chevron icon\"></i>\r\n                            </a>\r\n                            <a\r\n                                class=\"item\"\r\n                                *ngFor=\"let loop of loopTimes\"\r\n                                (click)=\"getFilteredUsers(loop)\"\r\n                                >{{ loop + 1 }}</a\r\n                            >\r\n                            <a class=\"icon item\">\r\n                                <i class=\"right chevron icon\"></i>\r\n                            </a>\r\n                        </div>\r\n                    </th>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--app-snack-bar></app-snack-bar-->\r\n        <div class=\"ui center aligned basic segment\">\r\n            <button class=\"ui centered aligned button\" (click)=\"goBack()\">\r\n                Back\r\n            </button>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1870,7 +2184,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserActivitiesComponent", function() { return UserActivitiesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/dialog/dialog.service */ "./src/app/services/dialog/dialog.service.ts");
-/* harmony import */ var _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/activities/activities.service */ "./src/app/services/activities/activities.service.ts");
+/* harmony import */ var src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/entity/entity.service */ "./src/app/services/entity/entity.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_messages_messages_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/messages/messages.service */ "./src/app/services/messages/messages.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1883,18 +2200,91 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var UserActivitiesComponent = /** @class */ (function () {
-    function UserActivitiesComponent(dialogService, activitiesService) {
+    function UserActivitiesComponent(dialogService, entityService, messageService, router) {
         this.dialogService = dialogService;
-        this.activitiesService = activitiesService;
+        this.entityService = entityService;
+        this.messageService = messageService;
+        this.router = router;
         this.actURL = 'https://grandapp.herokuapp.com/activities';
-        this.userActivities = [];
+        this.searchedName = '';
     }
     UserActivitiesComponent.prototype.ngOnInit = function () {
-        // this.userActivities = this.activitiesService.getActivities();
+        var _this = this;
+        // auto reaload the users content
+        var source = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["interval"])(1000 * 30);
+        var subscribe = source.subscribe(function (val) {
+            _this.getFilteredUsers(_this.entityService.getCurrentPageNumber());
+        });
+        this.entityService.countTotalUsers().subscribe(function (totalUser) {
+            _this.totalUsers = totalUser.count;
+            _this.entityService.setTotalUsers(totalUser.count);
+            _this.getFilteredUsers(0);
+        });
+    };
+    UserActivitiesComponent.prototype.setPageSize = function (event) {
+        var numPerPage = event.target.value;
+        this.entityService.setCurrentPageSize(numPerPage);
+        this.getFilteredUsers(0);
+    };
+    UserActivitiesComponent.prototype.getFilteredUsers = function (pageNumber) {
+        var _this = this;
+        // console.log('pagenumber = ', pageNumber);
+        this.entityService.setCurrentPageNumber(pageNumber);
+        this.entityService
+            .getUsersByParams(this.entityService.getCurrentPageNumber() * this.entityService.getCurrentPageSize(), this.entityService.getCurrentPageSize())
+            .subscribe(function (res) {
+            if (_this.messageService.getExists()) {
+                _this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: _this.messageService.getMessage()
+                });
+                _this.messageService.setMessage(null);
+            }
+            else {
+                var totalPage = Math.ceil(Number(_this.totalUsers) /
+                    _this.entityService.getCurrentPageSize());
+                console.log('totalUser: ', _this.totalUsers);
+                _this.entityService.setTotalUsers(_this.totalUsers);
+                _this.loopTimes = Array(totalPage)
+                    .fill(0)
+                    .map(function (x, i) { return i; });
+                _this.users = res;
+            }
+        });
+    };
+    UserActivitiesComponent.prototype.onKey = function (event) {
+        var _this = this;
+        this.searchedName = event.target.value;
+        if (this.searchedName === '') {
+            this.entityService.countTotalUsers().subscribe(function (totalUser) {
+                _this.totalUsers = totalUser.count;
+                _this.entityService.setTotalUsers(totalUser.count);
+                _this.getFilteredUsers(0);
+            });
+        }
+    };
+    UserActivitiesComponent.prototype.search = function () {
+        var _this = this;
+        this.entityService.searchUserByCompleteName(this.searchedName).subscribe(function (res) {
+            _this.users = res;
+            _this.totalUsers = res.length;
+            var totalPage = Math.ceil(Number(_this.totalUsers) /
+                _this.entityService.getCurrentPageSize());
+            _this.entityService.setTotalUsers(_this.totalUsers);
+            _this.loopTimes = Array(totalPage)
+                .fill(0)
+                .map(function (x, i) { return i; });
+        });
     };
     UserActivitiesComponent.prototype.openModal = function (mode) {
         this.dialogService.openDialog(mode);
+    };
+    UserActivitiesComponent.prototype.showDetails = function (id) {
+        this.router.navigate(['/users', id]);
     };
     UserActivitiesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1903,9 +2293,97 @@ var UserActivitiesComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./user-activities.component.css */ "./src/app/components/user-activities/user-activities.component.css")]
         }),
         __metadata("design:paramtypes", [_services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_1__["DialogService"],
-            _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__["ActivitiesService"]])
+            src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_2__["EntityService"],
+            src_app_services_messages_messages_service__WEBPACK_IMPORTED_MODULE_4__["MessagesService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], UserActivitiesComponent);
     return UserActivitiesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/user-details/user-details.component.css":
+/*!********************************************************************!*\
+  !*** ./src/app/components/user-details/user-details.component.css ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/user-details/user-details.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/user-details/user-details.component.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"userInfo\">\r\n    <h1>User Information:</h1>\r\n    <div class=\"right-controls\" style=\"text-align: right\">\r\n        <button class=\"ui labeled icon blue button\" (click)=\"openModal({mode: 'addEmergencyContact', obj: id})\">\r\n            <i class=\"add icon\"></i>\r\n            Add\r\n        </button>\r\n    </div>\r\n    \r\n    <table class=\"ui definition table\">\r\n        <tbody *ngIf=\"user\">\r\n            <tr>\r\n                <td class=\"two wide column\">Localitat</td>\r\n                <td>Latitude: {{ user.place.lat }} Longitude: {{ user.place.long }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Username</td>\r\n                <td>{{ user.username}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Email</td>\r\n                <td>{{ user.email }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Birthday</td>\r\n                <td>{{ user.birthday }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Phone</td>\r\n                <td>{{ user.phone }}</td>\r\n            </tr>\r\n            <tr *ngIf=\"emergencyPhones\">\r\n                <td>Emergency contacts</td>\r\n                <td>\r\n                    <ul>\r\n                        <li *ngFor=\"let emergencyPhone of emergencyPhones\">\r\n                            Name: {{ emergencyPhone.alias}}, Phone: {{ emergencyPhone.phone }}\r\n                        </li>\r\n                    </ul>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n\r\n<app-dialog></app-dialog>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/user-details/user-details.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/user-details/user-details.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: UserDetailsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserDetailsComponent", function() { return UserDetailsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_user_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/user/user.service */ "./src/app/services/user/user.service.ts");
+/* harmony import */ var _services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/dialog/dialog.service */ "./src/app/services/dialog/dialog.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var UserDetailsComponent = /** @class */ (function () {
+    function UserDetailsComponent(activatedRoute, userService, dialogService) {
+        this.activatedRoute = activatedRoute;
+        this.userService = userService;
+        this.dialogService = dialogService;
+    }
+    UserDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.activatedRoute.params.subscribe(function (params) {
+            _this.id = params['id'];
+            console.log('El meu id es', _this.id);
+            _this.userService.getUserInfo(_this.id).subscribe(function (resUI) {
+                _this.user = resUI;
+                _this.userService.getEmergencyPhoneById(_this.id).subscribe(function (res) {
+                    _this.emergencyPhones = res;
+                });
+            });
+        });
+    };
+    UserDetailsComponent.prototype.openModal = function (mode) {
+        this.dialogService.openDialog(mode);
+    };
+    UserDetailsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-user-details',
+            template: __webpack_require__(/*! ./user-details.component.html */ "./src/app/components/user-details/user-details.component.html"),
+            styles: [__webpack_require__(/*! ./user-details.component.css */ "./src/app/components/user-details/user-details.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], src_app_services_user_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _services_dialog_dialog_service__WEBPACK_IMPORTED_MODULE_3__["DialogService"]])
+    ], UserDetailsComponent);
+    return UserDetailsComponent;
 }());
 
 
@@ -1930,7 +2408,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userInfo\">\r\n    <h1>User Information:</h1>\r\n    <table class=\"ui definition table\">\r\n        <tbody>\r\n            <tr>\r\n                <td class=\"two wide column\"></td>\r\n                <td><button class=\"ui icon button\" style=\"text-align: right\" (click)=\"openModal({mode: 'editUserInfo', obj: userInfo})\"><i\r\n                            class=\"edit icon\"></i></button></td>\r\n            </tr>\r\n            <tr>\r\n                <td class=\"two wide column\">Localitat</td>\r\n                <td>Latitude: {{ userInfo.place.lat }}  Longitude: {{ userInfo.place.long }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Username</td>\r\n                <td>{{ userInfo.username}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Email</td>\r\n                <td>{{ userInfo.email }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Birthday</td>\r\n                <td>{{ userInfo.birthday }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Phone</td>\r\n                <td>{{ userInfo.phone }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>User type</td>\r\n                <td>{{ userInfo.userType }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Contact phone</td>\r\n                <td>\r\n                    <ul>\r\n                        <li *ngFor=\"let contact of userInfo.contactPhones\">\r\n                            Name: {{ contact.alias}}, Phone: {{ contact.phone }}\r\n                        </li>\r\n                    </ul>\r\n                </td>\r\n            </tr>\r\n            <tr>\r\n                <td>Entity</td>\r\n                <td (click)=\"show()\">\r\n                  <p style=\"color: blue\" >{{ entityInfo.alias }} </p>\r\n                  <div class=\"ui info message\">\r\n                      <i class=\"close icon\"></i>\r\n                      <div class=\"header\">\r\n                        Click over to show the entity information.\r\n                      </div>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n    <!-- <pre [innerHTML]=\"userInfo | json\"></pre> -->\r\n</div>\r\n\r\n<div class=\"entityInfo\" style=\"padding-top: 20px;\" *ngIf=\"showEntityInfo\">\r\n    <h1>Entity Information:</h1>\r\n    <table class=\"ui definition table\">\r\n        <tbody>\r\n            <tr>\r\n                <td class=\"two wide column\">Localitat</td>\r\n                <td>{{ entityInfo.address }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Entity Name</td>\r\n                <td>{{ entityInfo.alias}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Email</td>\r\n                <td>{{ entityInfo.email }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Phone</td>\r\n                <td>{{ entityInfo.phone }}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n    <!-- <pre [innerHTML]=\"entityInfo | json\"></pre> -->\r\n</div>\r\n\r\n<app-dialog></app-dialog>\r\n"
+module.exports = "<div class=\"userInfo\">\r\n    <h1>My profile:</h1>\r\n    <table class=\"ui definition table\">\r\n        <tbody *ngIf=\"userInfo\">\r\n            <tr>\r\n                <td class=\"two wide column\"></td>\r\n                <td><button class=\"ui icon button\" style=\"text-align: right\" (click)=\"openModal({mode: 'editUserInfo', obj: userInfo})\"><i\r\n                            class=\"edit icon\"></i></button></td>\r\n            </tr>\r\n            <tr>\r\n                <td class=\"two wide column\">Localitat</td>\r\n                <td>Latitude: {{ userInfo.place.lat }}  Longitude: {{ userInfo.place.long }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Complete Name</td>\r\n                <td>{{ userInfo.completeName}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Username</td>\r\n                <td>{{ userInfo.username}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Email</td>\r\n                <td>{{ userInfo.email }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Birthday</td>\r\n                <td>{{ userInfo.birthday }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Phone</td>\r\n                <td>{{ userInfo.phone }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>User type</td>\r\n                <td>{{ userInfo.userType }}</td>\r\n            </tr>\r\n            <!-- <tr>\r\n                <td>Contact phone</td>\r\n                <td>\r\n                    <ul>\r\n                        <li *ngFor=\"let contact of userInfo.contactPhones\">\r\n                            Name: {{ contact.alias}}, Phone: {{ contact.phone }}\r\n                        </li>\r\n                    </ul>\r\n                </td>\r\n            </tr> -->\r\n            <tr *ngIf=\"entityInfo\">\r\n                <td>Entity</td>\r\n                <td (click)=\"show()\">\r\n                  <p style=\"color: blue\" >{{ entityInfo.alias }} </p>\r\n                  <div class=\"ui info message\">\r\n                      <i class=\"close icon\"></i>\r\n                      <div class=\"header\">\r\n                        Click over to show the entity information.\r\n                      </div>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n\r\n<div class=\"entityInfo\" style=\"padding-top: 20px;\" *ngIf=\"showEntityInfo\">\r\n    <h1>Entity Information:</h1>\r\n    <table class=\"ui definition table\">\r\n        <tbody *ngIf=\"entityInfo && userInfo\">\r\n            <tr>\r\n                <td class=\"two wide column\">Localitat</td>\r\n                <td>{{ entityInfo.address }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Entity Name</td>\r\n                <td>{{ entityInfo.alias}}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Email</td>\r\n                <td>{{ entityInfo.email }}</td>\r\n            </tr>\r\n            <tr>\r\n                <td>Phone</td>\r\n                <td>{{ entityInfo.phone }}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n\r\n<app-dialog></app-dialog>\r\n"
 
 /***/ }),
 
@@ -1963,27 +2441,31 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var UserProfileComponent = /** @class */ (function () {
     function UserProfileComponent(userService, dialogService, entityService) {
+        var _this = this;
         this.userService = userService;
         this.dialogService = dialogService;
         this.entityService = entityService;
-        this.userInfo = {};
-        this.entitiesInfo = [];
-        this.entityInfo = {};
         this.showEntityInfo = false;
+        this.userService.verify().subscribe(function (userInfo) {
+            _this.userInfo = userInfo;
+            if (_this.userInfo !== undefined) {
+                _this.entityId = userInfo.entity;
+            }
+            if (_this.entityId !== undefined) {
+                _this.entityService
+                    .getEntityInfo({ id: _this.entityId })
+                    .subscribe(function (res) {
+                    _this.entityInfo = res;
+                });
+            }
+        });
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService
-            .verify()
-            .subscribe(function (userInfo) {
-            _this.userInfo = userInfo;
-            _this.entityId = userInfo.entity;
-            // console.log('userInfo', this.userInfo);
-            // console.log('entityId', this.entityId);
-            _this.entityService
-                .getEntityInfo({ id: _this.entityId })
-                .subscribe(function (entityInfo) {
-                _this.entityInfo = entityInfo;
+        this.userService.user$.subscribe(function (newUserInfo) {
+            console.log('asdasd', newUserInfo);
+            _this.userService.verify().subscribe(function (userInfo) {
+                _this.userInfo = userInfo;
             });
         });
     };
@@ -2028,7 +2510,7 @@ module.exports = "agm-map {\r\n    height: 700px;\r\n}\r\n\r\n.controlPanel {\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>User location:</h1>\r\n\r\n<div class=\"agm-map\">\r\n    <!-- Center of the map -->\r\n    <agm-map [latitude]=\"iniLat\" [longitude]=\"iniLng\" [scrollwheel]=\"true\" (mapClick)=\"mapclicked($event)\">\r\n        <!-- Markers -->\r\n        <agm-marker *ngFor=\"let p of locationsOfUser;\" [latitude]=p.lat [longitude]=p.lng>\r\n            <agm-info-window>\r\n                <p><strong>Latitude:</strong> {{ p.lat }}</p>\r\n                <p><strong>Longitude:</strong> {{ p.long }}</p>\r\n                <p><strong>Address:</strong> {{ p.address }}</p>\r\n            </agm-info-window>\r\n        </agm-marker>\r\n    </agm-map>\r\n</div>\r\n\r\n<div class=\"controlPanel\">\r\n    <h1>Filter users by activities:</h1>\r\n    <p>Choose one activity</p>\r\n    <select class=\"ui dropdown\" (change)=\"filterByActivity($event)\">\r\n        <option *ngFor=\"let act of activities\" value=\"act.title\"> {{ act.title }} </option>\r\n    </select>\r\n</div>\r\n"
+module.exports = "<h1>User location: <i class=\"location arrow icon\"></i></h1>\r\n\r\n<div class=\"agm-map\">\r\n    <!-- Center of the map -->\r\n    <agm-map [zoom]=\"zoom\" [latitude]=\"initLat\" [longitude]=\"initLong\" [scrollwheel]=\"true\" (mapClick)=\"mapclicked($event)\">\r\n        <!-- Markers -->\r\n        <agm-marker *ngFor=\"let p of emergencyUsers;\" [latitude]=p.place.lat [longitude]=p.place.long>\r\n            <agm-info-window>\r\n                <p><strong>Latitude:</strong> {{ p.place.lat }}</p>\r\n                <p><strong>Longitude:</strong> {{ p.place.long }}</p>\r\n                <p><strong>Address:</strong> {{ p.place.placeName }}</p>\r\n                <p><strong>Username:</strong> {{ p.username }}</p>\r\n                <p><strong>Emergency Contacts:</strong> {{p.contactPhones}}</p>\r\n            </agm-info-window>\r\n        </agm-marker> \r\n    </agm-map>\r\n</div>\r\n\r\n<!-- <div class=\"controlPanel\">\r\n    <h1>Filter users by activities:</h1>\r\n    <p>Choose one activity</p>\r\n    <select class=\"ui dropdown\" (change)=\"filterByActivity($event)\">\r\n        <option *ngFor=\"let act of activities\" value=\"act.title\"> {{ act.title }} </option>\r\n    </select>\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -2046,6 +2528,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_reverseGeocoding_reverse_geocoding_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/reverseGeocoding/reverse-geocoding.service */ "./src/app/services/reverseGeocoding/reverse-geocoding.service.ts");
 /* harmony import */ var _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/activities/activities.service */ "./src/app/services/activities/activities.service.ts");
 /* harmony import */ var _services_userLocation_user_location_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/userLocation/user-location.service */ "./src/app/services/userLocation/user-location.service.ts");
+/* harmony import */ var src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/entity/entity.service */ "./src/app/services/entity/entity.service.ts");
+/* harmony import */ var src_app_services_user_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user/user.service */ "./src/app/services/user/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2059,41 +2543,56 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var UsersComponent = /** @class */ (function () {
-    function UsersComponent(reverseGeoService, activityService, userLocationService) {
+    function UsersComponent(reverseGeoService, activityService, userLocationService, entityService, userService) {
         this.reverseGeoService = reverseGeoService;
         this.activityService = activityService;
         this.userLocationService = userLocationService;
-        this.iniLat = 51.678418;
-        this.iniLng = 7.809007;
+        this.entityService = entityService;
+        this.userService = userService;
+        // google maps zoom level
+        this.zoom = 13;
         this.usersOfActivity = [];
         this.locationsOfUser = [];
+        this.emergencyUsers = [];
     }
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.activityService.getActivities().subscribe(function (res) {
-            _this.activities = res;
-            _this.activity = res[0];
-            console.log('activity', _this.activity);
-            _this.usersOfActivity = _this.activity.participants;
-            console.log('usersOfActivity: ', _this.usersOfActivity);
-        });
-        this.usersOfActivity.forEach(function (element) {
-            var position = _this.userLocationService.getUserLocation(element.id);
-            _this.reverseGeoService
-                .convertToStreet(position.lat, position.lng)
-                .subscribe(function (res) {
-                position['address'] = res.results[0].formatted_address;
+        this.userService.verify().subscribe(function (resv) {
+            _this.entityid = resv.entity;
+            // console.log('Id entity', this.entityid);
+            _this.entityService.getEntityInfo({ id: _this.entityid }).subscribe(function (rese) {
+                _this.initLat = rese.place.lat;
+                // console.log('Tinc lat', this.initLat);
+                _this.initLong = rese.place.long;
+                // console.log('Tinc long', this.initLong);
             });
-            _this.locationsOfUser.push(position);
+            // console.log('Tinc id entitat', this.entityid);
+            _this.entityService.getEmergencyContacts(_this.entityid).subscribe(function (emer) {
+                _this.emergencyUsers = emer;
+                if (Object.keys(_this.emergencyUsers).length > 0) {
+                    _this.zoom = 9;
+                }
+            });
+        });
+        /*this.emergencyUsers.forEach(element => {
+            const position = element;
+            );
+            this.reverseGeoService
+                .convertToStreet(position.place.lat, position.place.long)
+                .subscribe(res => {
+                    position['address'] = res.results[0].formatted_address;
+                    // aixo retorna el nom complert en paraules de l'adreça on esta l'individu
+                });
+            this.locationsOfUser.push(position);
         });
         console.log('locationsOfUser: ', this.locationsOfUser);
+        */
     };
     UsersComponent.prototype.mapclicked = function ($event) {
         // console.log($event);
-    };
-    UsersComponent.prototype.filterByActivity = function (event) {
-        var activityName = event.target.value;
     };
     UsersComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2103,7 +2602,9 @@ var UsersComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_reverseGeocoding_reverse_geocoding_service__WEBPACK_IMPORTED_MODULE_1__["ReverseGeocodingService"],
             _services_activities_activities_service__WEBPACK_IMPORTED_MODULE_2__["ActivitiesService"],
-            _services_userLocation_user_location_service__WEBPACK_IMPORTED_MODULE_3__["UserLocationService"]])
+            _services_userLocation_user_location_service__WEBPACK_IMPORTED_MODULE_3__["UserLocationService"],
+            src_app_services_entity_entity_service__WEBPACK_IMPORTED_MODULE_4__["EntityService"],
+            src_app_services_user_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]])
     ], UsersComponent);
     return UsersComponent;
 }());
@@ -2151,15 +2652,49 @@ var ActivitiesService = /** @class */ (function () {
     function ActivitiesService(http, messageService) {
         this.http = http;
         this.messageService = messageService;
-        this.actURL = 'https://grandapp.herokuapp.com/activities';
+        this.actURL = 'https://grandapp.herokuapp.com/entity/activities';
+        this.entityURL = 'https://grandapp.herokuapp.com/entity';
+        this.currentPagesize = 5; // default pagesize is 5
+        this.currentPageNumber = 1; // default pageNumber is 1
         this.activitySubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"](); // 发送器，通知有变化
         this.activity$ = this.activitySubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
     }
+    ActivitiesService.prototype.setCurrentPageSize = function (num) {
+        this.currentPagesize = num;
+    };
+    ActivitiesService.prototype.getCurrentPageSize = function () {
+        return this.currentPagesize;
+    };
+    ActivitiesService.prototype.setCurrentPageNumber = function (num) {
+        this.currentPageNumber = num;
+    };
+    ActivitiesService.prototype.getCurrentPageNumber = function () {
+        return this.currentPageNumber;
+    };
+    ActivitiesService.prototype.setTotalActivities = function (total) {
+        this.totalActivities = total;
+    };
+    ActivitiesService.prototype.getTotaluActivities = function () {
+        return this.totalActivities;
+    };
+    ActivitiesService.prototype.searchActByTitle = function (title) {
+        return this.http.get(this.actURL + "?title=" + title, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('searchActByTitle')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('searchActByTitle', resp); }));
+    };
+    ActivitiesService.prototype.countTotalActivities = function () {
+        return this.http
+            .get(this.entityURL + "/count/activities", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('countTotalActivities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('countTotalActivities', resp); }));
+    };
     ActivitiesService.prototype.getActivity = function (id) {
         return this.http.get(this.actURL + "/" + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getActivity')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getActivity', resp); }));
     };
     ActivitiesService.prototype.getActivities = function () {
         return this.http.get(this.actURL, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getActivities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getActivities', resp); }));
+    };
+    ActivitiesService.prototype.getActivitiesByParams = function (pageNumber, numberPerPage) {
+        return this.http
+            .get(this.actURL + "?skip=" + pageNumber + "&limit=" + numberPerPage, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getActivitiesByParams')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getActivitiesByParams', resp); }));
     };
     ActivitiesService.prototype.addActivitiy = function (activity) {
         return this.http.post(this.actURL, activity, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('addActivities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('addActivities', resp); }));
@@ -2394,20 +2929,89 @@ var EntityService = /** @class */ (function () {
     function EntityService(http, messageService) {
         this.http = http;
         this.messageService = messageService;
-        this.entitiesURL = 'https://grandapp.herokuapp.com/entities';
+        this.entitiesURL = 'https://grandapp.herokuapp.com/entity/entities';
+        this.entitiesUsers = 'https://grandapp.herokuapp.com/entity/users';
+        this.entityURL = 'https://grandapp.herokuapp.com/entity';
+        this.currentPagesize = 5; // default pagesize is 5
+        this.currentPageNumber = 1; // default pageNumber is 1
     }
+    EntityService.prototype.setCurrentPageSize = function (num) {
+        this.currentPagesize = num;
+    };
+    EntityService.prototype.getCurrentPageSize = function () {
+        return this.currentPagesize;
+    };
+    EntityService.prototype.setCurrentPageNumber = function (num) {
+        this.currentPageNumber = num;
+    };
+    EntityService.prototype.getCurrentPageNumber = function () {
+        return this.currentPageNumber;
+    };
+    EntityService.prototype.setTotalUsers = function (total) {
+        this.totalUsers = total;
+    };
+    EntityService.prototype.getTotaluUsers = function () {
+        return this.totalUsers;
+    };
+    EntityService.prototype.countTotalUsers = function () {
+        return this.http
+            .get(this.entityURL + "/count/users", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('countTotalUsers')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('countTotalUsers', resp); }));
+    };
     EntityService.prototype.getEntities = function () {
         return this.http.get(this.entitiesURL, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntities', resp); }));
     };
     EntityService.prototype.getEntityInfo = function (entitiyId) {
-        return this.http.get(this.entitiesURL + "/" + entitiyId.id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityInfo')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityInfo', resp); }));
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId.id, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityInfo')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityInfo', resp); }));
     };
     EntityService.prototype.getEntityStatisticsActivities = function (entitiyId) {
-        console.log('asd: ', entitiyId);
-        return this.http.get(this.entitiesURL + "/" + entitiyId + "/statistics/activities", httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityStatisticsActivities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityStatisticsActivities', resp); }));
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId + "/statistics/activities", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityStatisticsActivities')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityStatisticsActivities', resp); }));
     };
     EntityService.prototype.getEntityStatisticsUsers = function (entitiyId) {
-        return this.http.get(this.entitiesURL + "/" + entitiyId + "/statistics/users", httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityStatisticsUsers')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityStatisticsUsers', resp); }));
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId + "/statistics/users", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityStatisticsUsers')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntityStatisticsUsers', resp); }));
+    };
+    EntityService.prototype.getEntityStatisticsAchievements = function (entitiyId) {
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId + "/statistics/achievements", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntityStatisticsAchievements')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) {
+            return console.log('getEntityStatisticsAchievements', resp);
+        }));
+    };
+    EntityService.prototype.getTotalConnections = function (entitiyId) {
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId + "/statistics/connections", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getTotalConnections')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getTotalConnections(', resp); }));
+    };
+    EntityService.prototype.getAllUsersOfMyEntity = function () {
+        return this.http.get("" + this.entitiesUsers, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getAllUsersOfMyEntity')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getAllUsersOfMyEntity(', resp); }));
+    };
+    EntityService.prototype.getEmergencyContacts = function (entitiyId) {
+        return this.http
+            .get(this.entitiesURL + "/" + entitiyId + "/emergency", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEntitySos')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEntitySos', resp); }));
+    };
+    EntityService.prototype.addEmergencyContact = function (uid, newContact) {
+        console.log('uid: ', uid);
+        console.log('newContact: ', newContact);
+        return this.http
+            .post(this.entitiesUsers + "/" + uid + "/emergency", newContact, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('addEmergencyContact')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('addEmergencyContact', resp); }));
+    };
+    EntityService.prototype.getUsersByParams = function (pageNumber, numberPerPage) {
+        return this.http
+            .get(this.entitiesUsers + "?skip=" + pageNumber + "&limit=" + numberPerPage, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getUsersByParams')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getUsersByParams', resp); }));
+    };
+    EntityService.prototype.searchUserByCompleteName = function (name) {
+        return this.http
+            .get(this.entitiesUsers + "?completeName=" + name, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('searchUserByCompleteName')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('searchUserByCompleteName', resp); }));
     };
     EntityService.prototype.handleError = function (operation, result) {
         var _this = this;
@@ -2433,6 +3037,71 @@ var EntityService = /** @class */ (function () {
             _messages_messages_service__WEBPACK_IMPORTED_MODULE_4__["MessagesService"]])
     ], EntityService);
     return EntityService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/geocoding/geocoding.service.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/services/geocoding/geocoding.service.ts ***!
+  \*********************************************************/
+/*! exports provided: GeocodingService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeocodingService", function() { return GeocodingService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _messages_messages_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/messages.service */ "./src/app/services/messages/messages.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GeocodingService = /** @class */ (function () {
+    function GeocodingService(http, messageService) {
+        this.http = http;
+        this.messageService = messageService;
+        this.googleMapUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+    }
+    GeocodingService.prototype.getLatLong = function (address) {
+        return this.http.get(this.googleMapUrl + "?address=" + address + "&key=AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg");
+    };
+    GeocodingService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            if (error.status !== 200) {
+                // TODO: send the error to remote logging infrastructure
+                console.error(error);
+                // TODO: better job of transforming error for user consumption
+                // console.log(`${operation} failed: ${error.message}`);
+                // Catch the status code and do some actions if it is a particular situation
+                _this.messageService.setMessage(error.error);
+            }
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
+    GeocodingService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _messages_messages_service__WEBPACK_IMPORTED_MODULE_3__["MessagesService"]])
+    ], GeocodingService);
+    return GeocodingService;
 }());
 
 
@@ -2547,6 +3216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReverseGeocodingService", function() { return ReverseGeocodingService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _messages_messages_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/messages.service */ "./src/app/services/messages/messages.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2558,9 +3229,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var ReverseGeocodingService = /** @class */ (function () {
-    function ReverseGeocodingService(http) {
+    function ReverseGeocodingService(http, messageService) {
         this.http = http;
+        this.messageService = messageService;
         this.googleMapUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
     }
     ReverseGeocodingService.prototype.convertToStreet = function (latitude, longitude) {
@@ -2568,11 +3242,27 @@ var ReverseGeocodingService = /** @class */ (function () {
         var lng = longitude;
         return this.http.get(this.googleMapUrl + "?latlng=" + lat + "," + lng + "&key=AIzaSyDBNBmRlzQDTVzB07XLJbuusxIh84qXOOg");
     };
+    ReverseGeocodingService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            if (error.status !== 200) {
+                // TODO: send the error to remote logging infrastructure
+                console.error(error);
+                // TODO: better job of transforming error for user consumption
+                // console.log(`${operation} failed: ${error.message}`);
+                // Catch the status code and do some actions if it is a particular situation
+                _this.messageService.setMessage(error.error);
+            }
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
     ReverseGeocodingService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _messages_messages_service__WEBPACK_IMPORTED_MODULE_3__["MessagesService"]])
     ], ReverseGeocodingService);
     return ReverseGeocodingService;
 }());
@@ -2733,10 +3423,17 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.messageService = messageService;
         this.verifyURL = 'https://grandapp.herokuapp.com/verify';
-        this.userURL = 'https://grandapp.herokuapp.com/users';
+        this.userURL = 'https://grandapp.herokuapp.com/entity/users';
+        this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"](); // 发送器，通知有变化
+        this.user$ = this.userSubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
     }
     UserService.prototype.verify = function () {
         return this.http.get(this.verifyURL, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('verify')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('verify', resp); }));
+    };
+    UserService.prototype.getEmergencyPhoneById = function (uid) {
+        return this.http
+            .get(this.userURL + "/" + uid + "/emergency", httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEmergencyPhoneById')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getEmergencyPhoneById', resp); }));
     };
     UserService.prototype.getUserInfo = function (id) {
         return this.http.get(this.userURL + "/" + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getUserInfo')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getUserInfo', resp); }));
@@ -2748,6 +3445,9 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.getAllUsers = function () {
         return this.http.get(this.userURL, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getAllUser')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (resp) { return console.log('getAllUser', resp); }));
+    };
+    UserService.prototype.userDataChanged = function (mode) {
+        this.userSubject.next(mode); // emit有变化，并且传送新的value
     };
     UserService.prototype.handleError = function (operation, result) {
         var _this = this;

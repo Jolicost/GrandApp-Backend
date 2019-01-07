@@ -97,7 +97,6 @@ export class DialogComponent implements OnInit, OnDestroy {
         phone: new FormControl('', Validators.required),
         alias: new FormControl('', Validators.required)
     });
-
     constructor(
         public dialog: MatDialog,
         private dialogService: DialogService

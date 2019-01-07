@@ -1,6 +1,7 @@
-<h1>User location: <i class="location arrow icon"></i></h1>
+<h1>Users out of range location: <i class="location arrow icon"></i></h1>
 
 <div class="agm-map">
+    <app-dialog></app-dialog>
     <!-- Center of the map -->
     <agm-map [zoom]="zoom" [latitude]="initLat" [longitude]="initLong" [scrollwheel]="true" (mapClick)="mapclicked($event)">
         <!-- Markers -->
@@ -8,9 +9,11 @@
             <agm-info-window>
                 <p><strong>Latitude:</strong> {{ p.place.lat }}</p>
                 <p><strong>Longitude:</strong> {{ p.place.long }}</p>
-                <p><strong>Address:</strong> {{ p.place.placeName }}</p>
                 <p><strong>Username:</strong> {{ p.username }}</p>
-                <p><strong>Emergency Contacts:</strong> {{p.contactPhones}}</p>
+                <p><strong>Emergency Contacts:</strong> 
+                    <li *ngFor="let c of p.contactPhones;">
+                     {{c.alias}} : {{c.phone}}
+                    </li>  
             </agm-info-window>
         </agm-marker> 
     </agm-map>

@@ -109,24 +109,12 @@
             </div>
             <div class="field">
                 <div class="fields">
-                    <div class="eight wide field">
+                    <div class="sixteen wide field">
                         <label style="text-align: left">
                             Location:
                             <input type="text" formControlName="adressToConvert">
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('adressToConvert').invalid && activityForm.get('adressToConvert').touched"
-                            style="text-align: center">
-                            <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="eight wide field">
-                        <label style="text-align: left">
-                            Address:
-                            <input type="text" formControlName="address">
-                        </label>
-                        <div class="error-message" *ngIf="activityForm.get('address').invalid && activityForm.get('address').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>
@@ -155,18 +143,6 @@
                             <input type="text" formControlName="price">
                         </label>
                         <div class="error-message" *ngIf="activityForm.get('price').invalid && activityForm.get('price').touched"
-                            style="text-align: center">
-                            <div class="input-err-message" style="text-align: center">
-                                <p style="color: red; white-space: nowrap;">Can't be empty!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label style="text-align: left">
-                            Rating:
-                            <input type="text" formControlName="rating">
-                        </label>
-                        <div class="error-message" *ngIf="activityForm.get('rating').invalid && activityForm.get('rating').touched"
                             style="text-align: center">
                             <div class="input-err-message" style="text-align: center">
                                 <p style="color: red; white-space: nowrap;">Can't be empty!</p>

@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <td class="two wide column">Localitat</td>
-                <td>Latitude: {{ userInfo.place.lat }}  Longitude: {{ userInfo.place.long }}</td>
+                <td *ngIf="entityInfo">Latitude: {{ entityInfo.place.lat }}  Longitude: {{ entityInfo.place.long }}</td>
             </tr>
             <tr>
                 <td>Complete Name</td>

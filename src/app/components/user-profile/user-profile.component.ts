@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
                 this.entityService
                     .getEntityInfo({ id: this.entityId })
                     .subscribe(res => {
+                        console.log('ssss: ', res);
                         this.entityInfo = res;
                     });
             }

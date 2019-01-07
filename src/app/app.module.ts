@@ -43,6 +43,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 // Angular authentification
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { AllusersComponent } from './components/allusers/allusers.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
         LoginComponent,
         ActivityDetailsComponent,
         UserProfileComponent,
-        UserDetailsComponent
+        UserDetailsComponent,
+        AllusersComponent
     ],
     entryComponents: [DialogContentComponent], // per fer servir el dialogcontentComponent
     imports: [

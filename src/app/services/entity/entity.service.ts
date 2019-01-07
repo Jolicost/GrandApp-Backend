@@ -138,7 +138,6 @@ export class EntityService {
                 tap(resp => console.log('getEntitySos', resp))
             );
     }
-
     addEmergencyContact(uid, newContact): Observable<any> {
         console.log('uid: ', uid);
         console.log('newContact: ', newContact);

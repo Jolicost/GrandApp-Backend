@@ -1,0 +1,20 @@
+<h1>All Users Location <i class="globe icon"></i></h1>
+
+<div class="agm-map">
+    <app-dialog></app-dialog>
+    <!-- Center of the map -->
+    <agm-map [zoom]="zoom" [latitude]="initLat" [longitude]="initLong" [scrollwheel]="true" (mapClick)="mapclicked($event)">
+        <!-- Markers -->
+        <agm-marker *ngFor="let p of allUsers;" [latitude]=p.place.lat [longitude]=p.place.long>
+            <agm-info-window>
+                <p><strong>Latitude:</strong> {{ p.place.lat }}</p>
+                <p><strong>Longitude:</strong> {{ p.place.long }}</p>
+                <p><strong>Username:</strong> {{ p.username }}</p>
+                <p><strong>Emergency Contacts:</strong> 
+                    <li *ngFor="let c of p.contactPhones;">
+                     {{c.alias}} : {{c.phone}}
+                    </li>  
+            </agm-info-window>
+        </agm-marker> 
+    </agm-map>
+</div>

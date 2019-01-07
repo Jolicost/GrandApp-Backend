@@ -47,32 +47,20 @@ export class UsersComponent implements OnInit {
             // console.log('Tinc id entitat', this.entityid);
             this.entityService.getEmergencyContacts(this.entityid).subscribe (emer => {
                 this.emergencyUsers = emer;
-                if (Object.keys(this.emergencyUsers).length > 0) {
+                console.log('tinc un array de length ', this.emergencyUsers.length);
+                if (this.emergencyUsers.length > 0) {
                     this.zoom = 9;
                 }
-            });
-            this.usersOor = Object.keys(this.emergencyUsers).length;
-            this.mess = 'There are ' + this.usersOor + ' users out of range';
-            console.log(this.mess);
-            this.dialogService.openDialog({
-                mode: 'infoDialog',
-                obj: this.mess
-            });
-        });
-
-        /*this.emergencyUsers.forEach(element => {
-            const position = element;
-            );
-            this.reverseGeoService
-                .convertToStreet(position.place.lat, position.place.long)
-                .subscribe(res => {
-                    position['address'] = res.results[0].formatted_address;
-                    // aixo retorna el nom complert en paraules de l'adreça on esta l'individu
+                this.usersOor = this.emergencyUsers.length;
+                this.mess = 'There are ' + this.usersOor + ' users out of range';
+                this.dialogService.openDialog({
+                    mode: 'infoDialog',
+                    obj: this.mess
                 });
-            this.locationsOfUser.push(position);
+                console.log('Tinc aquests usuaris perduts', this.usersOor);
+                console.log(this.mess);
+            });
         });
-        console.log('locationsOfUser: ', this.locationsOfUser);
-        */
     }
     mapclicked($event) {
         // console.log($event);

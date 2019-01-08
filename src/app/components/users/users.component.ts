@@ -28,9 +28,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     mess;
     loop;
     constructor(
-        private reverseGeoService: ReverseGeocodingService,
-        private activityService: ActivitiesService,
-        private userLocationService: UserLocationService,
         private entityService: EntityService,
         private userService: UserService,
         private dialogService: DialogService
@@ -38,7 +35,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.userService.verify().subscribe (resv => {
+        this.userService.verify().subscribe(resv => {
             this.entityid = resv.entity;
             // console.log('Id entity', this.entityid);
             this.entityService.getEntityInfo({id: this.entityid}).subscribe (rese => {

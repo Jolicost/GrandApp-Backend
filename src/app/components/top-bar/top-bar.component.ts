@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class TopBarComponent implements OnInit {
     logged = localStorage.getItem('token');
     username = localStorage.getItem('username');
-    profilePicture;
+    profilePicture = localStorage.getItem('profilepic');
 
     sidebarOpened = false;
     constructor(

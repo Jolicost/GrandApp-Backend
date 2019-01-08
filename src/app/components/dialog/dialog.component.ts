@@ -409,6 +409,7 @@ export class DialogContentComponent implements OnInit {
                         });
                         this.messagesService.setMessage(null);
                     } else {
+                        this.userService.userDataChanged('updated');
                         this.dialogRef.close();
                     }
                 });
@@ -557,7 +558,7 @@ export class DialogContentComponent implements OnInit {
                         });
                         this.messagesService.setMessage(null);
                     } else {
-                        this.userService.userDataChanged('changed');
+                        this.userService.userDataChanged('myProfileChanged');
                         // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                         this.onCancelClick();
                     }
@@ -602,7 +603,7 @@ export class DialogContentComponent implements OnInit {
                     });
                     this.messagesService.setMessage(null);
                 } else {
-                    this.activityService.actDataChanged('changed');
+                    this.activityService.actDataChanged('deleted');
                     // this.snackBarService.openSnackBar({message: 'Added successful!', action: 'Ok'});
                     this.onCancelClick();
                 }

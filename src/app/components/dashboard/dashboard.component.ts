@@ -3,6 +3,7 @@ import { Chart } from 'chart.js';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActivitiesService } from 'src/app/services/activities/activities.service';
 import { EntityService } from 'src/app/services/entity/entity.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -62,15 +63,24 @@ export class DashboardComponent implements OnInit {
     constructor(
         private userService: UserService,
         private actService: ActivitiesService,
-        private entityService: EntityService
+        private entityService: EntityService,
+        private router: Router
     ) {}
+
+    async delay(ms: number) {
+        await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() =>
+            console.log('fired')
+        );
+    }
 
     ngOnInit() {
         this.userService.verify().subscribe(userInfo => {
             this.entityId = userInfo.entity;
+            // console.log('entityID: ', this.entityId);
             this.entityService
                 .getEntityStatisticsActivities(this.entityId)
                 .subscribe(entityInfo => {
+                    // console.log('entityInfo: ', entityInfo);
                     if (entityInfo !== undefined) {
                         this.entityStatsTypeAct = entityInfo.types;
                         this.entityStatsHours = entityInfo.hours;

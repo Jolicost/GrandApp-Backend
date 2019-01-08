@@ -4,12 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessagesService } from '../messages/messages.service';
 
-const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
-    })
-};
+
 @Injectable({
     providedIn: 'root'
 })
@@ -20,11 +15,19 @@ export class EntityService {
     totalUsers;
     currentPagesize = 5; // default pagesize is 5
     currentPageNumber = 1; // default pageNumber is 1
+    httpOptions;
 
     constructor(
         private http: HttpClient,
         private messageService: MessagesService
-    ) {}
+    ) {
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token')
+            })
+        };
+    }
 
     setCurrentPageSize(num) {
         this.currentPagesize = num;
@@ -48,7 +51,7 @@ export class EntityService {
 
     countTotalUsers(): Observable<any> {
         return this.http
-            .get<any>(`${this.entityURL}/count/users`, httpOptions)
+            .get<any>(`${this.entityURL}/count/users`, this.httpOptions)
             .pipe(
                 catchError(this.handleError<any>('countTotalUsers')),
                 tap(resp => console.log('countTotalUsers', resp))
@@ -56,7 +59,7 @@ export class EntityService {
     }
 
     getEntities(): Observable<any> {
-        return this.http.get<any>(this.entitiesURL, httpOptions).pipe(
+        return this.http.get<any>(this.entitiesURL, this.httpOptions).pipe(
             catchError(this.handleError<any>('getEntities')),
             tap(resp => console.log('getEntities', resp))
         );
@@ -64,17 +67,18 @@ export class EntityService {
 
     getEntityInfo(entitiyId): Observable<any> {
         return this.http
-            .get<any>(`${this.entitiesURL}/${entitiyId.id}`, httpOptions)
+            .get<any>(`${this.entitiesURL}/${entitiyId.id}`, this.httpOptions)
             .pipe(
                 catchError(this.handleError<any>('getEntityInfo')),
                 tap(resp => console.log('getEntityInfo', resp))
             );
     }
     getEntityStatisticsActivities(entitiyId): Observable<any> {
+        console.log('service entityID: ', entitiyId);
         return this.http
             .get<any>(
                 `${this.entitiesURL}/${entitiyId}/statistics/activities`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(
@@ -87,7 +91,7 @@ export class EntityService {
         return this.http
             .get<any>(
                 `${this.entitiesURL}/${entitiyId}/statistics/users`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('getEntityStatisticsUsers')),
@@ -99,7 +103,7 @@ export class EntityService {
         return this.http
             .get<any>(
                 `${this.entitiesURL}/${entitiyId}/statistics/achievements`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(
@@ -115,7 +119,7 @@ export class EntityService {
         return this.http
             .get<any>(
                 `${this.entitiesURL}/${entitiyId}/statistics/connections`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('getTotalConnections')),
@@ -124,7 +128,7 @@ export class EntityService {
     }
 
     getAllUsersOfMyEntity(): Observable<any> {
-        return this.http.get<any>(`${this.entitiesUsers}`, httpOptions).pipe(
+        return this.http.get<any>(`${this.entitiesUsers}`, this.httpOptions).pipe(
             catchError(this.handleError<any>('getAllUsersOfMyEntity')),
             tap(resp => console.log('getAllUsersOfMyEntity(', resp))
         );
@@ -132,13 +136,12 @@ export class EntityService {
 
     getEmergencyContacts(entitiyId): Observable<any> {
         return this.http
-            .get<any>(`${this.entitiesURL}/${entitiyId}/emergency`, httpOptions)
+            .get<any>(`${this.entitiesURL}/${entitiyId}/emergency`, this.httpOptions)
             .pipe(
                 catchError(this.handleError<any>('getEntitySos')),
                 tap(resp => console.log('getEntitySos', resp))
             );
     }
-
     addEmergencyContact(uid, newContact): Observable<any> {
         console.log('uid: ', uid);
         console.log('newContact: ', newContact);
@@ -146,7 +149,7 @@ export class EntityService {
             .post<any>(
                 `${this.entitiesUsers}/${uid}/emergency`,
                 newContact,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('addEmergencyContact')),
@@ -158,7 +161,7 @@ export class EntityService {
         return this.http
             .get<any>(
                 `${this.entitiesUsers}?skip=${pageNumber}&limit=${numberPerPage}`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('getUsersByParams')),
@@ -168,7 +171,7 @@ export class EntityService {
 
     searchUserByCompleteName(name): Observable<any> {
         return this.http
-            .get<any>(`${this.entitiesUsers}?completeName=${name}`, httpOptions)
+            .get<any>(`${this.entitiesUsers}?completeName=${name}`, this.httpOptions)
             .pipe(
                 catchError(this.handleError<any>('searchUserByCompleteName')),
                 tap(resp => console.log('searchUserByCompleteName', resp))

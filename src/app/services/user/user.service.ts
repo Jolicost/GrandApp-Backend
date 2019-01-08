@@ -27,7 +27,13 @@ export class UserService {
     ) {}
 
     verify(): Observable<any> {
-        return this.http.get<any>(this.verifyURL, httpOptions).pipe(
+        const httpOptions2 = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token')
+            })
+        };
+        return this.http.get<any>(this.verifyURL, httpOptions2).pipe(
             catchError(this.handleError<any>('verify')),
             tap(resp => console.log('verify', resp))
         );

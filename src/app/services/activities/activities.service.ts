@@ -5,12 +5,6 @@ import { Observable, Subject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { MessagesService } from '../messages/messages.service';
 
-const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
-    })
-};
 @Injectable({
     providedIn: 'root'
 })
@@ -20,14 +14,21 @@ export class ActivitiesService {
     totalActivities;
     currentPagesize = 5; // default pagesize is 5
     currentPageNumber = 1; // default pageNumber is 1
-
+    httpOptions;
     private activitySubject = new Subject<any>(); // 发送器，通知有变化
     activity$ = this.activitySubject.asObservable(); // 数据储存的地方， 可以被subscribe()然后就可以获取数据
 
     constructor(
         private http: HttpClient,
         private messageService: MessagesService
-    ) {}
+    ) {
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token')
+            })
+        };
+    }
 
     setCurrentPageSize(num) {
         this.currentPagesize = num;
@@ -50,7 +51,7 @@ export class ActivitiesService {
     }
 
     searchActByTitle(title): Observable<any> {
-        return this.http.get<any>(`${this.actURL}?title=${title}`, httpOptions).pipe(
+        return this.http.get<any>(`${this.actURL}?title=${title}`, this.httpOptions).pipe(
             catchError(this.handleError<any>('searchActByTitle')),
             tap(resp => console.log('searchActByTitle', resp))
         );
@@ -58,7 +59,7 @@ export class ActivitiesService {
 
     countTotalActivities(): Observable<any> {
         return this.http
-            .get<any>(`${this.entityURL}/count/activities`, httpOptions)
+            .get<any>(`${this.entityURL}/count/activities`, this.httpOptions)
             .pipe(
                 catchError(this.handleError<any>('countTotalActivities')),
                 tap(resp => console.log('countTotalActivities', resp))
@@ -66,14 +67,14 @@ export class ActivitiesService {
     }
 
     getActivity(id): Observable<any> {
-        return this.http.get<any>(`${this.actURL}/${id}`, httpOptions).pipe(
+        return this.http.get<any>(`${this.actURL}/${id}`, this.httpOptions).pipe(
             catchError(this.handleError<any>('getActivity')),
             tap(resp => console.log('getActivity', resp))
         );
     }
 
     getActivities(): Observable<any> {
-        return this.http.get<any>(this.actURL, httpOptions).pipe(
+        return this.http.get<any>(this.actURL, this.httpOptions).pipe(
             catchError(this.handleError<any>('getActivities')),
             tap(resp => console.log('getActivities', resp))
         );
@@ -83,7 +84,7 @@ export class ActivitiesService {
         return this.http
             .get<any>(
                 `${this.actURL}?skip=${pageNumber}&limit=${numberPerPage}`,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('getActivitiesByParams')),
@@ -92,7 +93,7 @@ export class ActivitiesService {
     }
 
     addActivitiy(activity): Observable<any> {
-        return this.http.post<any>(this.actURL, activity, httpOptions).pipe(
+        return this.http.post<any>(this.actURL, activity, this.httpOptions).pipe(
             catchError(this.handleError<any>('addActivities')),
             tap(resp => console.log('addActivities', resp))
         );
@@ -103,7 +104,7 @@ export class ActivitiesService {
             .put<any>(
                 `${this.actURL}/${newActivity.id}`,
                 newActivity,
-                httpOptions
+                this.httpOptions
             )
             .pipe(
                 catchError(this.handleError<any>('editActivities')),
@@ -118,7 +119,7 @@ export class ActivitiesService {
     deleteActivity(idToDelete): Observable<any> {
         return this.http.delete<any>(
             `${this.actURL}/${idToDelete}`,
-            httpOptions
+            this.httpOptions
         );
     }
     private handleError<T>(operation = 'operation', result?: T) {

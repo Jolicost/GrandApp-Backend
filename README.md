@@ -1,4 +1,10 @@
-# Grandapp
+# Grandapp-backend
+
+![](https://i.imgur.com/YVIONt5.png)
+
+Grandapp Backend Server. A webserver that allows to manage and operate the Grandapp ecosystem backend. It includes various dashboards, Key indicators and complete operations for managing your Grandapp model data.
+
+It fetches the grandapp API Rest in order to perform its operations.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
